@@ -2,8 +2,10 @@
   "name": "kronos",
   "version": "0.1.0",
   "description": "",
+  "main": "",
   "scripts": {
-    "start": "node server.js"
+    "start": "./scripts/start",
+    "build": "./scripts/build"
   },
   "repository": {
     "type": "git",

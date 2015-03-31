@@ -1,7 +1,7 @@
 React = require 'react'
 moment = require 'moment-range'
 
-Kronos = require './kronos'
+Kronos = require '../kronos'
 
 module.exports = React.createClass
   displayName: 'App'

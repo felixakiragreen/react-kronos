@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# build examples
+cd examples
+../node_modules/.bin/webpack --config webpack.config.production.js --progress --profile --colors
+cd ..

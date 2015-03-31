@@ -6,29 +6,32 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:3373',
     'webpack/hot/only-dev-server',
-    './scripts/index'
+    './index'
   ],
   output: {
-    path: path.join(__dirname, 'build'),
+    path: __dirname,
     filename: 'bundle.js',
-    publicPath: '/scripts/'
+    publicPath: '/'
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ],
+  resolveLoader: {
+    modulesDirectories: ['node_modules']
+  },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.coffee', '.cjsx']
+    extensions: ['', '.js', '.coffee', '.cjsx']
   },
   module: {
     loaders:
     [ { test: /\.json$/, loader: 'json' }
-    , { test: /\.jsx?$/
+    , { test: /\.js?$/
       , loaders: ['react-hot', 'babel']
-      , include: path.join(__dirname, 'scripts')
+      , include: path.join(__dirname, './')
       }
     , { test: /\.cjsx$/, loaders: ['react-hot', 'coffee', 'cjsx'] }
     , { test: /\.coffee$/, loader: 'coffee' }
     ]
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ]
 };
