@@ -2,7 +2,7 @@
   "name": "kronos",
   "version": "0.0.1",
   "description": "",
-  "main": "",
+  "main": "dist/index.js",
   "scripts": {
     "start": "./scripts/start",
     "build": "./scripts/build"
@@ -38,6 +38,7 @@
     "babel-loader": "^4.2.0",
     "cjsx-loader": "^2.0.1",
     "coffee-loader": "^0.7.2",
+    "coffee-react": "^3.0.1",
     "coffee-script": "^1.9.1",
     "json-loader": "^0.5.1",
     "react-hot-loader": "^1.2.4",

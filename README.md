@@ -29,7 +29,7 @@ Key requirements:
 - Return multiple time formats (Date, Moment, ISO, string)
 - Lightweight, use no jquery
 - Active on focus, disappear on blur
-- Good keyboard navigation
+- Efficient keyboard navigation
 
 #### See Also
 
@@ -55,7 +55,6 @@ Kronos is built from scratch, but heavily inspired by:
 - **NPM Install**
 - **Features**
 - **Usage / Documentation**
-- create dist/ (add to package.json/main)
 
 #### Roadmap
 
@@ -73,8 +72,8 @@ Kronos is built from scratch, but heavily inspired by:
 
 0.3:
 - minimum date+time
-  - hard (user cannot enter value)
-  - soft (user enters values and field becomes red)
+  - hard (user cannot select a date/time, or type/paste a value)
+  - soft (user can select/input values but it becomes red)
 - maximum date+time
   - hard
   - soft
@@ -110,3 +109,4 @@ Coming:
 - scroll time list as user arrows up+down
 - ⇧+arrow uses the higher order unit
 - make it immutable
+- maintain a CHANGELOG

@@ -2,37 +2,32 @@ var webpack = require('webpack')
 
 
 module.exports =
-{ devtool: 'source-map'
-, entry: './index'
+{ entry: './src/index'
 , output:
-  { path: __dirname
-  , filename: 'bundle.js'
+  { path: __dirname + '/dist'
+  , filename: 'kronos.min.js'
   , publicPath: '/'
-}
-, resolveLoader:
-  { modulesDirectories: [ 'node_modules' ]
   }
 , resolve:
   { extensions: ['', '.js', '.coffee', '.cjsx']
   }
 , module:
   { loaders:
-  [ { test: /\.json$/
-    , loader: 'json'
-    }
-  , { test: /\.jsx?$/
-    , loader: 'babel'
-    , include: __dirname
-    , exclude: /node_modules/
-    }
-  , { test: /\.cjsx$/
-    , loaders: ['coffee', 'cjsx']
-    }
-  , { test: /\.coffee$/
-    , loader: 'coffee'
-    }
-  ]
-}
+    [ { test: /\.json$/
+      , loader: 'json'
+      }
+    , { test: /\.jsx?$/
+      , loader: 'babel'
+      , exclude: /node_modules/
+      }
+    , { test: /\.cjsx$/
+      , loaders: ['coffee', 'cjsx']
+      }
+    , { test: /\.coffee$/
+      , loader: 'coffee'
+      }
+    ]
+  }
 , plugins:
   [ new webpack.NormalModuleReplacementPlugin(/^kronos$/, '../src/index')
   , new webpack.optimize.OccurenceOrderPlugin()

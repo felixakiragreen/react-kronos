@@ -4,3 +4,9 @@
 cd examples
 ../node_modules/.bin/webpack --config webpack.config.production.js --progress --profile --colors
 cd ..
+
+# build dist
+./node_modules/.bin/cjsx -cbo dist ./src/*
+
+# build min dist
+./node_modules/.bin/webpack

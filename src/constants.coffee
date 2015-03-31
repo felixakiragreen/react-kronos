@@ -19,7 +19,7 @@ module.exports =
     HOUR: 'hours'
 
   Colors:
-    HIGHLIGHT: '#76578e'
+    HIGHLIGHT: '#0e627b'
 
   Levels:
     years:
