@@ -14,6 +14,11 @@ A fast, intuitive, and elegant date and time picker for React.
 - Style is done in JS and can be easily modified
 - Beautiful code and appearance
 
+## [Demo](http://dubert.github.io/react-kronos)
+- make beautiful website
+- link to github
+- link to npm
+
 #### Rationale
 
 Even though there are many React Date and/or Time components, I'm developing my own because none of them do everything that I need.
@@ -21,7 +26,7 @@ Even though there are many React Date and/or Time components, I'm developing my 
 Key requirements:
 - Separate date and/or time components (many only have date)
 - Easily style-able from JS (not have to muck around in the css)
-- Return multiple time formats (Moment, ISO, string)
+- Return multiple time formats (Date, Moment, ISO, string)
 - Lightweight, use no jquery
 - Active on focus, disappear on blur
 - Good keyboard navigation
@@ -30,7 +35,7 @@ Key requirements:
 
 Kronos is built from scratch, but heavily inspired by:
 
-*UX:*
+*UX & UI:*
 - Google Calendar's input fields
 
 *Code & UX:*
@@ -46,36 +51,62 @@ Kronos is built from scratch, but heavily inspired by:
 
 #### TODO
 
-- **Demo** [instructions](https://help.github.com/categories/github-pages-basics/)
-- **Install**
+- **Demo website**
+- **NPM Install**
 - **Features**
 - **Usage / Documentation**
-- create examples/
-- create dist/
-- create docs/
+- create dist/ (add to package.json/main)
+
+#### Roadmap
+
+0.1:
+- ~~date & time inputs~~
+- ~~formatting (input & returning)~~
+- common style variables (highlight color, font family, rounded corners)
+- options: customize with moment locale
+
+0.2:
+- granular styling (overwrite any style, or provide entire theme)
+- options:
+  - date (restrict calendar to show only days, or with months, or with years)
+  - time (set increments, set ranges of time)
+
+0.3:
+- minimum date+time
+  - hard (user cannot enter value)
+  - soft (user enters values and field becomes red)
+- maximum date+time
+  - hard
+  - soft
+- support for connected start & end date+time
+  - date (show range on calendar)
+  - time (show "0 hours", "0.5 hours", "1 hour", &c)
 
 #### Props
 
-- ~~date~~
-- ~~time~~
-- min : minimum allowable value
-- max : maximum allowable value
--  ~~format~~ : [Moment formatting](http://momentjs.com/docs/#/parsing/string-format/) of date / time
-- ~~onChange~~ : change method called when there is a new value
-- ~~returnAs~~ : onChange format: Date(), Moment(), ISO, String
-- ~~close~~ : closes the dropdown when a value is selected
-- ~~placeholder~~ : placeholder text when there is no value
+Current:
+- `date`
+- `time`
+- `format` - [Moment formatting](http://momentjs.com/docs/#/parsing/string-format/) of date / time
+- `onChange` - change method called when there is a new value
+- `returnAs` - onChange format `jsdate`, `moment`, `iso`, `string`
+- `close` - closes the dropdown when a value is selected
+- `placeholder` - placeholder text when there is no value
+
+Coming:
+- `min` - minimum allowable value
+- `max` - maximum allowable value
 - options
-  - date (show years, months, days)
-  - time (periods of time (every 30 min, hour), range of time)
+  - date
+  - time
   - moment locale (for customization)
 - style (CSS)
   - common variables
-    - highlight color
-    - rounded corner
   - granular style
 
 #### Ideas
 
-- min time also shows from now (0 hours, 0.5 hours, &c)
-- min & max make the fields red
+- input field masking
+- scroll time list as user arrows up+down
+- ⇧+arrow uses the higher order unit
+- make it immutable
