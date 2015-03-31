@@ -7,18 +7,30 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/dubert/react-kronos"
   },
   "keywords": [
     "react",
-    "reactjs"
+    "reactjs",
+    "date",
+    "time",
+    "picker",
+    "input",
+    "field",
+    "moment",
+    "datetime",
+    "calendar",
+    "years",
+    "months",
+    "days",
+    "hours"
   ],
   "author": "Luke Dubert <dubert@me.com> (http://github.com/dubert)",
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/dubert/react-kronos/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/dubert/react-kronos",
   "devDependencies": {
     "babel-core": "^4.7.16",
     "babel-loader": "^4.2.0",
