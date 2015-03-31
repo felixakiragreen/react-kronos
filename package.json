@@ -1,0 +1,44 @@
+{
+  "name": "kronos",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "react",
+    "reactjs"
+  ],
+  "author": "Luke Dubert <dubert@me.com> (http://github.com/dubert)",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "devDependencies": {
+    "babel-core": "^4.7.16",
+    "babel-loader": "^4.2.0",
+    "cjsx-loader": "^2.0.1",
+    "coffee-loader": "^0.7.2",
+    "coffee-script": "^1.9.1",
+    "json-loader": "^0.5.1",
+    "react-hot-loader": "^1.2.4",
+    "webpack": "^1.7.3",
+    "webpack-dev-server": "^1.7.0"
+  },
+  "dependencies": {
+    "color": "^0.8.0",
+    "jss": "^1.0.8",
+    "jss-camel-case": "^0.1.1",
+    "jss-nested": "^0.1.7",
+    "jss-px": "^0.1.2",
+    "jss-vendor-prefixer": "^0.2.0",
+    "moment-range": "^1.0.7",
+    "react": "^0.13.1",
+    "react-jss": "^0.1.3"
+  }
+}
