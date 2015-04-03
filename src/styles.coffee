@@ -1,152 +1,187 @@
+'use strict'
+
+_ = require 'lodash'
 color = require 'color'
-{ Colors } = require './constants'
+moment = require 'moment-range'
 
-module.exports =
+_options = {}
 
-  IndexStyle:
-    kronos:
-      position: 'relative'
-      display: 'flex'
-      color: 'hsl(0, 0%, 50%)'
-      '& *':
-        fontFamily: 'Source Sans Pro'
-        margin: 0
-        padding: 0
-        boxSizing: 'border-box'
-        userSelect: 'none'
+setOptions = (options) ->
+  if options.moment
+    moment.locale options.moment.lang, options.moment.settings
+  else
+    moment.locale 'en',
+      week: dow: 1
+      weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 
-    input:
-      border: '1px solid transparent'
-      borderRadius: 4
-      fontSize: 16
-      '&:focus':
-        background:
-          do color Colors.HIGHLIGHT
-            .alpha 0.1
-            .rgbaString
-        outline: 'none'
-        borderColor: Colors.HIGHLIGHT
+  _options = _.omit options, 'moment'
 
-  CalendarStyle:
-    calendar:
-      position: 'absolute'
-      top: '100%'
-      left: 0
-      padding: 6
-      background: 'white'
-      border: '1px solid ' + do color 'black'
-        .alpha 0.15
-        .rgbString
-      borderRadius: 4
-      boxShadow: '0 0 7px 5px hsla(0, 0%, 0%, 0.05)'
-      textAlign: 'center'
-      zIndex: 2
+getStyle = (page, props) ->
+    if props then setOptions props.options
 
-    grid:
-      width: 182
-      '&.hours':
-        height: 200
-        width: 100
-        overflow: 'auto'
-        paddingRight: 6
-      '&::-webkit-scrollbar':
-        width: 8
-      '&::-webkit-scrollbar-track':
-        background: do color(Colors.HIGHLIGHT).alpha(0.05).rgbString
-        boxShadow: 'inset 0 0 3px rgba(0, 0, 0, 0.15)'
-        borderRadius: 4
-      '&::-webkit-scrollbar-thumb':
-        borderRadius: 4
-        background: Colors.HIGHLIGHT
-        boxShadow: 'inset 0 0 3px rgba(0, 0, 0, 0.3)'
+    defaultOptions =
+      color: '#1e7e9e'
+      corners: 4
+      font: 'Source Sans Pro'
 
-    today:
-      display: 'flex'
-      justifyContent: 'center'
-      alignItems: 'center'
+    options = _.assign defaultOptions, _options
+
+    style = switch page
+      when 'index' then index options
+      when 'calendar' then calendar options
+      when 'navigation' then navigation options
+      when 'cell' then cell options
+
+    style
+
+module.exports = getStyle
+
+# Style per page
+
+index = (options) ->
+  kronos:
+    position: 'relative'
+    display: 'flex'
+    color: 'hsl(0, 0%, 50%)'
+    '& *':
+      fontFamily: options.font
+      margin: 0
+      padding: 0
+      boxSizing: 'border-box'
+      userSelect: 'none'
+
+  input:
+    border: '1px solid transparent'
+    borderRadius: options.corners
+    fontSize: 16
+    background: 'white'
+    '&:focus':
+      background:
+        do color options.color
+          .alpha 0.1
+          .rgbaString
+      outline: 'none'
+      borderColor: options.color
+
+calendar = (options) ->
+  calendar:
+    position: 'absolute'
+    top: '100%'
+    left: 0
+    padding: 6
+    background: 'white'
+    border: '1px solid hsla(0, 0%, 0%, 0.15)'
+    borderRadius: options.corners
+    boxShadow: '0 0 7px 5px hsla(0, 0%, 0%, 0.05)'
+    textAlign: 'center'
+    zIndex: 2
+
+  grid:
+    width: 182
+    '&.hours':
+      height: 200
+      width: 96 + options.corners * 2
+      overflow: 'auto'
+      paddingRight: 6
+    '&::-webkit-scrollbar':
+      width: if options.corners <= 2 then 4 else options.corners * 2
+    '&::-webkit-scrollbar-track':
+      background: do color(options.color).alpha(0.05).rgbString
+      boxShadow: 'inset 0 0 3px rgba(0, 0, 0, 0.15)'
+      borderRadius: options.corners
+    '&::-webkit-scrollbar-thumb':
+      borderRadius: options.corners
+      background: options.color
+      boxShadow: 'inset 0 0 3px rgba(0, 0, 0, 0.3)'
+
+  today:
+    display: 'flex'
+    justifyContent: 'center'
+    alignItems: 'center'
+    height: 30
+    cursor: 'pointer'
+    border: '1px solid transparent'
+    borderRadius: options.corners
+    marginTop: 3
+    '&:hover':
+      borderColor:
+        do color options.color
+          .alpha 0.5
+          .rgbString
+      color: options.color
+
+  cell:
+    display: 'inline-flex'
+    alignItems: 'center'
+    justifyContent: 'center'
+    border: '1px solid transparent'
+    borderRadius: options.corners
+    fontSize: 15
+    cursor: 'pointer'
+    '&:not(.selected):not(.header):hover':
+      backgroundColor:
+        do color options.color
+          .alpha 0.2
+          .rgbString
+      '&:not(.today)':
+        color: 'hsl(0, 0%, 25%)'
+    '&.years':
+      width: 58
+      height: 38
+    '&.months':
+      width: 58
+      height: 38
+    '&.days':
+      width: 26
       height: 26
-      cursor: 'pointer'
-      border: '1px solid transparent'
-      borderRadius: 4
-      marginTop: 3
+    '&.hours':
+      display: 'flex'
+      lineHeight: 1.5
+
+    '&.header':
+      cursor: 'default'
+      color:
+        do color options.color
+          .alpha 0.4
+          .rgbString
+      fontWeight: 700
+    '&.past':
+      opacity: 0.4
+    '&.future':
+      opacity: 0.4
+
+    '&.today':
+      fontWeight: 700
+      border: '1px solid'
+      borderColor:
+        do color options.color
+          .alpha 0.75
+          .rgbString
+      color: options.color
+
+    '&.selected':
+      backgroundColor: options.color
+      color: 'white'
+
+
+navigation = (options) ->
+  nav:
+    display: 'flex'
+    cursor: 'pointer'
+    lineHeight: '32px'
+
+    '& > div':
+      border: '1px solid'
+      borderColor: 'transparent'
+      borderRadius: options.corners
       '&:hover':
         borderColor:
-          do color Colors.HIGHLIGHT
+          do color options.color
             .alpha 0.5
             .rgbString
-        color: Colors.HIGHLIGHT
-
-  NavStyle:
-    nav:
-      display: 'flex'
-      cursor: 'pointer'
-      lineHeight: '32px'
-
-      '& > div':
-        border: '1px solid'
-        borderColor: 'transparent'
-        borderRadius: 4
-        '&:hover':
-          borderColor:
-            do color Colors.HIGHLIGHT
-              .alpha 0.5
-              .rgbString
-          color: Colors.HIGHLIGHT
-        '&.arrow':
-          flex: 1
-          fontSize: 24
-        '&.title':
-          flex: 2
-
-  CellStyle:
-    cell:
-      display: 'inline-flex'
-      alignItems: 'center'
-      justifyContent: 'center'
-      border: '1px solid'
-      borderColor: 'white'
-      borderRadius: 4
-      fontSize: 15
-      cursor: 'pointer'
-      '&:not(.selected):not(.header):hover':
-        backgroundColor:
-          do color Colors.HIGHLIGHT
-            .alpha 0.25
-            .rgbString
-      '&.years':
-        width: 58
-        height: 38
-      '&.months':
-        width: 58
-        height: 38
-      '&.days':
-        width: 26
-        height: 26
-      '&.hours':
-        display: 'flex'
-        lineHeight: 1.5
-
-      '&.header':
-        cursor: 'default'
-        color:
-          do color Colors.HIGHLIGHT
-            .alpha 0.4
-            .rgbString
-        fontWeight: 700
-      '&.past':
-        opacity: 0.4
-      '&.future':
-        opacity: 0.4
-
-      '&.today':
-        fontWeight: 700
-        border: '1px solid'
-        borderColor:
-          do color Colors.HIGHLIGHT
-            .alpha 0.75
-            .rgbString
-        color: Colors.HIGHLIGHT
-
-      '&.selected':
-        backgroundColor: Colors.HIGHLIGHT
-        color: 'white'
+        color: options.color
+      '&.arrow':
+        flex: 1
+        fontSize: 24
+      '&.title':
+        flex: 2

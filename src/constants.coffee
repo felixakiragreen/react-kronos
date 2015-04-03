@@ -1,3 +1,5 @@
+'use strict'
+
 React = require 'react'
 keyMirror = require 'react/lib/keyMirror'
 
@@ -18,8 +20,11 @@ module.exports =
     DAY: 'days'
     HOUR: 'hours'
 
-  Colors:
-    HIGHLIGHT: '#0e627b'
+  Types: keyMirror
+    JS_DATE: null
+    MOMENT: null
+    ISO: null
+    STRING: null
 
   Levels:
     years:
@@ -55,9 +60,3 @@ module.exports =
       key:
         unit: 'minutes'
         span: 30
-
-  Types: keyMirror
-    JS_DATE: null
-    MOMENT: null
-    ISO: null
-    STRING: null

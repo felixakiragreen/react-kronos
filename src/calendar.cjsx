@@ -1,22 +1,23 @@
+'use strict'
+
 React = require 'react'
 moment = require 'moment-range'
 cn = require 'classnames'
 
 { Levels, Units } = require './constants'
-Cell = require './cell'
 Navigation = require './nav'
+Cell = require './cell'
+getPropsAndAttach = require './react-hoc-jss'
+getStyle = require './styles'
 
-useSheet = require 'react-jss'
-{ CalendarStyle } = require './styles'
 
-
-module.exports = React.createClass
+Calendar = React.createClass
   displayName: 'Calendar'
 
   render: ->
     dates = @props.level isnt 'hours'
     <div
-      className={@sheet.classes.calendar}
+      className={@props.classes.calendar}
       onMouseDown={(e) => @props.above true ; e}
       onMouseUp={(e) => @props.above false ; e}
     >
@@ -27,7 +28,7 @@ module.exports = React.createClass
           onTitle={@onNavigateUp}
           title={@getTitle[@props.level] @props.datetime}
         /> }
-      <div ref='grid' className={cn @sheet.classes.grid, @props.level}>
+      <div ref='grid' className={cn @props.classes.grid, @props.level}>
         { @getCells[@props.level] @props.datetime
             .map (cell, i) =>
               type = switch
@@ -49,7 +50,7 @@ module.exports = React.createClass
               />
         }
         { dates and
-          <div className={@sheet.classes.today} onClick={this.onToday}>
+          <div className={@props.classes.today} onClick={this.onToday}>
             Today
           </div>
         }
@@ -183,10 +184,6 @@ module.exports = React.createClass
 
       hours
 
-  mixins: [
-    useSheet(CalendarStyle)
-  ]
-
   propTypes:
     datetime: React.PropTypes.object.isRequired
     onSelect: React.PropTypes.func.isRequired
@@ -194,56 +191,6 @@ module.exports = React.createClass
     setLevel: React.PropTypes.func.isRequired
     onMouseDown: React.PropTypes.func
     onMouseUp: React.PropTypes.func
-    # min: React.PropTypes.any
 
-  # componentWillUpdate: (nextProps, nextState) ->
 
-    # TODO: arrows move scroll position
-    # TODO: parsing entered text moves scroll position
-    # TODO: selecting does not
-
-    # if @props.level is 'hours'
-    #
-    #   console.log 'this.refs:', @refs
-    #
-    #   list = React.findDOMNode @refs.grid
-    #   hour = React.findDOMNode @refs.selected
-
-      # console.log 'list.scrollTop:', list.scrollTop
-      # console.log 'list.offsetHeight:', list.offsetHeight
-      # console.log 'list.scrollHeight:', list.scrollHeight
-      # console.log 'hour.offsetTop:', hour.offsetTop
-      # console.log 'hour.offsetHeight:', hour.offsetHeight
-      # console.log 'hour.scrollHeight:', hour.scrollHeight
-      #
-      # topOfList = list.scrollTop
-      # topOfHour = hour.offsetTop
-      # bottomOfList = list.scrollTop + list.offsetHeight
-      # bottomOfHour = hour.offsetTop + hour.offsetHeight
-      #
-      # console.log 'bottomOfHour:', bottomOfHour
-      # console.log 'bottomOfList:', bottomOfList
-      # console.log 'topOfHour:', topOfHour
-      # console.log 'topOfList:', topOfList
-      #
-      # if bottomOfHour > bottomOfList
-      #   console.log '---BOTTOM'
-      #   @scrollPosition = bottomOfHour - list.offsetHeight - hour.offsetHeight * 2 + 6
-      # else if topOfHour < topOfList
-      #   console.log '----TOP'
-      #   @scrollPosition = list.scrollTop
-      # else
-      #   @scrollPosition = null
-      #
-      # console.log 'bottomOfList:', bottomOfList
-      # console.log 'hour.offsetTop:', hour.offsetTop
-      # console.log ':', d
-      # console.log 'this.scrollPosition:', @scrollPosition
-      #
-      # @shouldScrollBottom = `node.scrollTop + node.offsetHeight == node.scrollHeight`
-
-  # componentDidUpdate: (prevProps, prevState) ->
-    # if @scrollPosition
-    #   console.log 'update'
-    #   list = @refs.hours.getDOMNode()
-    #   list.scrollTop = @scrollPosition
+module.exports = getPropsAndAttach Calendar, (props) -> getStyle 'calendar'

@@ -1,15 +1,14 @@
+'use strict'
+
 React = require 'react'
 cn = require 'classnames'
-
-useSheet = require 'react-jss'
-{ CellStyle } = require './styles'
 
 
 module.exports = React.createClass
   displayName: 'Cell'
 
   render: ->
-    classes = cn @sheet.classes.cell,
+    classes = cn @props.classes.cell,
       @props.level,
       @props.type,
       { selected: @props.selected },
@@ -21,10 +20,6 @@ module.exports = React.createClass
     >
       {@props.label}
     </div>
-
-  mixins: [
-    useSheet(CellStyle)
-  ]
 
   propTypes:
     label: React.PropTypes.string
