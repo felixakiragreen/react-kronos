@@ -1,4 +1,5 @@
 var webpack = require('webpack')
+var path = require('path')
 
 
 module.exports =
@@ -8,9 +9,9 @@ module.exports =
   { path: __dirname
   , filename: 'bundle.js'
   , publicPath: '/'
-}
+  }
 , resolveLoader:
-  { modulesDirectories: [ 'node_modules' ]
+  { modulesDirectories: [ path.join(__dirname, '../node_modules') ]
   }
 , resolve:
   { extensions: ['', '.js', '.coffee', '.cjsx']

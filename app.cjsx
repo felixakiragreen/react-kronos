@@ -7,14 +7,26 @@ module.exports = React.createClass
   displayName: 'App'
 
   render: ->
+
+    props =
+      options:
+        color: '#1a8317'
+        corners: 3
+      # closeOnBlur: false
+      # style:
+      #   bleh: 'hmm'
+
     <div>
       <Kronos
         date={@state.datetime}
         onChange={@onChange}
+        format='MM . DD . YYYY'
+        {... props}
       />
       <Kronos
         time={@state.datetime}
         onChange={@onChange}
+        {... props}
       />
     </div>
 
@@ -23,4 +35,4 @@ module.exports = React.createClass
     @setState datetime: datetime
 
   getInitialState: ->
-    datetime: do moment().toISOString
+    datetime: moment().toISOString()
