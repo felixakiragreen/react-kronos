@@ -122,10 +122,7 @@ Kronos = React.createClass
     @commit saving
 
   commit: (datetime) ->
-    console.log '@props.returnAs:', @props.returnAs
-    console.log '@state.type:', @state.type
     returnAs = @props.returnAs or @state.type
-    console.log 'returnAs:', returnAs
     result = switch returnAs
       when Types.ISO then do datetime.toISOString
       when Types.JS_DATE then do datetime.toDate
