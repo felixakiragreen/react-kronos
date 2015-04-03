@@ -106,11 +106,7 @@ A fast, intuitive, and elegant date and time picker for React.
 #### See Also
 
 Kronos is built from scratch, but heavily inspired by:
-
-*UX & UI:*
 - Google Calendar's input fields
-
-*Code & UX:*
 - [react-widgets datetimepicker](http://jquense.github.io/react-widgets/docs/#/datetime-picker)
 - [react-input-calendar](https://github.com/Rudeg/react-input-calendar)
 
