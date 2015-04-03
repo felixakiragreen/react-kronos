@@ -1,7 +1,7 @@
 {
-  "name": "kronos",
-  "version": "0.0.1",
-  "description": "",
+  "name": "react-kronos",
+  "version": "0.1.0",
+  "description": "A fast, intuitive, and elegant date and time picker for React.",
   "main": "dist/index.js",
   "scripts": {
     "start": "./scripts/start",
@@ -34,6 +34,7 @@
   },
   "homepage": "http://dubert.github.io/react-kronos",
   "devDependencies": {
+    "babel": "^5.0.7",
     "babel-core": "^4.7.16",
     "babel-loader": "^4.2.0",
     "cjsx-loader": "^2.0.1",
@@ -46,6 +47,7 @@
     "webpack-dev-server": "^1.7.0"
   },
   "dependencies": {
+    "classnames": "^1.2.0",
     "color": "^0.8.0",
     "jss": "^1.0.8",
     "jss-camel-case": "^0.1.1",

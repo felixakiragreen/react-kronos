@@ -95,6 +95,7 @@ A fast, intuitive, and elegant date and time picker for React.
 
 #### Ideas
 
+- move over to JS with ES6 *I just love coffeescript so much :/*
 - input field masking
 - scroll time list as user arrows up+down
 - ⇧+arrow uses the higher order unit

@@ -6,7 +6,10 @@ cd examples
 cd ..
 
 # build dist
-./node_modules/.bin/cjsx -cbo dist ./src/*
+./node_modules/.bin/cjsx -cbo dist ./src/*.cjsx
+./node_modules/.bin/cjsx -cbo dist ./src/*.coffee
+# temp for .js file
+./node_modules/.bin/babel ./src --out-dir ./dist
 
 # build min dist
 ./node_modules/.bin/webpack
