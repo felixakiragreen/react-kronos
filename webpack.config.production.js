@@ -23,7 +23,7 @@ module.exports =
     }
   , { test: /\.jsx?$/
     , loader: 'babel'
-    , include: __dirname
+    , include: [ __dirname, path.join(__dirname, '../src') ]
     , exclude: /node_modules/
     }
   , { test: /\.cjsx$/
