@@ -8,15 +8,15 @@ A fast, intuitive, and elegant date and time picker for React.
 
 ## Philosophy
 
-- Works straight out of the box with no props
-- Provide a couple props and options that give lots of control
+- Works straight out of the box with minimal props
+- Provide a few props and options that give lots of control
 - Allow for granular control when needed
 - Style is done in JS and can be easily modified
 - Beautiful code and appearance
 
 > #### Rationale
 >
-> Even though there are many React Date and/or Time components, I'm developing my own because > none of them do everything that I need.
+> Even though there are many React Date and/or Time components, I'm developing my own because none of them do everything that I need.
 >
 > Key requirements:
 > - Separate date and/or time components (many only have date)
@@ -32,7 +32,7 @@ A fast, intuitive, and elegant date and time picker for React.
 
 1. NPM install `npm install react-kronos`
 2. Require Kronos `import Kronos from 'react-kronos'`
-3. Include
+3. Use
 ```jsx
 <Kronos
   date={this.state.datetime}
@@ -53,25 +53,9 @@ A fast, intuitive, and elegant date and time picker for React.
   - `color` - the highlight color in the UI
   - `corners` - the pixel size of rounded corners (default: `4`)
   - `font` - the font family (default: `Source Sans Pro`)
-  - `moment:` - customize according to [Moments documentation](http://momentjs.com/docs/#/customization/)
+  - `moment:` - Moment locale [customization](http://momentjs.com/docs/#/customization/)
     - `lang` - language (default: `en` for english)
     - `settings` - properties to override as an object (default: `{ week: { dow: 1 }, weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S'] }`)
-
-#### See Also
-
-Kronos is built from scratch, but heavily inspired by:
-
-*UX & UI:*
-- Google Calendar's input fields
-
-*Code & UX:*
-- [react-widgets datetimepicker](http://jquense.github.io/react-widgets/docs/#/datetime-picker)
-- [react-input-calendar](https://github.com/Rudeg/react-input-calendar)
-
-#### Thanks
-
-- **!!!** [gaearon](https://github.com/gaearon) big thanks to Dan Abramov who has built some incredible react components ([hot-loader](https://github.com/gaearon/react-hot-loader), [dnd](https://github.com/gaearon/react-dnd)), written excellent [articles](https://medium.com/@dan_abramov), and answered many questions
-- **!** [vjeux](https://github.com/vjeux) leading the CSS in JS movement
 
 ## Construction progress
 
@@ -83,7 +67,7 @@ Kronos is built from scratch, but heavily inspired by:
 
 #### Roadmap
 
-**0.1:**
+**0.1**
 - ~~date & time inputs~~
 - ~~formatting (input & returning)~~
 - ~~common style variables:~~
@@ -92,13 +76,13 @@ Kronos is built from scratch, but heavily inspired by:
   - ~~rounded corners~~
 - ~~options: customize with moment locale~~
 
-**0.2:**
+**0.2**
 - prop: `styles` - granular styling (overwrite any style, or provide entire theme)
 - options:
   - date (restrict calendar to show only days, or with months, or with years)
   - time (set increments, set ranges of time)
 
-**0.3:**
+**0.3**
 - prop: `min` - minimum allowable date+time
   - hard (user cannot select a date/time, or type/paste a value)
   - soft (user can select/input values but it becomes red)
@@ -116,3 +100,21 @@ Kronos is built from scratch, but heavily inspired by:
 - ⇧+arrow uses the higher order unit
 - maintain a CHANGELOG
 - address required props & non-required (what happens if none are included)
+- mobile support
+- wide browser compatibility
+
+#### See Also
+
+Kronos is built from scratch, but heavily inspired by:
+
+*UX & UI:*
+- Google Calendar's input fields
+
+*Code & UX:*
+- [react-widgets datetimepicker](http://jquense.github.io/react-widgets/docs/#/datetime-picker)
+- [react-input-calendar](https://github.com/Rudeg/react-input-calendar)
+
+#### Thanks
+
+- **!!!** [gaearon](https://github.com/gaearon) big thanks to Dan Abramov who has built some incredible react components ([hot-loader](https://github.com/gaearon/react-hot-loader), [dnd](https://github.com/gaearon/react-dnd)), written excellent [articles](https://medium.com/@dan_abramov), and answered many questions
+- **!** [vjeux](https://github.com/vjeux) leading the CSS in JS movement
