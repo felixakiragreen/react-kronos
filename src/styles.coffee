@@ -7,7 +7,7 @@ moment = require 'moment-range'
 _options = {}
 
 setOptions = (options) ->
-  if options.moment
+  if options?.moment
     moment.locale options.moment.lang, options.moment.settings
   else
     moment.locale 'en',
@@ -54,11 +54,12 @@ index = (options) ->
     border: '1px solid transparent'
     borderRadius: options.corners
     fontSize: 16
+    padding: '3px 6px'
     background: 'white'
     '&:focus':
       background:
         do color options.color
-          .alpha 0.1
+          .alpha 0.05
           .rgbaString
       outline: 'none'
       borderColor: options.color

@@ -141,7 +141,7 @@ Kronos = React.createClass
 
   onSelect: (datetime, close) ->
     @setState
-      visible: if @props.close and close then !@state.visible else @state.visible
+      visible: if @props.closeOnSelect and close then !@state.visible else @state.visible
     @save datetime
 
   onBlur: ->
