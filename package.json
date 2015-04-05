@@ -56,7 +56,6 @@
     "jss-vendor-prefixer": "^0.2.0",
     "lodash": "^3.6.0",
     "moment-range": "^1.0.7",
-    "react": "^0.13.1",
-    "react-jss": "^0.1.3"
+    "react": "^0.13.1"
   }
 }

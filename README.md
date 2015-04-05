@@ -1,6 +1,3 @@
-# UNDER CONSTRUCTION
-*Goal to publish to NPM by April 5th, 2015*
-
 React Kronos
 ============
 
@@ -41,29 +38,23 @@ A fast, intuitive, and elegant date and time picker for React.
 ```
 
 **Props:**
-- `date` - Date(), Moment, ISO, or string (must match `format`)
-- `time` - Date(), Moment, ISO, or string (must match `format`)
-- `format` - [Moment formatting](http://momentjs.com/docs/#/parsing/string-format/) of date / time
-- `onChange` - change method called when there is a new value
-- `returnAs` - onChange format `JS_DATE`, `MOMENT`, `ISO`, `STRING` (default: same as input)
-- `closeOnSelect` - closes the dropdown when a value is selected (default: `true`)
-- `closeOnBlur` - closes the dropdown when the field is blurred (default: `true`)
-- `placeholder` - placeholder text when there is no value
+- `date` - *Date()*, *Moment()*, *ISO*, or *string* (if string, must match `format`)
+- `time` - *Date()*, *Moment()*, *ISO*, or *string* (if string, must match `format`)
+- `format` - *string* : [Moment formatting](http://momentjs.com/docs/#/parsing/string-format/) of date / time
+- `onChange` - *function* : change method called when there is a new value
+- `returnAs` - *string* : onChange format `JS_DATE`, `MOMENT`, `ISO`, `STRING` (default: same as input)
+- `closeOnSelect` - *boolean* : closes the dropdown when a value is selected (default: `true`)
+- `closeOnBlur` - *boolean* : closes the dropdown when the field is blurred (default: `true`)
+- `placeholder` - *string* : placeholder text when there is no value
 - `options:`
-  - `color` - the highlight color in the UI
-  - `corners` - the pixel size of rounded corners (default: `4`)
-  - `font` - the font family (default: `Source Sans Pro`)
-  - `moment:` - Moment locale [customization](http://momentjs.com/docs/#/customization/)
-    - `lang` - language (default: `en` for english)
-    - `settings` - properties to override as an object (default: `{ week: { dow: 1 }, weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S'] }`)
+  - `color` - *string* : the highlight color in the UI as a hex
+  - `corners` - *number* : the pixel size of rounded corners (default: `4`)
+  - `font` - *string* : the font family (default: `Source Sans Pro`)
+  - `moment:` - *object* : Moment locale [customization](http://momentjs.com/docs/#/customization/)
+    - `lang` - *string* : language (default: `en` for english)
+    - `settings` - *object* : properties to override as an object (default: `{ week: { dow: 1 }, weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S'] }`)
 
 ## Construction progress
-
-#### TODO:
-- **Demo website**
-- **Publish to NPM**
-- **Features**
-- **Usage / Documentation**
 
 #### Roadmap
 

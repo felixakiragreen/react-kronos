@@ -68,7 +68,7 @@ module.exports = React.createClass
             <span style={style.tagline}>A fast, intuitive, and elegant date and time picker for React.</span>
           </div>
           <div style={style.icon}>
-            <a className='icon-link' href='https://github.com/dubert/react-kronos'>
+            <a className='icon-link' href='https://www.npmjs.com/package/react-kronos'>
               {npm}
             </a>
             <a className='icon-link' href='https://github.com/dubert/react-kronos'>
