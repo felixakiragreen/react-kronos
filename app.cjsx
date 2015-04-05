@@ -45,6 +45,11 @@ module.exports = React.createClass
         backgroundColor: 'hsl(0, 0%, 97%)'
         padding: '48px 0'
 
+      coming:
+        margin: 32
+        color: 'hsl(0, 0%, 66%)'
+        fontStyle: 'italic'
+
     # props =
     #   options:
     #     color: '#1a8317'
@@ -83,6 +88,9 @@ module.exports = React.createClass
             />
           </div>
         </main>
+        <div style={style.coming}>
+          Documentation coming soon. Read more on Github.
+        </div>
       </div>
     </div>
 
