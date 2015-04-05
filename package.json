@@ -1,6 +1,6 @@
 {
   "name": "react-kronos",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A fast, intuitive, and elegant date and time picker for React.",
   "main": "dist/index.js",
   "scripts": {
