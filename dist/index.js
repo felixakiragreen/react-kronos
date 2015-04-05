@@ -206,7 +206,7 @@ Kronos = React.createClass({
   },
   onSelect: function(datetime, close) {
     this.setState({
-      visible: this.props.close && close ? !this.state.visible : this.state.visible
+      visible: this.props.closeOnSelect && close ? !this.state.visible : this.state.visible
     });
     return this.save(datetime);
   },

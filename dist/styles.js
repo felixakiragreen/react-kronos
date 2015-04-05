@@ -11,7 +11,7 @@ moment = require('moment-range');
 _options = {};
 
 setOptions = function(options) {
-  if (options.moment) {
+  if (options != null ? options.moment : void 0) {
     moment.locale(options.moment.lang, options.moment.settings);
   } else {
     moment.locale('en', {
@@ -70,9 +70,10 @@ index = function(options) {
       border: '1px solid transparent',
       borderRadius: options.corners,
       fontSize: 16,
+      padding: '3px 6px',
       background: 'white',
       '&:focus': {
-        background: color(options.color).alpha(0.1).rgbaString(),
+        background: color(options.color).alpha(0.05).rgbaString(),
         outline: 'none',
         borderColor: options.color
       }
