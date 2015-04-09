@@ -1,8 +1,6 @@
-'use strict'
-
 React = require 'react'
 
-getPropsAndAttach = require './react-hoc-jss'
+createStyledComponent = require './styled-component'
 getStyle = require './styles'
 
 
@@ -29,4 +27,5 @@ Navigation = React.createClass
     title: React.PropTypes.string
 
 
-module.exports = getPropsAndAttach Navigation, (props) -> getStyle 'navigation'
+module.exports = createStyledComponent Navigation,
+  (props, id) -> getStyle 'navigation', props, id

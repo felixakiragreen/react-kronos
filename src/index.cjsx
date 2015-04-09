@@ -1,5 +1,3 @@
-'use strict'
-
 React = require 'react'
 moment = require 'moment-range'
 
@@ -11,7 +9,7 @@ jss.use require 'jss-px'
 
 { Keys, Levels, Units, Types } = require './constants'
 Calendar = require './calendar'
-getPropsAndAttach = require './react-hoc-jss'
+createStyledComponent = require './styled-component'
 getStyle = require './styles'
 
 
@@ -34,6 +32,7 @@ Kronos = React.createClass
       />
       { @state.visible and
         <Calendar
+          id={@props.id}
           datetime={@state.datetime or do moment}
           onSelect={@onSelect}
           above={(bool) => @above = bool}
@@ -51,27 +50,27 @@ Kronos = React.createClass
     level: do @getDefaultLevel
 
   getDateTimeInput: (props) ->
-      props ?= @props
-      prop = props.date or props.time or null
-      datetime = @parse prop
-      isoRegex = /((\d{4}\-\d\d\-\d\d)[tT]([\d:\.]*)?)([zZ]|([+\-])(\d\d):?(\d\d))/
-      type = switch typeof prop
-        when 'object'
-          if moment.isDate prop
-            Types.JS_DATE
-          else if moment.isMoment prop
-            Types.MOMENT
-          else
-            null
-        when 'string'
-          if prop.match isoRegex
-            Types.ISO
-          else
-            Types.STRING
+    props ?= @props
+    prop = props.date or props.time or null
+    datetime = @parse prop
+    isoRegex = /((\d{4}\-\d\d\-\d\d)[tT]([\d:\.]*)?)([zZ]|([+\-])(\d\d):?(\d\d))/
+    type = switch typeof prop
+      when 'object'
+        if moment.isDate prop
+          Types.JS_DATE
+        else if moment.isMoment prop
+          Types.MOMENT
+        else
+          null
+      when 'string'
+        if prop.match isoRegex
+          Types.ISO
+        else
+          Types.STRING
 
-      datetime: datetime
-      input: datetime.format(@format props) or null
-      type: type
+    datetime: datetime
+    input: datetime.format(@format props) or null
+    type: type
 
   getDefaultLevel: ->
     if @props.date
@@ -209,4 +208,5 @@ Kronos = React.createClass
         input: @getDateTimeInput(nextProps).input
 
 
-module.exports = getPropsAndAttach Kronos, (props) -> getStyle 'index', props
+module.exports = createStyledComponent Kronos,
+  (props, id) -> getStyle 'index', props, id

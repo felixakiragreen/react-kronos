@@ -1,5 +1,3 @@
-'use strict'
-
 React = require 'react'
 cn = require 'classnames'
 

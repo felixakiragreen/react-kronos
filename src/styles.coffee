@@ -1,42 +1,41 @@
-'use strict'
-
 _ = require 'lodash'
 color = require 'color'
 moment = require 'moment-range'
 
 _options = {}
 
-setOptions = (options) ->
-  if options?.moment
+setOptions = (options, uuid) ->
+  if options.moment
     moment.locale options.moment.lang, options.moment.settings
   else
     moment.locale 'en',
       week: dow: 1
       weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S']
 
-  _options = _.omit options, 'moment'
+  _options[uuid] = _.omit options, 'moment'
 
-getStyle = (page, props) ->
-    if props then setOptions props.options
+getStyle = (page, props, uuid) ->
 
-    defaultOptions =
-      color: '#1e7e9e'
-      corners: 4
-      font: 'Source Sans Pro'
+  if props.options then setOptions props.options, uuid
 
-    options = _.assign defaultOptions, _options
+  defaultOptions =
+    color: '#1e7e9e'
+    corners: 4
+    font: 'Source Sans Pro'
 
-    style = switch page
-      when 'index' then index options
-      when 'calendar' then calendar options
-      when 'navigation' then navigation options
-      when 'cell' then cell options
+  options = _.assign defaultOptions, _options[uuid]
 
-    style
+  style = switch page
+    when 'index' then index options
+    when 'calendar' then calendar options
+    when 'navigation' then navigation options
+    when 'cell' then cell options
+
+  style
 
 module.exports = getStyle
 
-# Style per page
+# Styles for each page
 
 index = (options) ->
   kronos:

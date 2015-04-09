@@ -1,5 +1,3 @@
-'use strict'
-
 React = require 'react'
 moment = require 'moment-range'
 cn = require 'classnames'
@@ -7,7 +5,7 @@ cn = require 'classnames'
 { Levels, Units } = require './constants'
 Navigation = require './nav'
 Cell = require './cell'
-getPropsAndAttach = require './react-hoc-jss'
+createStyledComponent = require './styled-component'
 getStyle = require './styles'
 
 
@@ -23,6 +21,7 @@ Calendar = React.createClass
     >
       { dates and
         <Navigation
+          id={@props.id}
           onPrev={@onNavigateLeft}
           onNext={@onNavigateRight}
           onTitle={@onNavigateUp}
@@ -193,4 +192,5 @@ Calendar = React.createClass
     onMouseUp: React.PropTypes.func
 
 
-module.exports = getPropsAndAttach Calendar, (props) -> getStyle 'calendar'
+module.exports = createStyledComponent Calendar,
+  (props, id) -> getStyle 'calendar', props, id

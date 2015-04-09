@@ -9,6 +9,10 @@ Object.defineProperty(exports, '__esModule', {
 });
 exports['default'] = getPropsAndAttach;
 
+var _React = require('react');
+
+var _React2 = _interopRequireWildcard(_React);
+
 var _jss = require('jss');
 
 var _jss2 = _interopRequireWildcard(_jss);
@@ -48,7 +52,7 @@ function getPropsAndAttach(Component, Rules, Options) {
     },
 
     render: function render() {
-      return React.createElement(Component, _extends({}, this.props, {
+      return _React2['default'].createElement(Component, _extends({}, this.props, {
         classes: this.sheet.classes,
         classSet: this.classSet
       }));
@@ -69,7 +73,7 @@ function getPropsAndAttach(Component, Rules, Options) {
     };
   }
 
-  return React.createClass(StyledComponent);
+  return _React2['default'].createClass(StyledComponent);
 }
 
 module.exports = exports['default'];

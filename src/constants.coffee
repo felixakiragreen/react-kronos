@@ -1,5 +1,3 @@
-'use strict'
-
 React = require 'react'
 keyMirror = require 'react/lib/keyMirror'
 
