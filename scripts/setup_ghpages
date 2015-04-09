@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# create branch
+git checkout -b gh-pages
+# remove all files except examples dir
+ls | grep -v examples | xargs rm -rf
+# move files in examples to .
+git mv examples/* .
+
+# TODO: manually do the rest (delete examples, files not needed)
+
+# Track all changes
+git add --all
+# Commit
+git commit -m "initial commit in gh-pages"
+# Push (and set upstream)
+git push -u origin gh-pages

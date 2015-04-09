@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# checkout
+git checkout gh-pages
+# merge
+git merge -s recursive -X subtree=gh-pages origin/master --no-edit
+# push (-q quiet)
+git push origin gh-pages -q
+#
+git checkout master

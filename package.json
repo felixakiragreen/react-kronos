@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "start": "./scripts/start",
-    "build": "./scripts/build"
+    "build": "./scripts/build",
+    "push_examples": "./scripts/push_ghpages"
   },
   "repository": {
     "type": "git",
