@@ -50,14 +50,11 @@ module.exports = React.createClass
         color: 'hsl(0, 0%, 66%)'
         fontStyle: 'italic'
 
-    # props =
-    #   options:
-    #     color: '#1a8317'
-    #     corners: 3
-    #     font: 'Helvetica'
-    #   closeOnBlur: false
-    #   style:
-    #     bleh: 'hmm'
+    props =
+      options:
+        color: '#583ea4'
+        corners: 4
+      # closeOnBlur: false
 
 
     <div style={style.app}>
@@ -81,10 +78,12 @@ module.exports = React.createClass
             <Kronos
               date={@state.datetime}
               onChange={@onChange}
+              {... props}
             />
             <Kronos
               time={@state.datetime}
               onChange={@onChange}
+              {... props}
             />
           </div>
         </main>
