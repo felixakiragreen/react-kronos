@@ -52,7 +52,7 @@ module.exports = React.createClass
 
     props =
       options:
-        color: '#a43f65'
+        color: '#1b2a60'
         corners: 3
       # closeOnBlur: false
 
