@@ -1,8 +1,6 @@
 .DS_Store
 *.log
 node_modules
-datetime
-assortments
 examples
 scripts
 src
