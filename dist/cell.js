@@ -18,9 +18,7 @@ module.exports = React.createClass({
       "className": classes,
       "onClick": ((function(_this) {
         return function() {
-          if (_this.props.moment) {
-            return _this.props.onClick(_this.props.moment);
-          }
+          return _this.props.onClick(_this.props.moment);
         };
       })(this))
     }, this.props.label);

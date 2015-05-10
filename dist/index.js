@@ -27,7 +27,7 @@ Kronos = React.createClass({
   displayName: 'Kronos',
   render: function() {
     return React.createElement("div", {
-      "className": this.props.classes.kronos
+      "className": "react-kronos " + this.props.id + " " + this.props.classes.kronos
     }, React.createElement("input", {
       "type": 'text',
       "ref": 'input',
@@ -53,7 +53,7 @@ Kronos = React.createClass({
       "className": this.props.classes.input
     }), this.state.visible && React.createElement(Calendar, {
       "id": this.props.id,
-      "datetime": this.state.datetime || moment(),
+      "datetime": this.state.datetime,
       "onSelect": this.onSelect,
       "above": ((function(_this) {
         return function(bool) {
@@ -80,45 +80,53 @@ Kronos = React.createClass({
     };
   },
   getDateTimeInput: function(props) {
-    var datetime, isoRegex, prop, type;
+    var datetime, input, isoRegex, prop, type;
     if (props == null) {
       props = this.props;
     }
     prop = props.date || props.time || null;
-    datetime = this.parse(prop);
-    isoRegex = /((\d{4}\-\d\d\-\d\d)[tT]([\d:\.]*)?)([zZ]|([+\-])(\d\d):?(\d\d))/;
-    type = (function() {
-      switch (typeof prop) {
-        case 'object':
-          if (moment.isDate(prop)) {
-            return Types.JS_DATE;
-          } else if (moment.isMoment(prop)) {
-            return Types.MOMENT;
-          } else {
-            return null;
-          }
-          break;
-        case 'string':
-          if (prop.match(isoRegex)) {
-            return Types.ISO;
-          } else {
-            return Types.STRING;
-          }
-      }
-    })();
+    if (prop === null) {
+      datetime = moment();
+      input = null;
+      type = Types.MOMENT;
+    } else {
+      datetime = this.parse(prop);
+      input = datetime.format(this.format(props));
+      isoRegex = /((\d{4}\-\d\d\-\d\d)[tT]([\d:\.]*)?)([zZ]|([+\-])(\d\d):?(\d\d))/;
+      type = (function() {
+        switch (typeof prop) {
+          case 'object':
+            if (moment.isDate(prop)) {
+              return Types.JS_DATE;
+            } else if (moment.isMoment(prop)) {
+              return Types.MOMENT;
+            } else {
+              return null;
+            }
+            break;
+          case 'string':
+            if (prop.match(isoRegex)) {
+              return Types.ISO;
+            } else {
+              return Types.STRING;
+            }
+        }
+      })();
+    }
     return {
       datetime: datetime,
-      input: datetime.format(this.format(props)) || null,
+      input: input,
       type: type
     };
   },
   getDefaultLevel: function() {
-    if (this.props.date) {
+    if (typeof this.props.date !== 'undefined') {
       return Units.DAY;
-    } else if (this.props.time) {
+    } else if (typeof this.props.time !== 'undefined') {
       return Units.HOUR;
     } else {
-      return null;
+      console.warn('Please set a date or time prop. It can be null but not undefined.');
+      return Units.DAY;
     }
   },
   format: function(props) {
@@ -147,6 +155,9 @@ Kronos = React.createClass({
   },
   parse: function(input) {
     var parsing, ref1, test;
+    if (input === null) {
+      return null;
+    }
     parsing = moment(input, this.format(), true);
     if (!parsing.isValid()) {
       test = new Date(input);
@@ -223,7 +234,9 @@ Kronos = React.createClass({
 
     } else {
       datetime = this.parse(this.state.input);
-      return this.save(datetime);
+      if (datetime) {
+        return this.save(datetime);
+      }
     }
   },
   onKeyDown: function(code) {

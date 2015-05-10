@@ -10,7 +10,7 @@ moment = require('moment-range');
 _options = {};
 
 setOptions = function(options, uuid) {
-  if (options.moment) {
+  if (options != null ? options.moment : void 0) {
     moment.locale(options.moment.lang, options.moment.settings);
   } else {
     moment.locale('en', {
@@ -25,9 +25,7 @@ setOptions = function(options, uuid) {
 
 getStyle = function(page, props, uuid) {
   var defaultOptions, options, style;
-  if (props.options) {
-    setOptions(props.options, uuid);
-  }
+  setOptions(props.options, uuid);
   defaultOptions = {
     color: '#1e7e9e',
     corners: 4,
@@ -72,7 +70,6 @@ index = function(options) {
       padding: '3px 6px',
       background: 'white',
       '&:focus': {
-        background: color(options.color).alpha(0.05).rgbaString(),
         outline: 'none',
         borderColor: options.color
       }
