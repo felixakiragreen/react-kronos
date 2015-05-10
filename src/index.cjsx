@@ -17,7 +17,7 @@ Kronos = React.createClass
   displayName: 'Kronos'
 
   render: ->
-    <div className={@props.classes.kronos}>
+    <div className={"react-kronos #{@props.id} #{@props.classes.kronos}"}>
       <input
         type='text'
         ref='input'
@@ -33,7 +33,7 @@ Kronos = React.createClass
       { @state.visible and
         <Calendar
           id={@props.id}
-          datetime={@state.datetime or do moment}
+          datetime={@state.datetime}
           onSelect={@onSelect}
           above={(bool) => @above = bool}
           level={@state.level}
@@ -52,33 +52,40 @@ Kronos = React.createClass
   getDateTimeInput: (props) ->
     props ?= @props
     prop = props.date or props.time or null
-    datetime = @parse prop
-    isoRegex = /((\d{4}\-\d\d\-\d\d)[tT]([\d:\.]*)?)([zZ]|([+\-])(\d\d):?(\d\d))/
-    type = switch typeof prop
-      when 'object'
-        if moment.isDate prop
-          Types.JS_DATE
-        else if moment.isMoment prop
-          Types.MOMENT
-        else
-          null
-      when 'string'
-        if prop.match isoRegex
-          Types.ISO
-        else
-          Types.STRING
+    if prop is null
+      datetime = do moment
+      input = null
+      type = Types.MOMENT
+    else
+      datetime = @parse prop
+      input = datetime.format(@format props)
+      isoRegex = /((\d{4}\-\d\d\-\d\d)[tT]([\d:\.]*)?)([zZ]|([+\-])(\d\d):?(\d\d))/
+      type = switch typeof prop
+        when 'object'
+          if moment.isDate prop
+            Types.JS_DATE
+          else if moment.isMoment prop
+            Types.MOMENT
+          else
+            null
+        when 'string'
+          if prop.match isoRegex
+            Types.ISO
+          else
+            Types.STRING
 
     datetime: datetime
-    input: datetime.format(@format props) or null
+    input: input
     type: type
 
   getDefaultLevel: ->
-    if @props.date
+    if typeof @props.date isnt 'undefined'
       Units.DAY
-    else if @props.time
+    else if typeof @props.time isnt 'undefined'
       Units.HOUR
     else
-      null
+      console.warn 'Please set a date or time prop. It can be null but not undefined.'
+      Units.DAY
 
   format: (props) ->
     props ?= @props
@@ -96,6 +103,7 @@ Kronos = React.createClass
     @setState visible: visible unless visible is @state.visible
 
   parse: (input) ->
+    if input is null then return null
     parsing = moment input, do @format, true
     if not do parsing.isValid
       test = new Date input
@@ -154,7 +162,7 @@ Kronos = React.createClass
       return
     else
       datetime = @parse @state.input
-      @save datetime
+      if datetime then @save datetime
 
   onKeyDown: (code) ->
     datetime = @state.datetime or do moment

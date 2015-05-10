@@ -5,7 +5,7 @@ moment = require 'moment-range'
 _options = {}
 
 setOptions = (options, uuid) ->
-  if options.moment
+  if options?.moment
     moment.locale options.moment.lang, options.moment.settings
   else
     moment.locale 'en',
@@ -16,7 +16,7 @@ setOptions = (options, uuid) ->
 
 getStyle = (page, props, uuid) ->
 
-  if props.options then setOptions props.options, uuid
+  setOptions props.options, uuid
 
   defaultOptions =
     color: '#1e7e9e'
@@ -56,10 +56,6 @@ index = (options) ->
     padding: '3px 6px'
     background: 'white'
     '&:focus':
-      background:
-        do color options.color
-          .alpha 0.05
-          .rgbaString
       outline: 'none'
       borderColor: options.color
 

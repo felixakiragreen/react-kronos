@@ -14,7 +14,7 @@ module.exports = React.createClass
 
     <div
       className={classes}
-      onClick={=> @props.onClick @props.moment if @props.moment}
+      onClick={=> @props.onClick @props.moment}
     >
       {@props.label}
     </div>

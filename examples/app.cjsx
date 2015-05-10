@@ -78,12 +78,12 @@ module.exports = React.createClass
             <Kronos
               date={@state.datetime}
               onChange={@onChange}
-              {... props}
+
             />
             <Kronos
               time={@state.datetime}
               onChange={@onChange}
-              {... props}
+
             />
           </div>
         </main>
@@ -97,4 +97,5 @@ module.exports = React.createClass
     @setState datetime: datetime
 
   getInitialState: ->
-    datetime: moment().toISOString()
+    # moment().toISOString()
+    datetime: null
