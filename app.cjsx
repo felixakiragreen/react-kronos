@@ -52,8 +52,8 @@ module.exports = React.createClass
 
     props =
       options:
-        color: '#1b2a60'
-        corners: 3
+        color: '#3c1a60'
+        corners: 4
       # closeOnBlur: false
 
 
@@ -78,12 +78,12 @@ module.exports = React.createClass
             <Kronos
               date={@state.datetime}
               onChange={@onChange}
-
+              {...props}
             />
             <Kronos
               time={@state.datetime}
               onChange={@onChange}
-
+              {...props}
             />
           </div>
         </main>
@@ -97,5 +97,4 @@ module.exports = React.createClass
     @setState datetime: datetime
 
   getInitialState: ->
-    # moment().toISOString()
-    datetime: null
+    datetime: moment().toISOString()
