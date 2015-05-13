@@ -17,7 +17,6 @@ Kronos = React.createClass
   displayName: 'Kronos'
 
   render: ->
-    console.log 'woah'
     <div className={"react-kronos #{@props.id} #{@props.classes.kronos}"}>
       <input
         type='text'

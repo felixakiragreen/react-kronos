@@ -26,7 +26,6 @@ getStyle = require('./styles');
 Kronos = React.createClass({
   displayName: 'Kronos',
   render: function() {
-    console.log('woah');
     return React.createElement("div", {
       "className": "react-kronos " + this.props.id + " " + this.props.classes.kronos
     }, React.createElement("input", {

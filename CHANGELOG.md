@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 0.1.5
+- clean up
+
 ## 0.1.4
 - fix moment and prop options initialization
 
