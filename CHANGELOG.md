@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 0.1.4
+- fix moment and prop options initialization
+
 ## 0.1.3
 - fix setting of moment locale
 - add '.react-kronos' as a top level css class for customization
