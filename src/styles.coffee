@@ -2,21 +2,26 @@ _ = require 'lodash'
 color = require 'color'
 moment = require 'moment-range'
 
+_moment = false
 _options = {}
 
-setOptions = (options, uuid) ->
-  if options?.moment
-    moment.locale options.moment.lang, options.moment.settings
+initializeMoment = (options) ->
+  if not _moment
+    if options?.moment
+      moment.locale options.moment.lang, options.moment.settings
+    else
+      moment.locale 'en',
+        week: dow: 1
+        weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S']
   else
-    moment.locale 'en',
-      week: dow: 1
-      weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S']
+    _moment = true
 
+initializeOptions = (options, uuid) ->
   _options[uuid] = _.omit options, 'moment'
 
 getStyle = (page, props, uuid) ->
-
-  setOptions props.options, uuid
+  initializeMoment props.options
+  if props.options then initializeOptions props.options, uuid
 
   defaultOptions =
     color: '#1e7e9e'
@@ -52,12 +57,19 @@ index = (options) ->
   input:
     border: '1px solid transparent'
     borderRadius: options.corners
+    borderColor:
+      do color options.color
+        .alpha 0.2
+        .rgbString
     fontSize: 16
     padding: '3px 6px'
     background: 'white'
     '&:focus':
       outline: 'none'
-      borderColor: options.color
+      borderColor:
+        do color options.color
+          .alpha 0.5
+          .rgbString
 
 calendar = (options) ->
   calendar:
