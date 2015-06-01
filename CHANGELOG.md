@@ -1,6 +1,13 @@
 Changelog
 =========
 
+## 0.2.0-256
+- added `min` & `max` props for date ranges
+
+## 0.1.6
+- allow empty input strings for null
+- for moment-range@1.0.9 until it is fixed
+
 ## 0.1.5
 - clean up
 

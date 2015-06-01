@@ -10,7 +10,8 @@ module.exports = React.createClass
       @props.level,
       @props.type,
       { selected: @props.selected },
-      { today: @props.today }
+      { today: @props.today },
+      { 'outside-range': not @props.invalid }
 
     <div
       className={classes}

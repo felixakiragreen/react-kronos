@@ -1,5 +1,5 @@
 React = require 'react'
-moment = require 'moment-range'
+Moment = require 'moment-range'
 cn = require 'classnames'
 
 { Levels, Units } = require './constants'
@@ -46,6 +46,7 @@ Calendar = React.createClass
                 moment={cell.moment}
                 onClick={@onNavigateCell}
                 classes={@props.classes}
+                invalid={@props.validate(cell.moment)}
               />
         }
         { dates and
@@ -74,16 +75,16 @@ Calendar = React.createClass
     @props.onSelect @props.datetime.add lvl.span, lvl.unit
 
   onToday: ->
-    @props.onSelect do moment
+    @props.onSelect do Moment
 
   getTitle:
     years: (datetime) ->
-      datetime or= do moment
+      datetime or= do Moment
       start = datetime.clone().subtract 4, 'years'
       end = datetime.clone().add 7, 'years'
       years = []
 
-      moment()
+      Moment()
         .range start, end
         .by Units.YEAR, (year) ->
           years.push
@@ -93,23 +94,23 @@ Calendar = React.createClass
       [years[0].label, years[years.length-1].label].join('-')
 
     months: (datetime) ->
-      datetime or= do moment
+      datetime or= do Moment
       datetime.format 'YYYY'
 
     days: (datetime) ->
-      datetime or= do moment
+      datetime or= do Moment
       datetime.format 'MMMM'
 
     hours: (datetime) -> null
 
   getCells:
     years: (datetime) ->
-      datetime or= do moment
+      datetime or= do Moment
       start = datetime.clone().subtract 4, 'years'
       end = datetime.clone().add 7, 'years'
       years = []
 
-      moment()
+      Moment()
         .range start, end
         .by Units.YEAR, (year) ->
           years.push
@@ -120,12 +121,12 @@ Calendar = React.createClass
       years
 
     months: (datetime) ->
-      datetime or= do moment
+      datetime or= do Moment
       start = datetime.clone().startOf 'year'
       end = datetime.clone().endOf 'year'
       months = []
 
-      moment()
+      Moment()
         .range start, end
         .by Units.MONTH, (month) ->
           months.push
@@ -136,18 +137,18 @@ Calendar = React.createClass
       months
 
     days: (datetime) ->
-      datetime or= do moment
+      datetime or= do Moment
       start = datetime.clone().startOf('month').weekday 0
       end = datetime.clone().endOf('month').weekday 6
       days = []
 
-      moment.weekdaysMin()
+      Moment.weekdaysMin()
         .forEach (day) ->
           days.push
             label: day
             header: true
 
-      moment()
+      Moment()
         .range start, end
         .by Units.DAY, (day) ->
           days.push
@@ -156,17 +157,17 @@ Calendar = React.createClass
             past: day.isBefore datetime, 'month'
             future: day.isAfter datetime, 'month'
             selected: day.isSame datetime, 'day'
-            today: day.isSame do moment, 'day'
+            today: day.isSame do Moment, 'day'
 
       days
 
     hours: (datetime) ->
-      datetime or= do moment
+      datetime or= do Moment
       start = datetime.clone().startOf 'day'
       end = datetime.clone().endOf 'day'
       hours = []
 
-      moment()
+      Moment()
         .range start, end
         .by Units.HOUR, (hour) ->
           hours.push

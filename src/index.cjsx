@@ -1,5 +1,6 @@
 React = require 'react'
-moment = require 'moment-range'
+Moment = require 'moment-range'
+cn = require 'classnames'
 
 jss = require 'jss'
 jss.use require 'jss-nested'
@@ -17,7 +18,13 @@ Kronos = React.createClass
   displayName: 'Kronos'
 
   render: ->
-    <div className={"react-kronos #{@props.id} #{@props.classes.kronos}"}>
+    mainClasses = cn 'react-kronos',
+      @props.id,
+      @props.classes.kronos
+    inputClasses = cn @props.classes.input,
+      { 'outside-range': @state.dateTimeExceedsValidRange }
+
+    <div className={mainClasses}>
       <input
         type='text'
         ref='input'
@@ -28,7 +35,7 @@ Kronos = React.createClass
         onKeyDown={(e) => @onKeyDown e.keyCode}
         onChange={@onChange}
         placeholder={@props.placeholder}
-        className={@props.classes.input}
+        className={inputClasses}
       />
       { @state.visible and
         <Calendar
@@ -38,6 +45,7 @@ Kronos = React.createClass
           above={(bool) => @above = bool}
           level={@state.level}
           setLevel={(level) => @setState level: level}
+          validate={@validate}
         />
       }
     </div>
@@ -53,7 +61,7 @@ Kronos = React.createClass
     props ?= @props
     prop = props.date or props.time or null
     if prop is null
-      datetime = do moment
+      datetime = do Moment
       input = null
       type = Types.MOMENT
     else
@@ -62,9 +70,9 @@ Kronos = React.createClass
       isoRegex = /((\d{4}\-\d\d\-\d\d)[tT]([\d:\.]*)?)([zZ]|([+\-])(\d\d):?(\d\d))/
       type = switch typeof prop
         when 'object'
-          if moment.isDate prop
+          if Moment.isDate prop
             Types.JS_DATE
-          else if moment.isMoment prop
+          else if Moment.isMoment prop
             Types.MOMENT
           else
             null
@@ -104,12 +112,12 @@ Kronos = React.createClass
 
   parse: (input) ->
     if input is null then return null
-    parsing = moment input, do @format, true
+    parsing = Moment input, do @format, true
     if not do parsing.isValid
       test = new Date input
       if isNaN do test.getTime
-        test = if @state?.datetime then @state.datetime else do moment
-      parsing = moment test
+        test = if @state?.datetime then @state.datetime else do Moment
+      parsing = Moment test
 
     parsing
 
@@ -126,7 +134,17 @@ Kronos = React.createClass
       datetime: saving
       input: saving.format do @format
 
-    @commit saving
+    if @validate saving, true then @commit saving
+
+  validate: (datetime, saveState) ->
+    exceedsRange = false
+    if @props.min and Moment(datetime).isBefore @props.min
+      exceedsRange = true
+    if @props.max and Moment(datetime).isAfter @props.max
+      exceedsRange = true
+
+    if saveState then @setState dateTimeExceedsValidRange: exceedsRange
+    return !exceedsRange
 
   commit: (datetime) ->
     returnAs = @props.returnAs or @state.type
@@ -140,13 +158,20 @@ Kronos = React.createClass
 
   onChange: (e) ->
     input = e.target.value
-    datetime = moment input, do @format, true
+    datetime = Moment input, do @format, true
     if do datetime.isValid
       @save datetime
+    else if input is ''
+      @setState
+        datetime: null
+        input: ''
+      @props.onChange? null
     else
       @setState input: input
 
   onSelect: (datetime, close) ->
+    close or= close
+    if !@validate datetime then close = false
     @setState
       visible: if @props.closeOnSelect and close then !@state.visible else @state.visible
     @save datetime
@@ -165,7 +190,7 @@ Kronos = React.createClass
       if datetime then @save datetime
 
   onKeyDown: (code) ->
-    datetime = @state.datetime or do moment
+    datetime = @state.datetime or do Moment
     lvl = Levels[@state.level]
 
     switch code
@@ -189,8 +214,8 @@ Kronos = React.createClass
   propTypes:
     date: React.PropTypes.any
     time: React.PropTypes.any
-    # min: React.PropTypes.any
-    # max: React.PropTypes.any
+    min: React.PropTypes.any
+    max: React.PropTypes.any
     format: React.PropTypes.string
     onChange: React.PropTypes.func
     returnAs: React.PropTypes.oneOf [

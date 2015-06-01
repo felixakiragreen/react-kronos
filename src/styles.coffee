@@ -1,6 +1,6 @@
 _ = require 'lodash'
 color = require 'color'
-moment = require 'moment-range'
+Moment = require 'moment-range'
 
 _moment = false
 _options = {}
@@ -8,9 +8,9 @@ _options = {}
 initializeMoment = (options) ->
   if not _moment
     if options?.moment
-      moment.locale options.moment.lang, options.moment.settings
+      Moment.locale options.moment.lang, options.moment.settings
     else
-      moment.locale 'en',
+      Moment.locale 'en',
         week: dow: 1
         weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S']
   else
@@ -64,6 +64,9 @@ index = (options) ->
     fontSize: 16
     padding: '3px 6px'
     background: 'white'
+    '&.outside-range':
+      color: 'white'
+      background: '#d0021b'
     '&:focus':
       outline: 'none'
       borderColor:
@@ -133,6 +136,13 @@ calendar = (options) ->
           .rgbString
       '&:not(.today)':
         color: 'hsl(0, 0%, 25%)'
+      '&.outside-range':
+        color: '#d0021b'
+        backgroundColor:
+          do color '#d0021b'
+            .alpha 0.2
+            .rgbString
+
     '&.years':
       width: 58
       height: 38
@@ -170,6 +180,11 @@ calendar = (options) ->
     '&.selected':
       backgroundColor: options.color
       color: 'white'
+      '&.outside-range':
+        backgroundColor: '#d0021b'
+
+    '&:not(.selected).outside-range':
+      color: '#d0021b'
 
 
 navigation = (options) ->
