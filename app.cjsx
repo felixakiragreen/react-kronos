@@ -1,5 +1,5 @@
 React = require 'react'
-moment = require 'moment-range'
+Moment = require 'moment'
 Kronos = require 'kronos'
 
 
@@ -78,11 +78,15 @@ module.exports = React.createClass
             <Kronos
               date={@state.datetime}
               onChange={@onChange}
+              min={new Date('May 20 2015 17:40:00')}
+              max={new Date('Jun 20 2015 17:40:00')}
               {...props}
             />
             <Kronos
               time={@state.datetime}
               onChange={@onChange}
+              min={new Date('May 20 2015 17:40:00')}
+              max={new Date('Jun 20 2015 17:40:00')}
               {...props}
             />
           </div>
@@ -94,7 +98,8 @@ module.exports = React.createClass
     </div>
 
   onChange: (datetime) ->
+    console.log 'datetime:', datetime
     @setState datetime: datetime
 
   getInitialState: ->
-    datetime: moment().toISOString()
+    datetime: Moment().toISOString()
