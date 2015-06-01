@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## 0.2.0-256
+## 0.2.0
 - added `min` & `max` props for date ranges
 
 ## 0.1.6
