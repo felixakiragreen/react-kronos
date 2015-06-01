@@ -1,10 +1,13 @@
 #!/bin/sh
 
 # checkout
-git checkout gh-pages
-# merge
-git merge -s recursive -X subtree=gh-pages origin/master --no-edit
-# push (-q quiet)
-git push origin gh-pages -q
-#
 git checkout master
+
+# create a local gh-pages branch containing the splitted output folder
+git subtree split --prefix examples -b gh-pages
+
+# force the push of the gh-pages branch to the remote gh-pages branch at origin
+git push -f origin gh-pages:gh-pages
+
+# cleanup
+git branch -D gh-pages
