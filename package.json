@@ -1,6 +1,6 @@
 {
   "name": "react-kronos",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A fast, intuitive, and elegant date and time picker for React.",
   "main": "dist/index.js",
   "scripts": {
@@ -43,13 +43,13 @@
     "coffee-react": "^3.0.1",
     "coffee-script": "^1.9.1",
     "json-loader": "^0.5.1",
-    "lodash": "3.9.x",
     "react": "0.13.x",
     "react-hot-loader": "^1.2.4",
     "webpack": "^1.7.3",
     "webpack-dev-server": "^1.7.0"
   },
   "dependencies": {
+    "lodash": "3.9.x",
     "classnames": "^1.2.0",
     "color": "^0.8.0",
     "jss": "^1.0.8",
