@@ -1,6 +1,13 @@
 Changelog
 =========
 
+## 0.2.2
+- fixed JSS modules
+- KNOWN ISSUE: minified is not working
+
+## 0.2.1
+- fixed dependency
+
 ## 0.2.0
 - added `min` & `max` props for date ranges
 

@@ -1,132 +1,89 @@
-'use strict';
+Object.defineProperty(exports,'__esModule',{value:true});var _extends=Object.assign || function(target){for(var i=1;i < arguments.length;i++) {var source=arguments[i];for(var key in source) {if(Object.prototype.hasOwnProperty.call(source,key)){target[key] = source[key];}}}return target;};var _createClass=(function(){function defineProperties(target,props){for(var i=0;i < props.length;i++) {var descriptor=props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if('value' in descriptor)descriptor.writable = true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};})();var _get=function get(object,property,receiver){if(object === null)object = Function.prototype;var desc=Object.getOwnPropertyDescriptor(object,property);if(desc === undefined){var parent=Object.getPrototypeOf(object);if(parent === null){return undefined;}else {return get(parent,property,receiver);}}else if('value' in desc){return desc.value;}else {var getter=desc.get;if(getter === undefined){return undefined;}return getter.call(receiver);}};exports.default = 
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+createStyledComponent;function _interopRequireDefault(obj){return obj && obj.__esModule?obj:{'default':obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError('Cannot call a class as a function');}}function _inherits(subClass,superClass){if(typeof superClass !== 'function' && superClass !== null){throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)Object.setPrototypeOf?Object.setPrototypeOf(subClass,superClass):subClass.__proto__ = superClass;}var _react=require('react');var _react2=_interopRequireDefault(_react);var _jss=require('jss');var _jss2=_interopRequireDefault(_jss);function createStyledComponent(Component,rules,options){
 
-exports['default'] = createStyledComponent;
+function attach(rules,options){
+return _jss2.default.createStyleSheet(rules,options).attach();}
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+function makeUUID(){
+return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){
+var r=Math.random() * 16 | 0;
+var v=c === 'x'?r:r & 0x3 | 0x8;
+return v.toString(16);});}var 
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-var _react = require('react');
 
-var _react2 = _interopRequireDefault(_react);
+StyledComponent=(function(_React$Component){_inherits(StyledComponent,_React$Component);function StyledComponent(){_classCallCheck(this,StyledComponent);_get(Object.getPrototypeOf(StyledComponent.prototype),'constructor',this).apply(this,arguments);}_createClass(StyledComponent,[{key:'componentWillMount',value:
 
-var _jss = require('jss');
+function componentWillMount(){
+var uuid=this.props.id?this.props.id:makeUUID();
+var _rules=
+typeof rules === 'function'?
+rules(this.props,uuid):
+rules;
+var _options=
+typeof options === 'function'?
+options(this.props,uuid):
+options;
 
-var _jss2 = _interopRequireDefault(_jss);
+this.sheet = attach(_rules,_options);
+this.uuid = uuid;}},{key:'componentWillUnmount',value:
 
-function createStyledComponent(Component, rules, options) {
 
-  function attach(rules, options) {
-    return _jss2['default'].createStyleSheet(rules, options).attach();
-  }
+function componentWillUnmount(){
+this.sheet.detach();
+this.sheet = null;}},{key:'classSet',value:
 
-  function makeUUID() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = Math.random() * 16 | 0;
-      var v = c === 'x' ? r : r & 3 | 8;
-      return v.toString(16);
-    });
-  }
 
-  var StyledComponent = (function (_React$Component) {
-    function StyledComponent() {
-      _classCallCheck(this, StyledComponent);
+function classSet(classNames){
+return Object.
+keys(classNames).
+filter(function(className){
+return classNames[className];}).
 
-      if (_React$Component != null) {
-        _React$Component.apply(this, arguments);
-      }
-    }
+map(function(className){
+return this.sheet.classes[className] || className;}).
 
-    _inherits(StyledComponent, _React$Component);
+join(' ');}},{key:'render',value:
 
-    _createClass(StyledComponent, [{
-      key: 'componentWillMount',
-      value: function componentWillMount() {
-        var uuid = this.props.id ? this.props.id : makeUUID();
-        var _rules = typeof rules === 'function' ? rules(this.props, uuid) : rules;
-        var _options = typeof options === 'function' ? options(this.props, uuid) : options;
 
-        this.sheet = attach(_rules, _options);
-        this.uuid = uuid;
-      }
-    }, {
-      key: 'componentWillUnmount',
-      value: function componentWillUnmount() {
-        this.sheet.detach();
-        this.sheet = null;
-      }
-    }, {
-      key: 'classSet',
-      value: function classSet(classNames) {
-        return Object.keys(classNames).filter(function (className) {
-          return classNames[className];
-        }).map(function (className) {
-          return this.sheet.classes[className] || className;
-        }).join(' ');
-      }
-    }, {
-      key: 'render',
-      value: function render() {
-        return _react2['default'].createElement(Component, _extends({
-          id: this.uuid,
-          classes: this.sheet.classes,
-          classSet: this.classSet
-        }, this.props));
-      }
-    }]);
+function render(){
+return (
+_react2.default.createElement(Component,_extends({
+id:this.uuid,
+classes:this.sheet.classes,
+classSet:this.classSet},
+this.props)));}}]);return StyledComponent;})(_react2.default.Component);
 
-    return StyledComponent;
-  })(_react2['default'].Component);
 
-  // Support React Hot Loader
-  if (module.hot) {
-    var _ret = (function () {
-      var HotStyledComponent = (function (_StyledComponent) {
-        function HotStyledComponent() {
-          _classCallCheck(this, HotStyledComponent);
 
-          if (_StyledComponent != null) {
-            _StyledComponent.apply(this, arguments);
-          }
-        }
 
-        _inherits(HotStyledComponent, _StyledComponent);
 
-        _createClass(HotStyledComponent, [{
-          key: 'componentWillReceiveProps',
-          value: function componentWillReceiveProps(nextProps) {
-            if (this.props !== nextProps) {
-              var _rules = typeof rules === 'function' ? rules(nextProps, this.uuid) : rules;
-              var _options = typeof options === 'function' ? options(nextProps, this.uuid) : options;
 
-              this.sheet.detach();
-              this.sheet = attach(_rules, _options);
-            }
-          }
-        }]);
 
-        return HotStyledComponent;
-      })(StyledComponent);
+if(module.hot){var _ret=(function(){var 
+HotStyledComponent=(function(_StyledComponent){_inherits(HotStyledComponent,_StyledComponent);function HotStyledComponent(){_classCallCheck(this,HotStyledComponent);_get(Object.getPrototypeOf(HotStyledComponent.prototype),'constructor',this).apply(this,arguments);}_createClass(HotStyledComponent,[{key:'componentWillReceiveProps',value:
+function componentWillReceiveProps(nextProps){
+if(this.props !== nextProps){
+var _rules=
+typeof rules === 'function'?
+rules(nextProps,this.uuid):
+rules;
+var _options=
+typeof options === 'function'?
+options(nextProps,this.uuid):
+options;
 
-      return {
-        v: HotStyledComponent
-      };
-    })();
+this.sheet.detach();
+this.sheet = attach(_rules,_options);}}}]);return HotStyledComponent;})(StyledComponent);
 
-    if (typeof _ret === 'object') return _ret.v;
-  }
 
-  return StyledComponent;
-}
 
-module.exports = exports['default'];
+
+return {v:HotStyledComponent};})();if(typeof _ret === 'object')return _ret.v;}
+
+
+return StyledComponent;}module.exports = exports.default;

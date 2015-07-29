@@ -60,35 +60,25 @@ A fast, intuitive, and elegant date and time picker for React.
 
 #### Roadmap
 
-**0.1**
-- ~~date & time inputs~~
-- ~~formatting (input & returning)~~
-- ~~common style variables:~~
-  - ~~highlight color~~
-  - ~~font family~~
-  - ~~rounded corners~~
-- ~~options: customize with moment locale~~
+**1.0**:
+- Rewrite codebase in ES6
+- Prodive docs on website
 
-**0.2**
-- ~~prop: `min` - minimum allowable date+time~~
-- ~~prop: `max` - maximum allowable date+time~~
-
-**0.3**
+**1.1**
 - options:
   - date (restrict calendar to show only days, or with months, or with years)
   - time (set increments, set ranges of time)
 
-**0.4**
+**1.2**
 - support for connected start & end date+time
   - date (show range on calendar)
   - time (show "0 hours", "0.5 hours", "1 hour", &c)
 
-**0.5**
+**1.3**
 - prop: `styles` - granular styling (overwrite any style, or provide entire theme)
 
 #### Ideas
 
-- move over to JS with ES6 *I just love coffeescript so much :/*
 - input field masking
 - scroll time list as user arrows up+down
 - ⇧+arrow uses the higher order unit
