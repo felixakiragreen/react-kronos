@@ -37,7 +37,7 @@ Calendar = React.createClass
                 else 'base'
               <Cell
                 key={i}
-                ref={if cell.selected then 'selected' else null}
+                ref={if cell.selected or cell.nearestBefore then 'selected'}
                 label={cell.label}
                 level={@props.level}
                 type={type}
@@ -46,7 +46,7 @@ Calendar = React.createClass
                 moment={cell.moment}
                 onClick={@onNavigateCell}
                 classes={@props.classes}
-                invalid={@props.validate(cell.moment)}
+                invalid={@props.validate(cell.moment, @props.level)}
               />
         }
         { dates and
@@ -57,6 +57,10 @@ Calendar = React.createClass
       </div>
     </div>
 
+  componentDidMount: ->
+    if @props.level is 'hours'
+      @refs.selected and React.findDOMNode(@refs.selected).scrollIntoView()
+
   onNavigateCell: (datetime) ->
     lvl = Levels[@props.level]
     @props.setLevel lvl.down if lvl.down
@@ -64,7 +68,7 @@ Calendar = React.createClass
 
   onNavigateUp: ->
     lvl = Levels[@props.level]
-    @props.setLevel lvl.up
+    if lvl.up then @props.setLevel lvl.up
 
   onNavigateLeft: ->
     lvl = Levels[@props.level].nav
@@ -166,6 +170,8 @@ Calendar = React.createClass
       start = datetime.clone().startOf 'day'
       end = datetime.clone().endOf 'day'
       hours = []
+      closeBefore = datetime.clone().subtract 31, 'minutes'
+      closeAfter = datetime.clone().add 31, 'minutes'
 
       Moment()
         .range start, end
@@ -174,13 +180,15 @@ Calendar = React.createClass
             moment: hour
             label: hour.format 'h:mm a'
             selected: hour.isSame datetime, 'minute'
-            fromNow: ''
+            nearestBefore: hour.isBetween closeBefore, datetime
+            nearestAfter: hour.isBetween datetime, closeAfter
           halfHour = hour.clone().add 30, 'minutes'
           hours.push
             moment: halfHour
             label: halfHour.format 'h:mm a'
             selected: halfHour.isSame datetime, 'minute'
-            fromNow: ''
+            nearestBefore: halfHour.isBetween closeBefore, datetime
+            nearestAfter: halfHour.isBetween datetime, closeAfter
 
       hours
 

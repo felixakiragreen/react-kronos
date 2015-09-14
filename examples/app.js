@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import Moment from 'moment'
-// import Kronos from  'kronos'
-import Kronos from '../dist/kronos.min'
+import Kronos from  'kronos'
+
+// Dunno why this is here?
+// import Kronos from '../dist/kronos.min'
 
 
 export default class App extends Component {

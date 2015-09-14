@@ -134,14 +134,19 @@ Kronos = React.createClass
       datetime: saving
       input: saving.format do @format
 
-    if @validate saving, true then @commit saving
+    if @validate saving, null, true then @commit saving
 
-  validate: (datetime, saveState) ->
+  validate: (datetime, timeUnit, saveState) ->
     exceedsRange = false
+
     if @props.min and Moment(datetime).isBefore @props.min
       exceedsRange = true
     if @props.max and Moment(datetime).isAfter @props.max
       exceedsRange = true
+
+    if exceedsRange and timeUnit isnt 'hours'
+      if Moment(datetime).isSame(@props.min, timeUnit) or Moment(datetime).isSame(@props.max, timeUnit)
+        exceedsRange = false
 
     if saveState then @setState dateTimeExceedsValidRange: exceedsRange
     return !exceedsRange
