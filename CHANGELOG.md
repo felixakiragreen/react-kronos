@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 0.2.3
+- [bug] clicking the decades button in calendar navigator will not crash anymore
+- [bug] min and max date will not be red for same dates
+- hour selector will scroll to selected hour or nearest hour
+
 ## 0.2.2
 - fixed JSS modules
 - KNOWN ISSUE: minified is not working

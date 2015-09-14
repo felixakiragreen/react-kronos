@@ -192,11 +192,11 @@ Kronos = React.createClass({
       datetime: saving,
       input: saving.format(this.format())
     });
-    if (this.validate(saving, true)) {
+    if (this.validate(saving, null, true)) {
       return this.commit(saving);
     }
   },
-  validate: function(datetime, saveState) {
+  validate: function(datetime, timeUnit, saveState) {
     var exceedsRange;
     exceedsRange = false;
     if (this.props.min && Moment(datetime).isBefore(this.props.min)) {
@@ -204,6 +204,11 @@ Kronos = React.createClass({
     }
     if (this.props.max && Moment(datetime).isAfter(this.props.max)) {
       exceedsRange = true;
+    }
+    if (exceedsRange && timeUnit !== 'hours') {
+      if (Moment(datetime).isSame(this.props.min, timeUnit) || Moment(datetime).isSame(this.props.max, timeUnit)) {
+        exceedsRange = false;
+      }
     }
     if (saveState) {
       this.setState({

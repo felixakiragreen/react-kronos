@@ -62,7 +62,7 @@ Calendar = React.createClass({
         })();
         return React.createElement(Cell, {
           "key": i,
-          "ref": (cell.selected ? 'selected' : null),
+          "ref": (cell.selected || cell.nearestBefore ? 'selected' : void 0),
           "label": cell.label,
           "level": _this.props.level,
           "type": type,
@@ -71,13 +71,18 @@ Calendar = React.createClass({
           "moment": cell.moment,
           "onClick": _this.onNavigateCell,
           "classes": _this.props.classes,
-          "invalid": _this.props.validate(cell.moment)
+          "invalid": _this.props.validate(cell.moment, _this.props.level)
         });
       };
     })(this)), dates && React.createElement("div", {
       "className": this.props.classes.today,
       "onClick": this.onToday
     }, "Today")));
+  },
+  componentDidMount: function() {
+    if (this.props.level === 'hours') {
+      return this.refs.selected && React.findDOMNode(this.refs.selected).scrollIntoView();
+    }
   },
   onNavigateCell: function(datetime) {
     var lvl;
@@ -90,7 +95,9 @@ Calendar = React.createClass({
   onNavigateUp: function() {
     var lvl;
     lvl = Levels[this.props.level];
-    return this.props.setLevel(lvl.up);
+    if (lvl.up) {
+      return this.props.setLevel(lvl.up);
+    }
   },
   onNavigateLeft: function() {
     var lvl;
@@ -188,25 +195,29 @@ Calendar = React.createClass({
       return days;
     },
     hours: function(datetime) {
-      var end, hours, start;
+      var closeAfter, closeBefore, end, hours, start;
       datetime || (datetime = Moment());
       start = datetime.clone().startOf('day');
       end = datetime.clone().endOf('day');
       hours = [];
+      closeBefore = datetime.clone().subtract(31, 'minutes');
+      closeAfter = datetime.clone().add(31, 'minutes');
       Moment().range(start, end).by(Units.HOUR, function(hour) {
         var halfHour;
         hours.push({
           moment: hour,
           label: hour.format('h:mm a'),
           selected: hour.isSame(datetime, 'minute'),
-          fromNow: ''
+          nearestBefore: hour.isBetween(closeBefore, datetime),
+          nearestAfter: hour.isBetween(datetime, closeAfter)
         });
         halfHour = hour.clone().add(30, 'minutes');
         return hours.push({
           moment: halfHour,
           label: halfHour.format('h:mm a'),
           selected: halfHour.isSame(datetime, 'minute'),
-          fromNow: ''
+          nearestBefore: halfHour.isBetween(closeBefore, datetime),
+          nearestAfter: halfHour.isBetween(datetime, closeAfter)
         });
       });
       return hours;
