@@ -58,8 +58,15 @@ Calendar = React.createClass
     </div>
 
   componentDidMount: ->
-    if @props.level is 'hours'
-      @refs.selected and React.findDOMNode(@refs.selected).scrollIntoView()
+    do @scrollToHour
+
+  componentDidUpdate: (prevProps) ->
+    do @scrollToHour
+
+  scrollToHour: ->
+    if @props.level is 'hours' and @refs.selected
+      selected = React.findDOMNode(@refs.selected)
+      selected.parentNode.scrollTop = selected.offsetTop - 6
 
   onNavigateCell: (datetime) ->
     lvl = Levels[@props.level]

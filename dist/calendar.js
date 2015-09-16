@@ -80,8 +80,16 @@ Calendar = React.createClass({
     }, "Today")));
   },
   componentDidMount: function() {
-    if (this.props.level === 'hours') {
-      return this.refs.selected && React.findDOMNode(this.refs.selected).scrollIntoView();
+    return this.scrollToHour();
+  },
+  componentDidUpdate: function(prevProps) {
+    return this.scrollToHour();
+  },
+  scrollToHour: function() {
+    var selected;
+    if (this.props.level === 'hours' && this.refs.selected) {
+      selected = React.findDOMNode(this.refs.selected);
+      return selected.parentNode.scrollTop = selected.offsetTop - 6;
     }
   },
   onNavigateCell: function(datetime) {

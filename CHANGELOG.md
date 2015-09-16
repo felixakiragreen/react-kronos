@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 0.2.4
+- [bug] fixed bug related to hour scrolling and jumping entire page
+
 ## 0.2.3
 - [bug] clicking the decades button in calendar navigator will not crash anymore
 - [bug] min and max date will not be red for same dates
