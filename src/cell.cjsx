@@ -5,6 +5,15 @@ cn = require 'classnames'
 module.exports = React.createClass
   displayName: 'Cell'
 
+  propTypes:
+    label: React.PropTypes.string
+    level: React.PropTypes.string
+    type: React.PropTypes.string
+    selected: React.PropTypes.bool
+    today: React.PropTypes.bool
+    onClick: React.PropTypes.func
+    classes: React.PropTypes.object
+
   render: ->
     classes = cn @props.classes.cell,
       @props.level,
@@ -19,12 +28,3 @@ module.exports = React.createClass
     >
       {@props.label}
     </div>
-
-  propTypes:
-    label: React.PropTypes.string
-    level: React.PropTypes.string
-    type: React.PropTypes.string
-    selected: React.PropTypes.bool
-    today: React.PropTypes.bool
-    onClick: React.PropTypes.func
-    classes: React.PropTypes.object

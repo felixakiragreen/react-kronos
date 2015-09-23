@@ -12,50 +12,13 @@ getStyle = require './styles'
 Calendar = React.createClass
   displayName: 'Calendar'
 
-  render: ->
-    dates = @props.level isnt 'hours'
-    <div
-      className={@props.classes.calendar}
-      onMouseDown={(e) => @props.above true ; e}
-      onMouseUp={(e) => @props.above false ; e}
-    >
-      { dates and
-        <Navigation
-          id={@props.id}
-          onPrev={@onNavigateLeft}
-          onNext={@onNavigateRight}
-          onTitle={@onNavigateUp}
-          title={@getTitle[@props.level] @props.datetime}
-        /> }
-      <div ref='grid' className={cn @props.classes.grid, @props.level}>
-        { @getCells[@props.level] @props.datetime
-            .map (cell, i) =>
-              type = switch
-                when cell.header then 'header'
-                when cell.past then 'past'
-                when cell.future then 'future'
-                else 'base'
-              <Cell
-                key={i}
-                ref={if cell.selected or cell.nearestBefore then 'selected'}
-                label={cell.label}
-                level={@props.level}
-                type={type}
-                selected={cell.selected}
-                today={cell.today}
-                moment={cell.moment}
-                onClick={@onNavigateCell}
-                classes={@props.classes}
-                invalid={@props.validate(cell.moment, @props.level)}
-              />
-        }
-        { dates and
-          <div className={@props.classes.today} onClick={this.onToday}>
-            Today
-          </div>
-        }
-      </div>
-    </div>
+  propTypes:
+    datetime: React.PropTypes.object.isRequired
+    onSelect: React.PropTypes.func.isRequired
+    level: React.PropTypes.string.isRequired
+    setLevel: React.PropTypes.func.isRequired
+    onMouseDown: React.PropTypes.func
+    onMouseUp: React.PropTypes.func
 
   componentDidMount: ->
     do @scrollToHour
@@ -86,7 +49,11 @@ Calendar = React.createClass
     @props.onSelect @props.datetime.add lvl.span, lvl.unit
 
   onToday: ->
-    @props.onSelect do Moment
+    lvl = Levels[@props.level]
+    if Moment(@props.datetime).isSame do Moment, 'day'
+      @props.onSelect do Moment, !lvl.down
+    else
+      @props.onSelect do Moment
 
   getTitle:
     years: (datetime) ->
@@ -199,13 +166,50 @@ Calendar = React.createClass
 
       hours
 
-  propTypes:
-    datetime: React.PropTypes.object.isRequired
-    onSelect: React.PropTypes.func.isRequired
-    level: React.PropTypes.string.isRequired
-    setLevel: React.PropTypes.func.isRequired
-    onMouseDown: React.PropTypes.func
-    onMouseUp: React.PropTypes.func
+  render: ->
+    dates = @props.level isnt 'hours'
+    <div
+      className={@props.classes.calendar}
+      onMouseDown={(e) => @props.above true ; e}
+      onMouseUp={(e) => @props.above false ; e}
+    >
+      { dates and
+        <Navigation
+          id={@props.id}
+          onPrev={@onNavigateLeft}
+          onNext={@onNavigateRight}
+          onTitle={@onNavigateUp}
+          title={@getTitle[@props.level] @props.datetime}
+        /> }
+      <div ref='grid' className={cn @props.classes.grid, @props.level}>
+        { @getCells[@props.level] @props.datetime
+            .map (cell, i) =>
+              type = switch
+                when cell.header then 'header'
+                when cell.past then 'past'
+                when cell.future then 'future'
+                else 'base'
+              <Cell
+                key={i}
+                ref={if cell.selected or cell.nearestBefore then 'selected'}
+                label={cell.label}
+                level={@props.level}
+                type={type}
+                selected={cell.selected}
+                today={cell.today}
+                moment={cell.moment}
+                onClick={@onNavigateCell}
+                classes={@props.classes}
+                invalid={@props.validate(cell.moment, @props.level)}
+              />
+        }
+        { dates and
+          <div className={@props.classes.today} onClick={this.onToday}>
+            Today
+          </div>
+        }
+      </div>
+    </div>
 
 
 module.exports = createStyledComponent Calendar,

@@ -7,6 +7,12 @@ getStyle = require './styles'
 Navigation = React.createClass
   displayName: 'Navigation'
 
+  propTypes:
+    onPrev: React.PropTypes.func
+    onNext: React.PropTypes.func
+    onTitle: React.PropTypes.func
+    title: React.PropTypes.string
+
   render: ->
     <div className={@props.classes.nav}>
       <div className='arrow' onClick={@props.onPrev}>
@@ -19,13 +25,6 @@ Navigation = React.createClass
         »
       </div>
     </div>
-
-  propTypes:
-    onPrev: React.PropTypes.func
-    onNext: React.PropTypes.func
-    onTitle: React.PropTypes.func
-    title: React.PropTypes.string
-
 
 module.exports = createStyledComponent Navigation,
   (props, id) -> getStyle 'navigation', props, id

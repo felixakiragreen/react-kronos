@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 0.3.0
+- added new prop: shouldTriggerOnChangeForDateTimeOutsideRange
+- on click of 'Today', if it's already today, panel dismisses
+
 ## 0.2.4
 - [bug] fixed bug related to hour scrolling and jumping entire page
 

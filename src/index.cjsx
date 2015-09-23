@@ -17,38 +17,39 @@ getStyle = require './styles'
 Kronos = React.createClass
   displayName: 'Kronos'
 
-  render: ->
-    mainClasses = cn 'react-kronos',
-      @props.id,
-      @props.classes.kronos
-    inputClasses = cn @props.classes.input,
-      { 'outside-range': @state.dateTimeExceedsValidRange }
+  above: false
 
-    <div className={mainClasses}>
-      <input
-        type='text'
-        ref='input'
-        value={@state.input}
-        onClick={=> @toggle true}
-        onFocus={=> @toggle true}
-        onBlur={@onBlur}
-        onKeyDown={(e) => @onKeyDown e.keyCode}
-        onChange={@onChange}
-        placeholder={@props.placeholder}
-        className={inputClasses}
-      />
-      { @state.visible and
-        <Calendar
-          id={@props.id}
-          datetime={@state.datetime}
-          onSelect={@onSelect}
-          above={(bool) => @above = bool}
-          level={@state.level}
-          setLevel={(level) => @setState level: level}
-          validate={@validate}
-        />
-      }
-    </div>
+  propTypes:
+    date: React.PropTypes.any
+    time: React.PropTypes.any
+    min: React.PropTypes.any
+    max: React.PropTypes.any
+    shouldTriggerOnChangeForDateTimeOutsideRange: React.PropTypes.bool
+    format: React.PropTypes.string
+    onChange: React.PropTypes.func
+    returnAs: React.PropTypes.oneOf [
+      Types.ISO
+      Types.JS_DATE
+      Types.MOMENT
+      Types.STRING
+    ]
+    closeOnSelect: React.PropTypes.bool
+    closeOnBlur: React.PropTypes.bool
+    placeholder: React.PropTypes.string
+    options: React.PropTypes.object
+    # styles: React.PropTypes.object
+
+  getDefaultProps: ->
+    closeOnSelect: true
+    closeOnBlur: true
+    shouldTriggerOnChangeForDateTimeOutsideRange: false
+
+  componentWillReceiveProps: (nextProps) ->
+    if @props isnt nextProps
+      @validate @getDateTimeInput(nextProps).datetime, null, true
+      @setState
+        datetime: @getDateTimeInput(nextProps).datetime
+        input: @getDateTimeInput(nextProps).input
 
   getInitialState: ->
     datetime: @getDateTimeInput().datetime
@@ -136,20 +137,23 @@ Kronos = React.createClass
 
     if @validate saving, null, true then @commit saving
 
-  validate: (datetime, timeUnit, saveState) ->
-    exceedsRange = false
+  validate: (datetime, timeUnit, isSaving) ->
+    outsideRange = false
 
     if @props.min and Moment(datetime).isBefore @props.min
-      exceedsRange = true
+      outsideRange = true
     if @props.max and Moment(datetime).isAfter @props.max
-      exceedsRange = true
+      outsideRange = true
 
-    if exceedsRange and timeUnit isnt 'hours'
+    if outsideRange and timeUnit isnt 'hours'
       if Moment(datetime).isSame(@props.min, timeUnit) or Moment(datetime).isSame(@props.max, timeUnit)
-        exceedsRange = false
+        outsideRange = false
 
-    if saveState then @setState dateTimeExceedsValidRange: exceedsRange
-    return !exceedsRange
+    if isSaving
+      @setState dateTimeExceedsValidRange: outsideRange
+      if @props.shouldTriggerOnChangeForDateTimeOutsideRange then return true
+
+    return !outsideRange
 
   commit: (datetime) ->
     returnAs = @props.returnAs or @state.type
@@ -214,37 +218,38 @@ Kronos = React.createClass
             datetime = @parse @state.input
             @save datetime
 
-  above: false
+  render: ->
+    mainClasses = cn 'react-kronos',
+      @props.id,
+      @props.classes.kronos
+    inputClasses = cn @props.classes.input,
+      { 'outside-range': @state.dateTimeExceedsValidRange }
 
-  propTypes:
-    date: React.PropTypes.any
-    time: React.PropTypes.any
-    min: React.PropTypes.any
-    max: React.PropTypes.any
-    format: React.PropTypes.string
-    onChange: React.PropTypes.func
-    returnAs: React.PropTypes.oneOf [
-      Types.ISO
-      Types.JS_DATE
-      Types.MOMENT
-      Types.STRING
-    ]
-    closeOnSelect: React.PropTypes.bool
-    closeOnBlur: React.PropTypes.bool
-    placeholder: React.PropTypes.string
-    options: React.PropTypes.object
-    # styles: React.PropTypes.object
-
-  getDefaultProps: ->
-    closeOnSelect: true
-    closeOnBlur: true
-
-  componentWillReceiveProps: (nextProps) ->
-    if @props isnt nextProps
-      @setState
-        datetime: @getDateTimeInput(nextProps).datetime
-        input: @getDateTimeInput(nextProps).input
-
+    <div className={mainClasses}>
+      <input
+        type='text'
+        ref='input'
+        value={@state.input}
+        onClick={=> @toggle true}
+        onFocus={=> @toggle true}
+        onBlur={@onBlur}
+        onKeyDown={(e) => @onKeyDown e.keyCode}
+        onChange={@onChange}
+        placeholder={@props.placeholder}
+        className={inputClasses}
+      />
+      { @state.visible and
+        <Calendar
+          id={@props.id}
+          datetime={@state.datetime}
+          onSelect={@onSelect}
+          above={(bool) => @above = bool}
+          level={@state.level}
+          setLevel={(level) => @setState level: level}
+          validate={@validate}
+        />
+      }
+    </div>
 
 module.exports = createStyledComponent Kronos,
   (props, id) -> getStyle 'index', props, id
