@@ -19,65 +19,13 @@ getStyle = require('./styles');
 
 Calendar = React.createClass({
   displayName: 'Calendar',
-  render: function() {
-    var dates;
-    dates = this.props.level !== 'hours';
-    return React.createElement("div", {
-      "className": this.props.classes.calendar,
-      "onMouseDown": ((function(_this) {
-        return function(e) {
-          _this.props.above(true);
-          return e;
-        };
-      })(this)),
-      "onMouseUp": ((function(_this) {
-        return function(e) {
-          _this.props.above(false);
-          return e;
-        };
-      })(this))
-    }, dates && React.createElement(Navigation, {
-      "id": this.props.id,
-      "onPrev": this.onNavigateLeft,
-      "onNext": this.onNavigateRight,
-      "onTitle": this.onNavigateUp,
-      "title": this.getTitle[this.props.level](this.props.datetime)
-    }), React.createElement("div", {
-      "ref": 'grid',
-      "className": cn(this.props.classes.grid, this.props.level)
-    }, this.getCells[this.props.level](this.props.datetime).map((function(_this) {
-      return function(cell, i) {
-        var type;
-        type = (function() {
-          switch (false) {
-            case !cell.header:
-              return 'header';
-            case !cell.past:
-              return 'past';
-            case !cell.future:
-              return 'future';
-            default:
-              return 'base';
-          }
-        })();
-        return React.createElement(Cell, {
-          "key": i,
-          "ref": (cell.selected || cell.nearestBefore ? 'selected' : void 0),
-          "label": cell.label,
-          "level": _this.props.level,
-          "type": type,
-          "selected": cell.selected,
-          "today": cell.today,
-          "moment": cell.moment,
-          "onClick": _this.onNavigateCell,
-          "classes": _this.props.classes,
-          "invalid": _this.props.validate(cell.moment, _this.props.level)
-        });
-      };
-    })(this)), dates && React.createElement("div", {
-      "className": this.props.classes.today,
-      "onClick": this.onToday
-    }, "Today")));
+  propTypes: {
+    datetime: React.PropTypes.object.isRequired,
+    onSelect: React.PropTypes.func.isRequired,
+    level: React.PropTypes.string.isRequired,
+    setLevel: React.PropTypes.func.isRequired,
+    onMouseDown: React.PropTypes.func,
+    onMouseUp: React.PropTypes.func
   },
   componentDidMount: function() {
     return this.scrollToHour();
@@ -118,7 +66,13 @@ Calendar = React.createClass({
     return this.props.onSelect(this.props.datetime.add(lvl.span, lvl.unit));
   },
   onToday: function() {
-    return this.props.onSelect(Moment());
+    var lvl;
+    lvl = Levels[this.props.level];
+    if (Moment(this.props.datetime).isSame(Moment(), 'day')) {
+      return this.props.onSelect(Moment(), !lvl.down);
+    } else {
+      return this.props.onSelect(Moment());
+    }
   },
   getTitle: {
     years: function(datetime) {
@@ -231,13 +185,65 @@ Calendar = React.createClass({
       return hours;
     }
   },
-  propTypes: {
-    datetime: React.PropTypes.object.isRequired,
-    onSelect: React.PropTypes.func.isRequired,
-    level: React.PropTypes.string.isRequired,
-    setLevel: React.PropTypes.func.isRequired,
-    onMouseDown: React.PropTypes.func,
-    onMouseUp: React.PropTypes.func
+  render: function() {
+    var dates;
+    dates = this.props.level !== 'hours';
+    return React.createElement("div", {
+      "className": this.props.classes.calendar,
+      "onMouseDown": ((function(_this) {
+        return function(e) {
+          _this.props.above(true);
+          return e;
+        };
+      })(this)),
+      "onMouseUp": ((function(_this) {
+        return function(e) {
+          _this.props.above(false);
+          return e;
+        };
+      })(this))
+    }, dates && React.createElement(Navigation, {
+      "id": this.props.id,
+      "onPrev": this.onNavigateLeft,
+      "onNext": this.onNavigateRight,
+      "onTitle": this.onNavigateUp,
+      "title": this.getTitle[this.props.level](this.props.datetime)
+    }), React.createElement("div", {
+      "ref": 'grid',
+      "className": cn(this.props.classes.grid, this.props.level)
+    }, this.getCells[this.props.level](this.props.datetime).map((function(_this) {
+      return function(cell, i) {
+        var type;
+        type = (function() {
+          switch (false) {
+            case !cell.header:
+              return 'header';
+            case !cell.past:
+              return 'past';
+            case !cell.future:
+              return 'future';
+            default:
+              return 'base';
+          }
+        })();
+        return React.createElement(Cell, {
+          "key": i,
+          "ref": (cell.selected || cell.nearestBefore ? 'selected' : void 0),
+          "label": cell.label,
+          "level": _this.props.level,
+          "type": type,
+          "selected": cell.selected,
+          "today": cell.today,
+          "moment": cell.moment,
+          "onClick": _this.onNavigateCell,
+          "classes": _this.props.classes,
+          "invalid": _this.props.validate(cell.moment, _this.props.level)
+        });
+      };
+    })(this)), dates && React.createElement("div", {
+      "className": this.props.classes.today,
+      "onClick": this.onToday
+    }, "Today")));
   }
 });
 

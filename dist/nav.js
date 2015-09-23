@@ -9,6 +9,12 @@ getStyle = require('./styles');
 
 Navigation = React.createClass({
   displayName: 'Navigation',
+  propTypes: {
+    onPrev: React.PropTypes.func,
+    onNext: React.PropTypes.func,
+    onTitle: React.PropTypes.func,
+    title: React.PropTypes.string
+  },
   render: function() {
     return React.createElement("div", {
       "className": this.props.classes.nav
@@ -22,12 +28,6 @@ Navigation = React.createClass({
       "className": 'arrow',
       "onClick": this.props.onNext
     }, "\u00bb"));
-  },
-  propTypes: {
-    onPrev: React.PropTypes.func,
-    onNext: React.PropTypes.func,
-    onTitle: React.PropTypes.func,
-    title: React.PropTypes.string
   }
 });
 

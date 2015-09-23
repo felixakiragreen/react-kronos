@@ -27,56 +27,36 @@ getStyle = require('./styles');
 
 Kronos = React.createClass({
   displayName: 'Kronos',
-  render: function() {
-    var inputClasses, mainClasses;
-    mainClasses = cn('react-kronos', this.props.id, this.props.classes.kronos);
-    inputClasses = cn(this.props.classes.input, {
-      'outside-range': this.state.dateTimeExceedsValidRange
-    });
-    return React.createElement("div", {
-      "className": mainClasses
-    }, React.createElement("input", {
-      "type": 'text',
-      "ref": 'input',
-      "value": this.state.input,
-      "onClick": ((function(_this) {
-        return function() {
-          return _this.toggle(true);
-        };
-      })(this)),
-      "onFocus": ((function(_this) {
-        return function() {
-          return _this.toggle(true);
-        };
-      })(this)),
-      "onBlur": this.onBlur,
-      "onKeyDown": ((function(_this) {
-        return function(e) {
-          return _this.onKeyDown(e.keyCode);
-        };
-      })(this)),
-      "onChange": this.onChange,
-      "placeholder": this.props.placeholder,
-      "className": inputClasses
-    }), this.state.visible && React.createElement(Calendar, {
-      "id": this.props.id,
-      "datetime": this.state.datetime,
-      "onSelect": this.onSelect,
-      "above": ((function(_this) {
-        return function(bool) {
-          return _this.above = bool;
-        };
-      })(this)),
-      "level": this.state.level,
-      "setLevel": ((function(_this) {
-        return function(level) {
-          return _this.setState({
-            level: level
-          });
-        };
-      })(this)),
-      "validate": this.validate
-    }));
+  above: false,
+  propTypes: {
+    date: React.PropTypes.any,
+    time: React.PropTypes.any,
+    min: React.PropTypes.any,
+    max: React.PropTypes.any,
+    shouldTriggerOnChangeForDateTimeOutsideRange: React.PropTypes.bool,
+    format: React.PropTypes.string,
+    onChange: React.PropTypes.func,
+    returnAs: React.PropTypes.oneOf([Types.ISO, Types.JS_DATE, Types.MOMENT, Types.STRING]),
+    closeOnSelect: React.PropTypes.bool,
+    closeOnBlur: React.PropTypes.bool,
+    placeholder: React.PropTypes.string,
+    options: React.PropTypes.object
+  },
+  getDefaultProps: function() {
+    return {
+      closeOnSelect: true,
+      closeOnBlur: true,
+      shouldTriggerOnChangeForDateTimeOutsideRange: false
+    };
+  },
+  componentWillReceiveProps: function(nextProps) {
+    if (this.props !== nextProps) {
+      this.validate(this.getDateTimeInput(nextProps).datetime, null, true);
+      return this.setState({
+        datetime: this.getDateTimeInput(nextProps).datetime,
+        input: this.getDateTimeInput(nextProps).input
+      });
+    }
   },
   getInitialState: function() {
     return {
@@ -196,26 +176,29 @@ Kronos = React.createClass({
       return this.commit(saving);
     }
   },
-  validate: function(datetime, timeUnit, saveState) {
-    var exceedsRange;
-    exceedsRange = false;
+  validate: function(datetime, timeUnit, isSaving) {
+    var outsideRange;
+    outsideRange = false;
     if (this.props.min && Moment(datetime).isBefore(this.props.min)) {
-      exceedsRange = true;
+      outsideRange = true;
     }
     if (this.props.max && Moment(datetime).isAfter(this.props.max)) {
-      exceedsRange = true;
+      outsideRange = true;
     }
-    if (exceedsRange && timeUnit !== 'hours') {
+    if (outsideRange && timeUnit !== 'hours') {
       if (Moment(datetime).isSame(this.props.min, timeUnit) || Moment(datetime).isSame(this.props.max, timeUnit)) {
-        exceedsRange = false;
+        outsideRange = false;
       }
     }
-    if (saveState) {
+    if (isSaving) {
       this.setState({
-        dateTimeExceedsValidRange: exceedsRange
+        dateTimeExceedsValidRange: outsideRange
       });
+      if (this.props.shouldTriggerOnChangeForDateTimeOutsideRange) {
+        return true;
+      }
     }
-    return !exceedsRange;
+    return !outsideRange;
   },
   commit: function(datetime) {
     var base, result, returnAs;
@@ -307,33 +290,56 @@ Kronos = React.createClass({
         }
     }
   },
-  above: false,
-  propTypes: {
-    date: React.PropTypes.any,
-    time: React.PropTypes.any,
-    min: React.PropTypes.any,
-    max: React.PropTypes.any,
-    format: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    returnAs: React.PropTypes.oneOf([Types.ISO, Types.JS_DATE, Types.MOMENT, Types.STRING]),
-    closeOnSelect: React.PropTypes.bool,
-    closeOnBlur: React.PropTypes.bool,
-    placeholder: React.PropTypes.string,
-    options: React.PropTypes.object
-  },
-  getDefaultProps: function() {
-    return {
-      closeOnSelect: true,
-      closeOnBlur: true
-    };
-  },
-  componentWillReceiveProps: function(nextProps) {
-    if (this.props !== nextProps) {
-      return this.setState({
-        datetime: this.getDateTimeInput(nextProps).datetime,
-        input: this.getDateTimeInput(nextProps).input
-      });
-    }
+  render: function() {
+    var inputClasses, mainClasses;
+    mainClasses = cn('react-kronos', this.props.id, this.props.classes.kronos);
+    inputClasses = cn(this.props.classes.input, {
+      'outside-range': this.state.dateTimeExceedsValidRange
+    });
+    return React.createElement("div", {
+      "className": mainClasses
+    }, React.createElement("input", {
+      "type": 'text',
+      "ref": 'input',
+      "value": this.state.input,
+      "onClick": ((function(_this) {
+        return function() {
+          return _this.toggle(true);
+        };
+      })(this)),
+      "onFocus": ((function(_this) {
+        return function() {
+          return _this.toggle(true);
+        };
+      })(this)),
+      "onBlur": this.onBlur,
+      "onKeyDown": ((function(_this) {
+        return function(e) {
+          return _this.onKeyDown(e.keyCode);
+        };
+      })(this)),
+      "onChange": this.onChange,
+      "placeholder": this.props.placeholder,
+      "className": inputClasses
+    }), this.state.visible && React.createElement(Calendar, {
+      "id": this.props.id,
+      "datetime": this.state.datetime,
+      "onSelect": this.onSelect,
+      "above": ((function(_this) {
+        return function(bool) {
+          return _this.above = bool;
+        };
+      })(this)),
+      "level": this.state.level,
+      "setLevel": ((function(_this) {
+        return function(level) {
+          return _this.setState({
+            level: level
+          });
+        };
+      })(this)),
+      "validate": this.validate
+    }));
   }
 });
 

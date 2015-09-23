@@ -7,6 +7,15 @@ cn = require('classnames');
 
 module.exports = React.createClass({
   displayName: 'Cell',
+  propTypes: {
+    label: React.PropTypes.string,
+    level: React.PropTypes.string,
+    type: React.PropTypes.string,
+    selected: React.PropTypes.bool,
+    today: React.PropTypes.bool,
+    onClick: React.PropTypes.func,
+    classes: React.PropTypes.object
+  },
   render: function() {
     var classes;
     classes = cn(this.props.classes.cell, this.props.level, this.props.type, {
@@ -24,14 +33,5 @@ module.exports = React.createClass({
         };
       })(this))
     }, this.props.label);
-  },
-  propTypes: {
-    label: React.PropTypes.string,
-    level: React.PropTypes.string,
-    type: React.PropTypes.string,
-    selected: React.PropTypes.bool,
-    today: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
-    classes: React.PropTypes.object
   }
 });
