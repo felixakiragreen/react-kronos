@@ -71,6 +71,7 @@ export default class App extends Component {
         color: '#67c446',
         corners: 4,
       },
+      // shouldTriggerOnChangeForDateTimeOutsideRange: true,
       // closeOnBlur: false,
     }
 
