@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 0.3.1
+- update to react 0.14
+- update babel-loader
+- switch to using fbjs for keymirror
+
 ## 0.3.0
 - added new prop: shouldTriggerOnChangeForDateTimeOutsideRange
 - on click of 'Today', if it's already today, panel dismisses

@@ -1,5 +1,5 @@
 React = require 'react'
-keyMirror = require 'react/lib/keyMirror'
+keyMirror = require 'fbjs/lib/keyMirror'
 
 
 module.exports =
