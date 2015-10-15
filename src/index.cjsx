@@ -1,4 +1,5 @@
 React = require 'react'
+ReactDOM = require 'react-dom'
 Moment = require 'moment-range'
 cn = require 'classnames'
 
@@ -187,7 +188,7 @@ Kronos = React.createClass
 
   onBlur: ->
     if @above
-      do React.findDOMNode @refs.input
+      do ReactDOM.findDOMNode @refs.input
         .focus
     else
       @toggle false if @props.closeOnBlur
