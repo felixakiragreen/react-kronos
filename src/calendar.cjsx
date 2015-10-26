@@ -1,4 +1,5 @@
 React = require 'react'
+ReactDOM = require 'react-dom'
 Moment = require 'moment-range'
 cn = require 'classnames'
 
@@ -28,7 +29,7 @@ Calendar = React.createClass
 
   scrollToHour: ->
     if @props.level is 'hours' and @refs.selected
-      selected = React.findDOMNode(@refs.selected)
+      selected = ReactDOM.findDOMNode(@refs.selected)
       selected.parentNode.scrollTop = selected.offsetTop - 6
 
   onNavigateCell: (datetime) ->
