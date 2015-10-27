@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# run
-cd examples
-node server.js
