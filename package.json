@@ -4,10 +4,12 @@
   "description": "A fast, intuitive, and elegant date and time picker for React.",
   "scripts": {
     "start": "node devServer.js",
-    "clean": "rimraf dist",
+    "clean:examples": "rimraf examples/bundle.*",
+    "clean": "rimraf dist && npm run clean:examples",
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build:lib": "./node_modules/.bin/babel ./src --out-dir ./dist",
-    "build": "npm run clean && npm run build:webpack",
+    "build:examples": "cp dist/* examples",
+    "build": "npm run clean && npm run build:webpack && npm run build:examples",
     "lint": "eslint src",
     "push_examples": "./scripts/push_ghpages"
   },
