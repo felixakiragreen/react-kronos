@@ -9,7 +9,7 @@ module.exports = {
   output: {
     path: __dirname,
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: '/react-kronos/'
   },
   plugins: [
     new webpack.NormalModuleReplacementPlugin(/^kronos$/, path.join(__dirname, '../src/index')),
