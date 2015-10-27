@@ -8,7 +8,7 @@
     "clean": "rimraf dist && npm run clean:examples",
     "build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build:lib": "./node_modules/.bin/babel ./src --out-dir ./dist",
-    "build:examples": "cp dist/* examples",
+    "build:examples": "NODE_ENV=production webpack --config examples/webpack.config.examples.js",
     "build": "npm run clean && npm run build:webpack && npm run build:examples",
     "lint": "eslint src",
     "push_examples": "./scripts/push_ghpages"
