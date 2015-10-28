@@ -58,6 +58,8 @@ class Kronos extends Component {
     shouldTriggerOnChangeForDateTimeOutsideRange: false,
   }
 
+  static above = false
+
   componentWillReceiveProps(nextProps) {
     if (this.props != nextProps) {
       this.validate(this.getDateTimeInput(nextProps).datetime, null, true)
@@ -141,7 +143,7 @@ class Kronos extends Component {
   }
 
   toggle(visible) {
-    visible = visible || !this.state.visible
+    visible || !this.state.visible
     if (visible !== this.state.visible) {
       this.setState({ visible })
     }
@@ -245,16 +247,19 @@ class Kronos extends Component {
   }
 
   onSelect(datetime, close) {
+    close || close
     const { visible } = this.state
     const { closeOnSelect } = this.props
-    close || close
     if (!this.validate(datetime)) close = false
     this.setState({ visible: closeOnSelect && close ? !visible : visible })
     this.save(datetime)
   }
 
   onBlur() {
-    if (this.props.closeOnBlur) {
+    if (this.above) {
+      ReactDOM.findDOMNode(this.refs.input).focus()
+    }
+    else if (this.props.closeOnBlur) {
       this.toggle(false)
     }
     if (this.state.input == this.state.datetime.format(this.format())) {
