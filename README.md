@@ -1,5 +1,5 @@
-React Kronos
-============
+React Kronos 1.0
+================
 
 A fast, intuitive, and elegant date and time picker for React.
 
@@ -47,6 +47,7 @@ A fast, intuitive, and elegant date and time picker for React.
 - `max` - *Date()*, *Moment()*, *ISO* to set as the maximum datetime
 - `closeOnSelect` - *boolean* : closes the dropdown when a value is selected (default: `true`)
 - `closeOnBlur` - *boolean* : closes the dropdown when the field is blurred (default: `true`)
+- `shouldTriggerOnChangeForDateTimeOutsideRange` - *boolean*: optionally allow dates outside range to trigger onChanges (default: `false`)
 - `placeholder` - *string* : placeholder text when there is no value
 - `options:`
   - `color` - *string* : the highlight color in the UI as a hex
@@ -60,8 +61,7 @@ A fast, intuitive, and elegant date and time picker for React.
 
 #### Roadmap
 
-**1.0**:
-- Rewrite codebase in ES6
+**Needed**
 - Prodive docs on website
 
 **1.1**
@@ -87,12 +87,6 @@ A fast, intuitive, and elegant date and time picker for React.
 - mobile support
 - wide browser compatibility
 
-#### See Also
-
-Kronos is built from scratch, but heavily inspired by:
-- Google Calendar's input fields
-- [react-widgets datetimepicker](http://jquense.github.io/react-widgets/docs/#/datetime-picker)
-- [react-input-calendar](https://github.com/Rudeg/react-input-calendar)
 
 #### Thanks
 

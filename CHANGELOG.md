@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.0.0
+- now following semantic versioning
+- full rewrite in ES6
+
 ## 0.3.1
 - update to react 0.14
 - update babel-loader
