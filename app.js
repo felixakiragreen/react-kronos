@@ -100,7 +100,7 @@ export default class App extends Component {
                 max={maxDate}
                 {...props}
               />
-            <Kronos
+              <Kronos
                 time={this.state.datetime}
                 onChange={::this.onChange}
                 min={minDate}
