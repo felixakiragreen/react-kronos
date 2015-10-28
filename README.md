@@ -65,17 +65,17 @@ A fast, intuitive, and elegant date and time picker for React.
 **Needed**
 - Prodive docs on website
 
-**1.1**
+**1.2**
 - options:
   - date (restrict calendar to show only days, or with months, or with years)
   - time (set increments, set ranges of time)
 
-**1.2**
+**1.3**
 - support for connected start & end date+time
   - date (show range on calendar)
   - time (show "0 hours", "0.5 hours", "1 hour", &c)
 
-**1.3**
+**1.4**
 - prop: `styles` - granular styling (overwrite any style, or provide entire theme)
 
 #### Ideas
