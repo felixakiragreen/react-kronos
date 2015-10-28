@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.1.0
+- added new prop: preventClickOnDateTimeOutsideRange
+
 ## 1.0.0
 - now following semantic versioning
 - full rewrite in ES6

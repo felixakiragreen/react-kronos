@@ -44,7 +44,7 @@ class Calendar extends Component {
   onNavigateCell(datetime) {
     const lvl = Levels[this.props.level]
     if (lvl.down) this.props.setLevel(lvl.down)
-    this.props.onSelect(datetime, !lvl.down)
+    this.props.onSelect(datetime, !lvl.down, lvl.key)
   }
 
   onNavigateUp() {

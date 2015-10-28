@@ -37,6 +37,7 @@ class Kronos extends Component {
     min: PropTypes.any,
     max: PropTypes.any,
     shouldTriggerOnChangeForDateTimeOutsideRange: PropTypes.bool,
+    preventClickOnDateTimeOutsideRange: PropTypes.bool,
     format: PropTypes.string,
     onChange: PropTypes.func,
     returnAs: PropTypes.oneOf([
@@ -56,6 +57,7 @@ class Kronos extends Component {
     closeOnSelect: true,
     closeOnBlur: true,
     shouldTriggerOnChangeForDateTimeOutsideRange: false,
+    preventClickOnDateTimeOutsideRange: false,
   }
 
   static above = false
@@ -246,12 +248,23 @@ class Kronos extends Component {
     }
   }
 
-  onSelect(datetime, close) {
-    close || close
+  onSelect(datetime, close, timeUnit) {
+    let shouldClose = close
     const { visible } = this.state
-    const { closeOnSelect } = this.props
-    if (!this.validate(datetime)) close = false
-    this.setState({ visible: closeOnSelect && close ? !visible : visible })
+    const {
+      closeOnSelect,
+      preventClickForDateTimeOutsideRange,
+    } = this.props
+
+    if (timeUnit) {
+      if (!this.validate(datetime, timeUnit.unit)) shouldClose = false
+    }
+    else {
+      if (!this.validate(datetime)) shouldClose = false
+    }
+    if (close && shouldClose === false && preventClickForDateTimeOutsideRange) return
+
+    this.setState({ visible: closeOnSelect && shouldClose ? !visible : visible })
     this.save(datetime)
   }
 

@@ -160,6 +160,7 @@ function calendar(options) {
         '&.outside-range': {
           color: '#d0021b',
           backgroundColor: color('#d0021b').alpha(0.2).rgbString(),
+          cursor: 'not-allowed',
         }
       },
       '&.years': {
