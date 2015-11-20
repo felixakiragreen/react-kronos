@@ -63,7 +63,7 @@ A fast, intuitive, and elegant date and time picker for React.
 #### Roadmap
 
 **Needed**
-- Prodive docs on website
+- Provide docs on website
 
 **1.2**
 - options:
@@ -75,18 +75,15 @@ A fast, intuitive, and elegant date and time picker for React.
   - date (show range on calendar)
   - time (show "0 hours", "0.5 hours", "1 hour", &c)
 
-**1.4**
-- prop: `styles` - granular styling (overwrite any style, or provide entire theme)
-
 #### Ideas
 
 - input field masking
-- scroll time list as user arrows up+down
 - ⇧+arrow uses the higher order unit
 - specify required props & non-required (what happens if none are included)
 - add warning messages to help use component properly
 - mobile support
 - wide browser compatibility
+- prop: `styles` - granular styling (overwrite any style, or provide entire theme)
 
 
 #### Thanks
