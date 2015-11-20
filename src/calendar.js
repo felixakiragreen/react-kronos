@@ -33,9 +33,6 @@ class Calendar extends Component {
 
   scrollToHour() {
     if (this.props.level == 'hours' && this.refs.selected) {
-      // TRY THIS (update in index too)
-      // const selected = this.refs.selected
-      // alternate
       const selected = ReactDOM.findDOMNode(this.refs.selected)
       selected.parentNode.scrollTop = selected.offsetTop - 6
     }

@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.1.1
+- fix bug: provide /lib for entry point
+- update packages (react, babel)
+
 ## 1.1.0
 - added new prop: preventClickOnDateTimeOutsideRange
 
