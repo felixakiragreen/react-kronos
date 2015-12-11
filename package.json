@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node devServer.js",
     "build": "npm run clean && npm run build:lib && npm run build:umd && npm run build:examples",
-    "build:lib": "node_modules/.bin/babel src --out-dir lib",
+    "build:lib": "BABEL_ENV=production node_modules/.bin/babel src --out-dir lib",
     "build:umd": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build:examples": "NODE_ENV=production webpack --config examples/webpack.config.examples.js",
     "clean": "rimraf dist && rimraf lib && npm run clean:examples",
