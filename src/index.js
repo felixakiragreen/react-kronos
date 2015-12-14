@@ -17,6 +17,7 @@ import getStyle from './styles'
 
 const ISOregex = /((\d{4}\-\d\d\-\d\d)[tT]([\d:\.]*)?)([zZ]|([+\-])(\d\d):?(\d\d))/
 
+
 class Kronos extends Component {
 
   constructor(props) {
@@ -145,10 +146,10 @@ class Kronos extends Component {
   }
 
   toggle(visible) {
-    visible || !this.state.visible
-    if (visible !== this.state.visible) {
-      this.setState({ visible })
+    if (typeof visible === 'undefined') {
+      visible = !this.state.visible
     }
+    this.setState({ visible })
   }
 
   parse(input) {
@@ -301,7 +302,12 @@ class Kronos extends Component {
         }
         else {
           if (this.state.input == datetime.format(this.format())) {
-            this.toggle()
+            if (!this.validate(datetime)) {
+              this.toggle(true)
+            }
+            else {
+              this.toggle()
+            }
           }
           else {
             if (!this.state.visible) this.toggle(true)

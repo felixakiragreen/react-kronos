@@ -1,4 +1,4 @@
-React Kronos 1.1
+React Kronos 1.2
 ================
 
 A fast, intuitive, and elegant date and time picker for React.
@@ -65,12 +65,12 @@ A fast, intuitive, and elegant date and time picker for React.
 **Needed**
 - Provide docs on website
 
-**1.2**
+**1.3**
 - options:
   - date (restrict calendar to show only days, or with months, or with years)
   - time (set increments, set ranges of time)
 
-**1.3**
+**1.4**
 - support for connected start & end date+time
   - date (show range on calendar)
   - time (show "0 hours", "0.5 hours", "1 hour", &c)

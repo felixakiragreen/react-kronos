@@ -54,6 +54,7 @@ export default function createStyledComponent(Component, rules, options) {
       return (
         <Component
           id={this.uuid}
+          ref={'kronos'}
           classes={this.sheet.classes}
           classSet={this.classSet}
           {...this.props}
