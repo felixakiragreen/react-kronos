@@ -17,6 +17,10 @@ export default class App extends Component {
     this.setState({ datetime })
   }
 
+  onClickButton(e) {
+    this.refs.datetime.refs.kronos.toggle()
+  }
+
   render() {
     let github =
       <svg viewBox='0 792 512 512'>
@@ -79,7 +83,7 @@ export default class App extends Component {
         <div style={style.page}>
           <header style={style.header}>
             <div>
-              <h1 style={{ margin: 0 }}>React Kronos 1.1.1</h1>
+              <h1 style={{ margin: 0 }}>React Kronos 1.2.0</h1>
               <span style={style.tagline}>A fast, intuitive, and elegant date and time picker for React.</span>
             </div>
             <div style={style.icon}>
@@ -93,7 +97,11 @@ export default class App extends Component {
           </header>
           <main style={style.main}>
             <div className='kronos'>
+              <button onClick={::this.onClickButton}>
+                Toggle Visibility
+              </button>
               <Kronos
+                ref='datetime'
                 date={this.state.datetime}
                 onChange={::this.onChange}
                 min={minDate}
