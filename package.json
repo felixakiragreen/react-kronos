@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node devServer.js",
     "build": "npm run clean && npm run build:lib && npm run build:umd && npm run build:examples",
-    "build:lib": "BABEL_ENV=production node_modules/.bin/babel src --out-dir lib",
+    "build:lib": "BABEL_ENV=production babel src -d lib",
     "build:umd": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "build:examples": "NODE_ENV=production webpack --config examples/webpack.config.examples.js",
     "clean": "rimraf dist && rimraf lib && npm run clean:examples",
@@ -41,7 +41,6 @@
   },
   "homepage": "http://dubert.github.io/react-kronos",
   "devDependencies": {
-    "babel": "^6.3.13",
     "babel-core": "^6.3.15",
     "babel-eslint": "^5.0.0-beta4",
     "babel-loader": "^6.2.0",
