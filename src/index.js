@@ -337,7 +337,7 @@ class Kronos extends Component {
           onClick={() => this.toggle(true)}
           onFocus={() => this.toggle(true)}
           onBlur={::this.onBlur}
-          onKeyDown={(e) => this.onKeyDown(e.keyCode)}
+          onKeyDown={e => this.onKeyDown(e.keyCode)}
           onChange={::this.onChange}
           placeholder={this.props.placeholder}
           className={inputClasses}
@@ -347,9 +347,9 @@ class Kronos extends Component {
             id={this.props.id}
             datetime={this.state.datetime}
             onSelect={::this.onSelect}
-            above={(bool) => this.above = bool}
+            above={bool => typeof bool === 'undefined' ? this.above : this.above = bool}
             level={this.state.level}
-            setLevel={(level) => this.setState({ level }) }
+            setLevel={level => this.setState({ level }) }
             validate={::this.validate}
           />
         }

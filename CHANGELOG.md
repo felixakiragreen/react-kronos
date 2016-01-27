@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.2.1
+- [bug] when scrolling the hour view and clicking, it jumped not allowing clicks
+
 ## 1.2.0
 - update react-transform, babel
 - added 'kronos' ref to toggle visibility from outside the component

@@ -28,7 +28,9 @@ class Calendar extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    this.scrollToHour()
+    if (!this.props.above()) {
+      this.scrollToHour()
+    }
   }
 
   scrollToHour() {
