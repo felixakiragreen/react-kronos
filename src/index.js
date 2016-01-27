@@ -270,6 +270,8 @@ class Kronos extends Component {
   }
 
   onBlur() {
+    let datetime = this.state.datetime || Moment()
+
     if (this.above) {
       ReactDOM.findDOMNode(this.refs.input).focus()
     }

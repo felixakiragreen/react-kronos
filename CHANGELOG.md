@@ -1,8 +1,11 @@
 Changelog
 =========
 
+## 1.2.2
+- [bug] null inputs are now allowed
+
 ## 1.2.1
-- [bug] when scrolling the hour view and clicking, it jumped not allowing clicks
+- [bug] clicking on the hours scrollview will no longer jump around
 
 ## 1.2.0
 - update react-transform, babel
