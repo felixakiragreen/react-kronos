@@ -51,6 +51,7 @@ class Kronos extends Component {
     closeOnBlur: PropTypes.bool,
     placeholder: PropTypes.string,
     options: PropTypes.object,
+    inputStyle: PropTypes.object
     // styles: React.PropTypes.object
   }
 
@@ -341,6 +342,7 @@ class Kronos extends Component {
           onChange={::this.onChange}
           placeholder={this.props.placeholder}
           className={inputClasses}
+          style={this.props.inputStyle}
         />
       { this.state.visible &&
           <Calendar
