@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.2.3
+- [bug] moment settings were being overwritten
+
 ## 1.2.2
 - [bug] null inputs are now allowed
 
