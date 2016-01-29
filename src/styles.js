@@ -18,9 +18,7 @@ function initializeMoment(options) {
       })
     }
   }
-  else {
-    _moment = true
-  }
+  _moment = true
 }
 
 function initializeOptions(options, uuid) {
