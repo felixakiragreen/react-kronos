@@ -83,7 +83,7 @@ export default class App extends Component {
         <div style={style.page}>
           <header style={style.header}>
             <div>
-              <h1 style={{ margin: 0 }}>React Kronos 1.2.2</h1>
+              <h1 style={{ margin: 0 }}>React Kronos 1.2.3</h1>
               <span style={style.tagline}>A fast, intuitive, and elegant date and time picker for React.</span>
             </div>
             <div style={style.icon}>
