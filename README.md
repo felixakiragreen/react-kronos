@@ -45,6 +45,7 @@ A fast, intuitive, and elegant date and time picker for React.
 - `returnAs` - *string* : onChange format `JS_DATE`, `MOMENT`, `ISO`, `STRING` (default: same as input)
 - `min` - *Date()*, *Moment()*, *ISO* to set as the minimum datetime
 - `max` - *Date()*, *Moment()*, *ISO* to set as the maximum datetime
+- `visible` - *boolean* : opens/closes the dropdown when true/false
 - `closeOnSelect` - *boolean* : closes the dropdown when a value is selected (default: `true`)
 - `closeOnBlur` - *boolean* : closes the dropdown when the field is blurred (default: `true`)
 - `shouldTriggerOnChangeForDateTimeOutsideRange` - *boolean*: optionally allow dates outside min/max range to trigger onChanges (default: `false`)
