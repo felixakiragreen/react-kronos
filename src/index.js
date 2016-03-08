@@ -47,6 +47,7 @@ class Kronos extends Component {
       Types.MOMENT,
       Types.STRING,
     ]),
+    visible: PropTypes.bool,
     closeOnSelect: PropTypes.bool,
     closeOnBlur: PropTypes.bool,
     placeholder: PropTypes.string,
@@ -55,6 +56,7 @@ class Kronos extends Component {
   }
 
   static defaultProps = {
+    visible: false,
     closeOnSelect: true,
     closeOnBlur: true,
     shouldTriggerOnChangeForDateTimeOutsideRange: false,
@@ -63,13 +65,21 @@ class Kronos extends Component {
 
   static above = false
 
+  componentWillMount() {
+    if ('visible' in this.props) {
+      this.setState({ visible: this.props.visible });
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props != nextProps) {
       this.validate(this.getDateTimeInput(nextProps).datetime, null, true)
-      this.setState({
-        datetime: this.getDateTimeInput(nextProps).datetime,
-        input: this.getDateTimeInput(nextProps).input,
-      })
+      this.setState(Object.assign({
+          datetime: this.getDateTimeInput(nextProps).datetime,
+          input: this.getDateTimeInput(nextProps).input,
+        },
+        ('visible' in nextProps) ? { visible: nextProps.visible } : {}
+      ))
     }
   }
 
