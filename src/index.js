@@ -254,7 +254,7 @@ class Kronos extends Component {
     const { visible } = this.state
     const {
       closeOnSelect,
-      preventClickForDateTimeOutsideRange,
+      preventClickOnDateTimeOutsideRange,
     } = this.props
 
     if (timeUnit) {
@@ -263,7 +263,7 @@ class Kronos extends Component {
     else {
       if (!this.validate(datetime)) shouldClose = false
     }
-    if (close && shouldClose === false && preventClickForDateTimeOutsideRange) return
+    if (close && shouldClose === false && preventClickOnDateTimeOutsideRange) return
 
     this.setState({ visible: closeOnSelect && shouldClose ? !visible : visible })
     this.save(datetime)
