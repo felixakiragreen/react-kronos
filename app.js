@@ -8,17 +8,26 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      datetime: Moment().toISOString()
+      uncontrolledDatetime: Moment().toISOString(),
+      controlledDatetime: Moment().toISOString(),
+      visible: false,
     }
   }
 
-  onChange(datetime) {
-    console.log('datetime:', datetime)
-    this.setState({ datetime })
+  onChangeUncontrolled(datetime) {
+    this.setState({ uncontrolledDatetime: datetime })
   }
 
-  onClickButton(e) {
-    this.refs.datetime.refs.kronos.toggle()
+  onChangeControlled(datetime) {
+    this.setState({ controlledDatetime: datetime })
+  }
+
+  onClickButtonUncontrolled(e) {
+    this.refs.uncontrolled.refs.kronos.toggle()
+  }
+
+  onClickButtonControlled(e) {
+    this.setState({ visible: !this.state.visible })
   }
 
   render() {
@@ -41,7 +50,7 @@ export default class App extends Component {
       },
       page: {
         backgroundColor: 'white',
-        margin: '160px auto 100px',
+        margin: 'auto auto',
         minWidth: 800,
         boxShadow: '0 0 12px 2px hsla(0, 0%, 0%, 0.1)',
       },
@@ -57,13 +66,9 @@ export default class App extends Component {
       },
       main: {
         backgroundColor: 'hsl(0, 0%, 97%)',
-        padding: '48px 0',
+        padding: '24px 0 48px',
+        flexDirection: 'column',
       },
-      coming: {
-        margin: 32,
-        color: 'hsl(0, 0%, 66%)',
-        fontStyle: 'italic',
-      }
     }
 
     let props = {
@@ -83,7 +88,7 @@ export default class App extends Component {
         <div style={style.page}>
           <header style={style.header}>
             <div>
-              <h1 style={{ margin: 0 }}>React Kronos 1.2.3</h1>
+              <h1 style={{ margin: 0 }}>React Kronos 1.2.4</h1>
               <span style={style.tagline}>A fast, intuitive, and elegant date and time picker for React.</span>
             </div>
             <div style={style.icon}>
@@ -96,32 +101,65 @@ export default class App extends Component {
             </div>
           </header>
           <main style={style.main}>
+            <h2>Uncontrolled</h2>
             <div className='kronos'>
-              <button onClick={::this.onClickButton}>
+              <button className='toggle-button' onClick={::this.onClickButtonUncontrolled}>
                 Toggle Visibility
               </button>
               <Kronos
-                ref='datetime'
-                date={this.state.datetime}
-                onChange={::this.onChange}
+                ref='uncontrolled'
+                date={this.state.uncontrolledDatetime}
+                onChangeDateTime={::this.onChangeUncontrolled}
                 min={minDate}
                 max={maxDate}
                 placeholder={'This is the placeholder'}
                 {...props}
               />
               <Kronos
-                time={this.state.datetime}
-                onChange={::this.onChange}
+                time={this.state.uncontrolledDatetime}
+                onChangeDateTime={::this.onChangeUncontrolled}
                 min={minDate}
                 max={maxDate}
                 placeholder={'Another one'}
                 {...props}
               />
             </div>
+            <h2>Controlled</h2>
+            <div className='kronos'>
+              <button className='toggle-button' onClick={::this.onClickButtonControlled}>
+                Toggle Visibility
+              </button>
+              <Kronos
+                ref='controlled'
+                date={this.state.controlledDatetime}
+                onChangeDateTime={::this.onChangeControlled}
+                min={minDate}
+                max={maxDate}
+                placeholder={'This is the placeholder'}
+                controlVisibility={true}
+                visible={this.state.visible}
+                onClick={ () => this.setState({ visible: true }) }
+                onFocus={ () => this.setState({ visible: true }) }
+                onBlur={ () => this.setState({ visible: false }) }
+                onSelect={ () => this.setState({ visible: false }) }
+                {...props}
+              />
+              <Kronos
+                time={this.state.controlledDatetime}
+                onChangeDateTime={::this.onChangeControlled}
+                min={minDate}
+                max={maxDate}
+                placeholder={'Another one'}
+                controlVisibility={true}
+                visible={this.state.visible}
+                onClick={ () => this.setState({ visible: true }) }
+                onFocus={ () => this.setState({ visible: true }) }
+                onBlur={ () => this.setState({ visible: false }) }
+                onSelect={ () => this.setState({ visible: false }) }
+                {...props}
+              />
+            </div>
           </main>
-          <div style={style.coming}>
-            Documentation coming soon. Read more on Github.
-          </div>
         </div>
       </div>
     )
