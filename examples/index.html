@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>React Kronos 1.2.3</title>
+    <title>React Kronos 1.2.4</title>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
     <style>
       html, body, #root {
@@ -14,6 +14,9 @@
         display: flex;
         justify-content: space-between;
         margin: 0 164px;
+      }
+      h2 {
+        text-align: center;
       }
       .kronos div {
         flex: 1;
@@ -36,6 +39,20 @@
       }
       .icon-link:active path {
         fill: hsl(0, 0%, 0%);
+      }
+      .toggle-button {
+        border: 0;
+        border-radius: 4px;
+        margin-right: 10px;
+        outline: none;
+        font-family: 'Source Sans Pro';
+        background-color: hsl(0, 0%, 66%);
+        cursor: pointer;
+        color: hsl(0, 0%, 100%);
+        font-weight: 600;
+      }
+      .toggle-button:hover {
+        background-color: hsl(0, 0%, 33%);
       }
     </style>
   </head>

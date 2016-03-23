@@ -40,7 +40,7 @@ class Kronos extends Component {
     shouldTriggerOnChangeForDateTimeOutsideRange: PropTypes.bool,
     preventClickOnDateTimeOutsideRange: PropTypes.bool,
     format: PropTypes.string,
-    onChange: PropTypes.func,
+    onChangeDateTime: PropTypes.func,
     returnAs: PropTypes.oneOf([
       Types.ISO,
       Types.JS_DATE,
@@ -51,12 +51,20 @@ class Kronos extends Component {
     closeOnBlur: PropTypes.bool,
     placeholder: PropTypes.string,
     options: PropTypes.object,
-    // styles: React.PropTypes.object
+    // Advanced controls
+    controlVisibility: PropTypes.bool,
+    visible: PropTypes.bool,
+    onClick: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
+    onSelect: PropTypes.func,
   }
 
   static defaultProps = {
     closeOnSelect: true,
     closeOnBlur: true,
+    controlVisibility: false,
     shouldTriggerOnChangeForDateTimeOutsideRange: false,
     preventClickOnDateTimeOutsideRange: false,
   }
@@ -228,10 +236,42 @@ class Kronos extends Component {
         break
     }
 
-    this.props.onChange && this.props.onChange(result)
+    this.props.onChangeDateTime && this.props.onChangeDateTime(result)
   }
 
-  onChange(e) {
+  onClickInput(e) {
+    if (this.props.onClick) this.props.onClick(e)
+    this.toggle(true)
+  }
+
+  onFocusInput(e) {
+    if (this.props.onFocus) this.props.onFocus(e)
+    this.toggle(true)
+  }
+
+  onBlurInput(e) {
+    if (this.props.onBlur) this.props.onBlur(e)
+
+    let datetime = this.state.datetime || Moment()
+
+    if (this.above) {
+      ReactDOM.findDOMNode(this.refs.input).focus()
+    }
+    else if (this.props.closeOnBlur) {
+      this.toggle(false)
+    }
+    if (this.state.input == this.state.datetime.format(this.format())) {
+      return
+    }
+    else {
+      datetime = this.parse(this.state.input)
+      if (datetime) this.save(datetime)
+    }
+  }
+
+  onChangeInput(e) {
+    if (this.props.onChange) this.props.onChange(e)
+
     let input = e.target.value
     let datetime = Moment(input, this.format(), true)
     if (datetime.isValid()) {
@@ -242,7 +282,7 @@ class Kronos extends Component {
         datetime: null,
         input: '',
       })
-      this.props.onChange && this.props.onChange(null)
+      this.props.onChangeDateTime && this.props.onChangeDateTime(null)
     }
     else {
       this.setState({ input })
@@ -250,6 +290,8 @@ class Kronos extends Component {
   }
 
   onSelect(datetime, close, timeUnit) {
+    if (this.props.onSelect) this.props.onSelect(datetime)
+
     let shouldClose = close
     const { visible } = this.state
     const {
@@ -267,24 +309,6 @@ class Kronos extends Component {
 
     this.setState({ visible: closeOnSelect && shouldClose ? !visible : visible })
     this.save(datetime)
-  }
-
-  onBlur() {
-    let datetime = this.state.datetime || Moment()
-
-    if (this.above) {
-      ReactDOM.findDOMNode(this.refs.input).focus()
-    }
-    else if (this.props.closeOnBlur) {
-      this.toggle(false)
-    }
-    if (this.state.input == this.state.datetime.format(this.format())) {
-      return
-    }
-    else {
-      datetime = this.parse(this.state.input)
-      if (datetime) this.save(datetime)
-    }
   }
 
   onKeyDown(code) {
@@ -329,6 +353,9 @@ class Kronos extends Component {
     const inputClasses = cn(this.props.classes.input,
       { 'outside-range': this.state.dateTimeExceedsValidRange }
     )
+    const visible = this.props.controlVisibility
+      ? this.props.visible
+      : this.state.visible
 
     return (
       <div className={mainClasses}>
@@ -336,15 +363,15 @@ class Kronos extends Component {
           type='text'
           ref='input'
           value={this.state.input}
-          onClick={() => this.toggle(true)}
-          onFocus={() => this.toggle(true)}
-          onBlur={::this.onBlur}
+          onClick={::this.onClickInput}
+          onFocus={::this.onFocusInput}
+          onBlur={::this.onBlurInput}
           onKeyDown={e => this.onKeyDown(e.keyCode)}
-          onChange={::this.onChange}
+          onChange={::this.onChangeInput}
           placeholder={this.props.placeholder}
           className={inputClasses}
         />
-      { this.state.visible &&
+      { visible &&
           <Calendar
             id={this.props.id}
             datetime={this.state.datetime}

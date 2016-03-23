@@ -41,7 +41,8 @@ A fast, intuitive, and elegant date and time picker for React.
 - `date` - *Date()*, *Moment()*, *ISO*, or *string* (if string, must match `format`)
 - `time` - *Date()*, *Moment()*, *ISO*, or *string* (if string, must match `format`)
 - `format` - *string* : [Moment formatting](http://momentjs.com/docs/#/parsing/string-format/) of date / time
-- `onChange` - *function* : change method called when there is a new value
+- `onChange` - *function* : native onChange method
+- `onChangeDateTime` - *function* : change method called when there is a new value
 - `returnAs` - *string* : onChange format `JS_DATE`, `MOMENT`, `ISO`, `STRING` (default: same as input)
 - `min` - *Date()*, *Moment()*, *ISO* to set as the minimum datetime
 - `max` - *Date()*, *Moment()*, *ISO* to set as the maximum datetime
