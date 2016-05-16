@@ -38,10 +38,11 @@ export default class App extends Component {
         minHeight: '100%',
         backgroundColor: 'hsl(0, 0%, 94%)',
         fontFamily: 'Source Sans Pro',
+        justifyContent: 'center',
       },
       page: {
         backgroundColor: 'white',
-        margin: '160px auto 100px',
+        margin: '160px 0 100px 0',
         minWidth: 800,
         boxShadow: '0 0 12px 2px hsla(0, 0%, 0%, 0.1)',
       },
