@@ -71,8 +71,10 @@
     "jss-vendor-prefixer": "^0.2.2",
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
-    "moment-range": "^2.0.3",
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3"
+    "moment-range": "^2.0.3"
+  },
+  "peerDependencies": {
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2"
   }
 }
