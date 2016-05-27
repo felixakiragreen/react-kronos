@@ -30,6 +30,10 @@ export default class App extends Component {
     this.setState({ visible: !this.state.visible })
   }
 
+  setVisibility(visible) {
+    this.setState({ visible })
+  }
+
   render() {
     let github =
       <svg viewBox='0 792 512 512'>
@@ -47,6 +51,7 @@ export default class App extends Component {
         minHeight: '100%',
         backgroundColor: 'hsl(0, 0%, 94%)',
         fontFamily: 'Source Sans Pro',
+        justifyContent: 'center',
       },
       page: {
         backgroundColor: 'white',
@@ -138,6 +143,7 @@ export default class App extends Component {
                 placeholder={'This is the placeholder'}
                 controlVisibility={true}
                 visible={this.state.visible}
+                setVisibility={::this.setVisibility}
                 onClick={ () => this.setState({ visible: true }) }
                 onFocus={ () => this.setState({ visible: true }) }
                 onBlur={ () => this.setState({ visible: false }) }
