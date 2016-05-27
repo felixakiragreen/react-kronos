@@ -1,6 +1,12 @@
 Changelog
 =========
 
+## 1.2.4
+
+- updated all packages to latest versions (most notably react to 15)
+- moved react & react-dom to peerDependencies
+- added controlled and uncontrolled states
+
 ## 1.2.3
 - [bug] moment settings were being overwritten
 

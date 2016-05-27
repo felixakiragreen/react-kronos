@@ -5,10 +5,11 @@ import Moment from 'moment'
 import cn from 'classnames'
 
 import jss from 'jss'
-jss.use(require('jss-nested'))
-jss.use(require('jss-camel-case'))
-jss.use(require('jss-vendor-prefixer'))
-jss.use(require('jss-px'))
+import nested from 'jss-nested'
+import camelCase from 'jss-camel-case'
+import vendorPrefixer from 'jss-vendor-prefixer'
+import defaultUnit from 'jss-default-unit'
+jss.use(nested(), camelCase(), vendorPrefixer(), defaultUnit())
 
 import { Keys, Levels, Units, Types } from './constants'
 import Calendar from './calendar'
@@ -67,6 +68,7 @@ class Kronos extends Component {
     controlVisibility: false,
     shouldTriggerOnChangeForDateTimeOutsideRange: false,
     preventClickOnDateTimeOutsideRange: false,
+    visible: false,
   }
 
   static above = false

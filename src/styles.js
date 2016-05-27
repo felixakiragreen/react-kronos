@@ -9,10 +9,10 @@ let _options = {}
 function initializeMoment(options) {
   if (!_moment) {
     if (options && options.moment) {
-      Moment.locale(options.moment.lang, options.moment.settings)
+      Moment.updateLocale(options.moment.lang, options.moment.settings)
     }
     else {
-      Moment.locale('en', {
+      Moment.updateLocale('en', {
         week: { dow: 1 },
         weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
       })
