@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.2.5
+
+- [bug] fixed bug created by React 15 when clearing input and pressing enter
+
 ## 1.2.4
 
 - updated all packages to latest versions (most notably react to 15)

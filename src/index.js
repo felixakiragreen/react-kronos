@@ -340,7 +340,7 @@ class Kronos extends Component {
           else {
             if (!this.state.visible) this.toggle(true)
             datetime = this.parse(this.state.input)
-            this.save(datetime)
+            if (datetime) this.save(datetime)
           }
         }
         break
@@ -364,7 +364,7 @@ class Kronos extends Component {
         <input
           type='text'
           ref='input'
-          value={this.state.input}
+          value={this.state.input || ''}
           onClick={::this.onClickInput}
           onFocus={::this.onFocusInput}
           onBlur={::this.onBlurInput}
