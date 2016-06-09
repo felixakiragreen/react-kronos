@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.2.6
+
+- [bug] fixed error when manually typing in dates & times
+
 ## 1.2.5
 
 - [bug] fixed bug created by React 15 when clearing input and pressing enter

@@ -141,13 +141,13 @@ class Kronos extends Component {
 
   format(props) {
     props = props || this.props
-    if (props.format) {
+    if (typeof props.format !== 'undefined') {
       return props.format
     }
-    else if (props.date) {
+    else if (typeof props.date !== 'undefined') {
       return 'MM-DD-YYYY'
     }
-    else if (props.time) {
+    else if (typeof props.time !== 'undefined') {
       return 'h:mm a'
     }
     else {
@@ -373,7 +373,7 @@ class Kronos extends Component {
           placeholder={this.props.placeholder}
           className={inputClasses}
         />
-      { visible &&
+        { visible &&
           <Calendar
             id={this.props.id}
             datetime={this.state.datetime}
