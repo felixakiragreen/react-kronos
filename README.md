@@ -85,6 +85,8 @@ A fast, intuitive, and elegant date and time picker for React.
 - mobile support
 - wide browser compatibility
 - prop: `styles` - granular styling (overwrite any style, or provide entire theme)
+- add crazy awesome date/time interpretation/parsing similar to that in The Hit List
+- set up solid unit tests
 
 
 #### Thanks

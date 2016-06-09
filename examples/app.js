@@ -34,6 +34,22 @@ export default class App extends Component {
     this.setState({ visible })
   }
 
+  onClick = () => {
+    if (!this.state.visible) this.setState({ visible: true })
+  }
+
+  onFocus = () => {
+    if (!this.state.visible) this.setState({ visible: true })
+  }
+
+  onBlur = () => {
+    if (this.state.visible) this.setState({ visible: false })
+  }
+
+  onSelect = (datetime, visible) => {
+    if (this.state.visible && !visible) this.setState({ visible })
+  }
+
   render() {
     let github =
       <svg viewBox='0 792 512 512'>
@@ -93,7 +109,7 @@ export default class App extends Component {
         <div style={style.page}>
           <header style={style.header}>
             <div>
-              <h1 style={{ margin: 0 }}>React Kronos 1.2.6</h1>
+              <h1 style={{ margin: 0 }}>React Kronos 1.2.7</h1>
               <span style={style.tagline}>A fast, intuitive, and elegant date and time picker for React.</span>
             </div>
             <div style={style.icon}>
@@ -144,10 +160,10 @@ export default class App extends Component {
                 controlVisibility={true}
                 visible={this.state.visible}
                 setVisibility={::this.setVisibility}
-                onClick={ () => this.setState({ visible: true }) }
-                onFocus={ () => this.setState({ visible: true }) }
-                onBlur={ () => this.setState({ visible: false }) }
-                onSelect={ () => this.setState({ visible: false }) }
+                onClick={this.onClick}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+                onSelect={this.onSelect}
                 {...props}
               />
               <Kronos
@@ -158,10 +174,10 @@ export default class App extends Component {
                 placeholder={'Another one'}
                 controlVisibility={true}
                 visible={this.state.visible}
-                onClick={ () => this.setState({ visible: true }) }
-                onFocus={ () => this.setState({ visible: true }) }
-                onBlur={ () => this.setState({ visible: false }) }
-                onSelect={ () => this.setState({ visible: false }) }
+                onClick={this.onClick}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+                onSelect={this.onSelect}
                 {...props}
               />
             </div>

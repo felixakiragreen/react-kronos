@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.2.7
+
+- [bug] fixed navigation between months in controlled state
+
 ## 1.2.6
 
 - [bug] fixed error when manually typing in dates & times

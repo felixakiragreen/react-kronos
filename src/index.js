@@ -179,11 +179,11 @@ class Kronos extends Component {
 
   save(saving) {
     const { datetime } = this.state
-    if (this.props.date) {
+    if (typeof this.props.date !== 'undefined') {
       saving.hours(datetime.hours())
       saving.minutes(datetime.minutes())
     }
-    if (this.props.time) {
+    if (typeof this.props.time !== 'undefined') {
       saving.date(datetime.date())
       saving.month(datetime.month())
       saving.year(datetime.year())
@@ -252,8 +252,6 @@ class Kronos extends Component {
   }
 
   onBlurInput(e) {
-    if (this.props.onBlur) this.props.onBlur(e)
-
     let datetime = this.state.datetime || Moment()
 
     if (this.above) {
@@ -261,6 +259,7 @@ class Kronos extends Component {
     }
     else if (this.props.closeOnBlur) {
       this.toggle(false)
+      if (this.props.onBlur) this.props.onBlur(e)
     }
     if (this.state.input == this.state.datetime.format(this.format())) {
       return
@@ -292,8 +291,6 @@ class Kronos extends Component {
   }
 
   onSelect(datetime, close, timeUnit) {
-    if (this.props.onSelect) this.props.onSelect(datetime)
-
     let shouldClose = close
     const { visible } = this.state
     const {
@@ -309,8 +306,13 @@ class Kronos extends Component {
     }
     if (close && shouldClose === false && preventClickOnDateTimeOutsideRange) return
 
-    this.setState({ visible: closeOnSelect && shouldClose ? !visible : visible })
+    const willBeVisible = closeOnSelect && shouldClose ? !visible : visible
+
+    this.setState({ visible: willBeVisible })
+
     this.save(datetime)
+
+    if (this.props.onSelect) this.props.onSelect(datetime, willBeVisible)
   }
 
   onKeyDown(code) {
