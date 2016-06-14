@@ -9,7 +9,12 @@ let _options = {}
 function initializeMoment(options) {
   if (!_moment) {
     if (options && options.moment) {
-      Moment.updateLocale(options.moment.lang, options.moment.settings)
+      if (options.moment.settings) {
+        Moment.locale(options.moment.lang, options.moment.settings)
+      }
+      else {
+        Moment.locale(options.moment.lang)
+      }
     }
     else {
       Moment.updateLocale('en', {

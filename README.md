@@ -1,4 +1,4 @@
-React Kronos 1.2
+React Kronos 1.3
 ================
 
 A fast, intuitive, and elegant date and time picker for React.
@@ -46,6 +46,8 @@ A fast, intuitive, and elegant date and time picker for React.
 - `returnAs` - *string* : onChange format `JS_DATE`, `MOMENT`, `ISO`, `STRING` (default: same as input)
 - `min` - *Date()*, *Moment()*, *ISO* to set as the minimum datetime
 - `max` - *Date()*, *Moment()*, *ISO* to set as the maximum datetime
+- `minTime` - *Date()*, *Moment()*, *ISO* to set as the minimum time (only the time will be used)
+- `maxTime` - *Date()*, *Moment()*, *ISO* to set as the maximum time (only the time will be used)
 - `closeOnSelect` - *boolean* : closes the dropdown when a value is selected (default: `true`)
 - `closeOnBlur` - *boolean* : closes the dropdown when the field is blurred (default: `true`)
 - `shouldTriggerOnChangeForDateTimeOutsideRange` - *boolean*: optionally allow dates outside min/max range to trigger onChanges (default: `false`)
@@ -58,6 +60,12 @@ A fast, intuitive, and elegant date and time picker for React.
   - `moment:` - *object* : Moment locale [customization](http://momentjs.com/docs/#/customization/)
     - `lang` - *string* : language (default: `en` for english)
     - `settings` - *object* : properties to override as an object (default: `{ week: { dow: 1 }, weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S'] }`)
+  - `format`: - *object* : Moment formatting for cell titles
+    - `today`: - *string* : default: `Today`
+    - `year`: - *string* : default: `YYYY`
+    - `month`: - *string* : default: `MMM`
+    - `day`: - *string* : default: `D`
+    - `hour`: - *string* : default: `h:mm a`
 
 ## Construction progress
 
@@ -66,12 +74,12 @@ A fast, intuitive, and elegant date and time picker for React.
 **Needed**
 - Provide docs on website
 
-**1.3**
+**1.4**
 - options:
   - date (restrict calendar to show only days, or with months, or with years)
   - time (set increments, set ranges of time)
 
-**1.4**
+**1.5**
 - support for connected start & end date+time
   - date (show range on calendar)
   - time (show "0 hours", "0.5 hours", "1 hour", &c)

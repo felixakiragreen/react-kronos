@@ -95,7 +95,13 @@ export default class App extends Component {
     let props = {
       options: {
         color: '#67c446',
-        corners: 4,
+        format: {
+          today: 'Not Today',
+          year: 'YYYY',
+          month: 'MMM',
+          day: 'D',
+          hour: 'H:mm',
+        },
       },
       // shouldTriggerOnChangeForDateTimeOutsideRange: true,
       // closeOnBlur: false,
@@ -104,12 +110,15 @@ export default class App extends Component {
     let minDate = Moment().subtract(2, 'weeks').toDate()
     let maxDate = Moment().add(2, 'weeks').toDate()
 
+    let minTime = Moment().subtract(4, 'hours').toDate()
+    let maxTime = Moment().add(4, 'hours').toDate()
+
     return (
       <div style={style.app}>
         <div style={style.page}>
           <header style={style.header}>
             <div>
-              <h1 style={{ margin: 0 }}>React Kronos 1.2.7</h1>
+              <h1 style={{ margin: 0 }}>React Kronos 1.3.0</h1>
               <span style={style.tagline}>A fast, intuitive, and elegant date and time picker for React.</span>
             </div>
             <div style={style.icon}>
@@ -138,9 +147,12 @@ export default class App extends Component {
               />
               <Kronos
                 time={this.state.uncontrolledDatetime}
+                format={'H:mm'}
                 onChangeDateTime={::this.onChangeUncontrolled}
                 min={minDate}
+                minTime={minTime}
                 max={maxDate}
+                maxTime={maxTime}
                 placeholder={'Another one'}
                 {...props}
               />

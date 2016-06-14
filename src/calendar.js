@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 
+import _ from 'lodash'
 import Moment from 'moment'
 require('moment-range')
 import cn from 'classnames'
@@ -108,13 +109,14 @@ class Calendar extends Component {
         const start = datetime.clone().subtract(4, 'years')
         const end = datetime.clone().add(7, 'years')
         let years = []
+        const format = _.get(this.props, 'options.format.year') || 'YYYY'
 
         Moment()
           .range(start, end)
           .by(Units.YEAR, year => {
             years.push({
               moment: year,
-              label: year.format('YYYY'),
+              label: year.format(format),
               selected: year.isSame(datetime, 'year'),
             })
           })
@@ -126,13 +128,14 @@ class Calendar extends Component {
         const start = datetime.clone().startOf('year')
         const end = datetime.clone().endOf('year')
         let months = []
+        const format = _.get(this.props, 'options.format.month') || 'MMM'
 
         Moment()
           .range(start, end)
           .by(Units.MONTH, month => {
             months.push({
               moment: month,
-              label: month.format('MMM'),
+              label: month.format(format),
               selected: month.isSame(datetime, 'month'),
             })
           })
@@ -144,6 +147,7 @@ class Calendar extends Component {
         const start = datetime.clone().startOf('month').weekday(0)
         const end = datetime.clone().endOf('month').weekday(6)
         let days = []
+        const format = _.get(this.props, 'options.format.day') || 'D'
 
         Moment.weekdaysMin()
           .forEach(day => {
@@ -158,7 +162,7 @@ class Calendar extends Component {
           .by(Units.DAY, day => {
             days.push({
               moment: day,
-              label: day.format('D'),
+              label: day.format(format),
               past: day.isBefore(datetime, 'month'),
               future: day.isAfter(datetime, 'month'),
               selected: day.isSame(datetime, 'day'),
@@ -175,13 +179,14 @@ class Calendar extends Component {
         let hours = []
         const closeBefore = datetime.clone().subtract(31, 'minutes')
         const closeAfter = datetime.clone().add(31, 'minutes')
+        const format = _.get(this.props, 'options.format.hour') || 'h:mm a'
 
         Moment()
           .range(start, end)
           .by(Units.HOUR, hour => {
             hours.push({
               moment: hour,
-              label: hour.format('h:mm a'),
+              label: hour.format(format),
               selected: hour.isSame(datetime, 'minute'),
               nearestBefore: hour.isBetween(closeBefore, datetime),
               nearestAfter: hour.isBetween(datetime, closeAfter),
@@ -189,7 +194,7 @@ class Calendar extends Component {
             let halfHour = hour.clone().add(30, 'minutes')
             hours.push({
               moment: halfHour,
-              label: halfHour.format('h:mm a'),
+              label: halfHour.format(format),
               selected: halfHour.isSame(datetime, 'minute'),
               nearestBefore: halfHour.isBetween(closeBefore, datetime),
               nearestAfter: halfHour.isBetween(datetime, closeAfter),
@@ -255,7 +260,7 @@ class Calendar extends Component {
           }
           { level != 'hours' &&
             <div className={classes.today} onClick={::this.onToday}>
-              Today
+              { _.get(this.props, 'options.format.today') || 'Today' }
             </div>
           }
         </div>

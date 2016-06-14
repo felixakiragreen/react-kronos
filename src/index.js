@@ -17,6 +17,9 @@ import createStyledComponent from './styled-component'
 import getStyle from './styles'
 
 const ISOregex = /((\d{4}\-\d\d\-\d\d)[tT]([\d:\.]*)?)([zZ]|([+\-])(\d\d):?(\d\d))/
+const minutesOfDay = (m) => {
+  return Moment(m).minutes() + Moment(m).hours() * 60
+}
 
 
 class Kronos extends Component {
@@ -38,6 +41,8 @@ class Kronos extends Component {
     time: PropTypes.any,
     min: PropTypes.any,
     max: PropTypes.any,
+    minTime: PropTypes.any,
+    maxTime: PropTypes.any,
     shouldTriggerOnChangeForDateTimeOutsideRange: PropTypes.bool,
     preventClickOnDateTimeOutsideRange: PropTypes.bool,
     format: PropTypes.string,
@@ -203,6 +208,13 @@ class Kronos extends Component {
       outsideRange = true
     }
     if (this.props.max && Moment(datetime).isAfter(this.props.max) ) {
+      outsideRange = true
+    }
+
+    if (this.props.minTime && minutesOfDay(datetime) < minutesOfDay(this.props.minTime)) {
+      outsideRange = true
+    }
+    if (this.props.maxTime && minutesOfDay(datetime) > minutesOfDay(this.props.maxTime)) {
       outsideRange = true
     }
 
@@ -384,6 +396,7 @@ class Kronos extends Component {
             level={this.state.level}
             setLevel={level => this.setState({ level }) }
             validate={::this.validate}
+            options={this.props.options}
           />
         }
       </div>

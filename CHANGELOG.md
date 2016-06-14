@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 1.3.0
+
+- added format props for all cell titles
+- added minTime/maxTime props for the time picker (ignores date)
+
 ## 1.2.7
 
 - [bug] fixed navigation between months in controlled state
