@@ -1,4 +1,5 @@
-import _ from 'lodash'
+import omit from 'lodash/omit';
+import assign from 'lodash/assign';
 import color from 'color'
 import Moment from 'moment'
 require('moment-range')
@@ -27,7 +28,7 @@ function initializeMoment(options) {
 }
 
 function initializeOptions(options, uuid) {
-  _options[uuid] = _.omit(options, 'moment')
+  _options[uuid] = omit(options, 'moment')
 }
 
 export default function getStyle(page, props, uuid) {
@@ -40,7 +41,7 @@ export default function getStyle(page, props, uuid) {
     corners: 4,
     font: 'Source Sans Pro',
   }
-  let options = _.assign(defaultOptions, _options[uuid])
+  let options = assign(defaultOptions, _options[uuid])
 
   let style
   switch (page) {
