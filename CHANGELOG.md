@@ -4,7 +4,7 @@ Changelog
 ## 1.4.0
 
 - dropdown now detects how much space is available and positions itself above or below the input automatically
-- made production ready (thanks to [@yury-dymov](https://github.com/yury-dymov))
+- made production ready ([@yury-dymov](https://github.com/yury-dymov) in [#39](https://github.com/dubert/react-kronos/pull/39))
 
 ## 1.3.0
 

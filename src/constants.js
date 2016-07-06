@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const Keys = {
   ENTER: 13,
   ESC: 27,
