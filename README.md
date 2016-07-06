@@ -53,6 +53,7 @@ A fast, intuitive, and elegant date and time picker for React.
 - `shouldTriggerOnChangeForDateTimeOutsideRange` - *boolean*: optionally allow dates outside min/max range to trigger onChanges (default: `false`)
 - `preventClickOnDateTimeOutsideRange` - *boolean*: optionally prevent users from clicking on dates outside min/max range (default: `false`)
 - `placeholder` - *string* : placeholder text when there is no value
+- `name` - *string* : name used for the input form
 - `options:`
   - `color` - *string* : the highlight color in the UI as a hex
   - `corners` - *number* : the pixel size of rounded corners (default: `4`)
