@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 
-import _ from 'lodash'
+import get from 'lodash/get';
+
 import Moment from 'moment'
 require('moment-range')
 import cn from 'classnames'
@@ -109,7 +110,7 @@ class Calendar extends Component {
         const start = datetime.clone().subtract(4, 'years')
         const end = datetime.clone().add(7, 'years')
         let years = []
-        const format = _.get(this.props, 'options.format.year') || 'YYYY'
+        const format = get(this.props, 'options.format.year') || 'YYYY'
 
         Moment()
           .range(start, end)
@@ -128,7 +129,7 @@ class Calendar extends Component {
         const start = datetime.clone().startOf('year')
         const end = datetime.clone().endOf('year')
         let months = []
-        const format = _.get(this.props, 'options.format.month') || 'MMM'
+        const format = get(this.props, 'options.format.month') || 'MMM'
 
         Moment()
           .range(start, end)
@@ -147,7 +148,7 @@ class Calendar extends Component {
         const start = datetime.clone().startOf('month').weekday(0)
         const end = datetime.clone().endOf('month').weekday(6)
         let days = []
-        const format = _.get(this.props, 'options.format.day') || 'D'
+        const format = get(this.props, 'options.format.day') || 'D'
 
         Moment.weekdaysMin()
           .forEach(day => {
@@ -179,7 +180,7 @@ class Calendar extends Component {
         let hours = []
         const closeBefore = datetime.clone().subtract(31, 'minutes')
         const closeAfter = datetime.clone().add(31, 'minutes')
-        const format = _.get(this.props, 'options.format.hour') || 'h:mm a'
+        const format = get(this.props, 'options.format.hour') || 'h:mm a'
 
         Moment()
           .range(start, end)
@@ -260,7 +261,7 @@ class Calendar extends Component {
           }
           { level != 'hours' &&
             <div className={classes.today} onClick={::this.onToday}>
-              { _.get(this.props, 'options.format.today') || 'Today' }
+              { get(this.props, 'options.format.today') || 'Today' }
             </div>
           }
         </div>
