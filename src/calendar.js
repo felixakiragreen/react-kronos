@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import get from 'lodash/get';
 
 import Moment from 'moment'
-require('moment-range')
+import 'moment-range'
 import cn from 'classnames'
 
 import { Levels, Units } from './constants'
@@ -16,6 +16,14 @@ import getStyle from './styles'
 
 class Calendar extends Component {
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      windowHeight: window.innerHeight
+    }
+  }
+
   static PropTypes = {
     datetime: PropTypes.object.isRequired,
     onSelect: PropTypes.func.isRequired,
@@ -25,13 +33,32 @@ class Calendar extends Component {
     onMouseUp: PropTypes.func,
   }
 
+  static _isMounted = false
+
+  componentWillMount() {
+    window.addEventListener('resize', this.updateDimensions.bind(this))
+  }
+
   componentDidMount() {
+    this._isMounted = true
     this.scrollToHour()
+    this.updateDimensions()
   }
 
   componentDidUpdate(prevProps) {
     if (!this.props.above()) {
       this.scrollToHour()
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false
+    window.removeEventListener('resize', this.updateDimensions.bind(this))
+  }
+
+  updateDimensions() {
+    if (this._isMounted) {
+      this.setState({ windowHeight: window.innerHeight })
     }
   }
 
@@ -211,9 +238,20 @@ class Calendar extends Component {
   render() {
     const { level, datetime, classes } = this.props
 
+    let inputRect = {}
+    let calendarClass = classes.calendarBelow
+
+    if (this.props.input) {
+      inputRect = this.props.input.getClientRects()[0]
+    }
+
+    if ((inputRect.top + inputRect.height + 237) > this.state.windowHeight) {
+      calendarClass = classes.calendarAbove
+    }
+
     return (
       <div
-        className={classes.calendar}
+        className={calendarClass}
         onMouseDown={e => this.props.above(true)}
         onMouseUp={e => this.props.above(false)}
       >
@@ -225,7 +263,7 @@ class Calendar extends Component {
             onTitle={::this.onNavigateUp}
             title={this.getTitle(level, datetime)}
           /> }
-        <div ref='grid' className={cn(classes.grid, level)}>
+        <div className={cn(classes.grid, level)}>
           { this.getCells(level, datetime).map( (cell, i) => {
               let type
               switch (true) {

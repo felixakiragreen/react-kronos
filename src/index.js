@@ -164,7 +164,9 @@ class Kronos extends Component {
     if (typeof visible === 'undefined') {
       visible = !this.state.visible
     }
-    this.setState({ visible })
+    if (visible !== this.state.visible) {
+      this.setState({ visible })
+    }
   }
 
   parse(input) {
@@ -267,7 +269,7 @@ class Kronos extends Component {
     let datetime = this.state.datetime || Moment()
 
     if (this.above) {
-      ReactDOM.findDOMNode(this.refs.input).focus()
+      ReactDOM.findDOMNode(this._input).focus()
     }
     else if (this.props.closeOnBlur) {
       this.toggle(false)
@@ -377,7 +379,7 @@ class Kronos extends Component {
       <div className={mainClasses}>
         <input
           type='text'
-          ref='input'
+          ref={input => this._input = input}
           value={this.state.input || ''}
           onClick={::this.onClickInput}
           onFocus={::this.onFocusInput}
@@ -397,6 +399,7 @@ class Kronos extends Component {
             setLevel={level => this.setState({ level }) }
             validate={::this.validate}
             options={this.props.options}
+            input={this._input}
           />
         }
       </div>

@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 1.4.0
+
+- dropdown now detects how much space is available and positions itself above or below the input automatically
+- made production ready (thanks to [@yury-dymov](https://github.com/yury-dymov))
+
 ## 1.3.0
 
 - added format props for all cell titles

@@ -2,7 +2,7 @@ import omit from 'lodash/omit';
 import assign from 'lodash/assign';
 import color from 'color'
 import Moment from 'moment'
-require('moment-range')
+import 'moment-range'
 
 let _moment = false
 let _options = {}
@@ -100,9 +100,21 @@ function index(options) {
 
 function calendar(options) {
   return {
-    calendar: {
+    calendarBelow: {
       position: 'absolute',
       top: '100%',
+      left: 0,
+      padding: 6,
+      background: 'white',
+      border: '1px solid hsla(0, 0%, 0%, 0.15)',
+      borderRadius: options.corners,
+      boxShadow: '0 0 7px 5px hsla(0, 0%, 0%, 0.05)',
+      textAlign: 'center',
+      zIndex: 2,
+    },
+    calendarAbove: {
+      position: 'absolute',
+      bottom: '100%',
       left: 0,
       padding: 6,
       background: 'white',
@@ -115,7 +127,7 @@ function calendar(options) {
     grid: {
       width: 182,
       '&.hours': {
-        height: 200,
+        height: 223,
         width: 96 + options.corners * 2,
         overflow: 'auto',
         paddingRight: 6,
