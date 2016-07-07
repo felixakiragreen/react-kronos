@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.4.1
+
+- added `name` prop to input ([@dalkir](https://github.com/dalkir) in [#40](https://github.com/dubert/react-kronos/pull/40))
+
 ## 1.4.0
 
 - dropdown now detects how much space is available and positions itself above or below the input automatically
