@@ -56,6 +56,7 @@ class Kronos extends Component {
     closeOnSelect: PropTypes.bool,
     closeOnBlur: PropTypes.bool,
     placeholder: PropTypes.string,
+    name: PropTypes.string,
     options: PropTypes.object,
     // Advanced controls
     controlVisibility: PropTypes.bool,
@@ -387,6 +388,7 @@ class Kronos extends Component {
           onKeyDown={e => this.onKeyDown(e.keyCode)}
           onChange={::this.onChangeInput}
           placeholder={this.props.placeholder}
+          name={this.props.name}
           className={inputClasses}
         />
         { visible &&
