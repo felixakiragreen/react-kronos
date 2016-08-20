@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.4.2
+
+- [bug] fixed issue with toggling visibility on controlled inputs [#41](https://github.com/dubert/react-kronos/issues/41)
+
 ## 1.4.1
 
 - added `name` prop to input ([@dalkir](https://github.com/dalkir) in [#40](https://github.com/dubert/react-kronos/pull/40))

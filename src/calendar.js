@@ -236,14 +236,9 @@ class Calendar extends Component {
   }
 
   render() {
-    const { level, datetime, classes } = this.props
+    const { level, datetime, classes, inputRect } = this.props
 
-    let inputRect = {}
     let calendarClass = classes.calendarBelow
-
-    if (this.props.input) {
-      inputRect = this.props.input.getClientRects()[0]
-    }
 
     if ((inputRect.top + inputRect.height + 237) > this.state.windowHeight) {
       calendarClass = classes.calendarAbove

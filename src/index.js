@@ -162,6 +162,10 @@ class Kronos extends Component {
   }
 
   toggle(visible) {
+    // Attempt to exit early
+    if (visible === this.state.visible) {
+      return
+    }
     if (typeof visible === 'undefined') {
       visible = !this.state.visible
     }
@@ -257,13 +261,21 @@ class Kronos extends Component {
   }
 
   onClickInput(e) {
-    if (this.props.onClick) this.props.onClick(e)
-    this.toggle(true)
+    if (this.props.controlVisibility) {
+      if (this.props.onClick) this.props.onClick(e)
+    }
+    else {
+      this.toggle(true)
+    }
   }
 
   onFocusInput(e) {
-    if (this.props.onFocus) this.props.onFocus(e)
-    this.toggle(true)
+    if (this.props.controlVisibility) {
+      if (this.props.onFocus) this.props.onFocus(e)
+    }
+    else {
+      this.toggle(true)
+    }
   }
 
   onBlurInput(e) {
@@ -401,7 +413,7 @@ class Kronos extends Component {
             setLevel={level => this.setState({ level }) }
             validate={::this.validate}
             options={this.props.options}
-            input={this._input}
+            inputRect={this._input.getClientRects()[0]}
           />
         }
       </div>
