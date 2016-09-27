@@ -275,8 +275,8 @@ class Calendar extends Component {
                   type = 'base'
                   break
               }
-              
-              if (hideOutsideDateTimes && !this.props.validate(cell.moment, level)) {
+
+              if (level === 'hours' && hideOutsideDateTimes && !this.props.validate(cell.moment, level)) {
                 return null
               }
 

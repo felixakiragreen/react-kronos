@@ -205,6 +205,7 @@ export default class App extends Component {
                 min={minDate}
                 max={maxDate}
                 placeholder={'This is the placeholder'}
+                hideOutsideDateTimes
                 {...props}
               />
               <Kronos
