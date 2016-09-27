@@ -193,34 +193,6 @@ export default class App extends Component {
                 {...props}
               />
             </div>
-            <h2>Hide Outside Date Times</h2>
-            <div className='kronos'>
-              <button className='toggle-button' onClick={::this.onClickButtonUncontrolled}>
-                Toggle Visibility
-              </button>
-              <Kronos
-                ref='uncontrolled'
-                date={this.state.uncontrolledDatetime}
-                onChangeDateTime={::this.onChangeUncontrolled}
-                min={minDate}
-                max={maxDate}
-                placeholder={'This is the placeholder'}
-                hideOutsideDateTimes
-                {...props}
-              />
-              <Kronos
-                time={this.state.uncontrolledDatetime}
-                format={'H:mm'}
-                onChangeDateTime={::this.onChangeUncontrolled}
-                min={minDate}
-                minTime={minTime}
-                max={maxDate}
-                maxTime={maxTime}
-                placeholder={'Another one'}
-                hideOutsideDateTimes
-                {...props}
-              />
-            </div>
           </main>
         </div>
       </div>
