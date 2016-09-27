@@ -236,7 +236,7 @@ class Calendar extends Component {
   }
 
   render() {
-    const { level, datetime, classes, inputRect } = this.props
+    const { level, datetime, classes, inputRect, hideOutsideDateTimes } = this.props
 
     let calendarClass = classes.calendarBelow
 
@@ -275,6 +275,11 @@ class Calendar extends Component {
                   type = 'base'
                   break
               }
+              
+              if (hideOutsideDateTimes && !this.props.validate(cell.moment, level)) {
+                return null
+              }
+
               return (
                 <Cell
                   key={i}
@@ -290,7 +295,7 @@ class Calendar extends Component {
                   invalid={this.props.validate(cell.moment, level)}
                 />
               )
-            })
+            }).filter( cell => cell != null )
           }
           { level != 'hours' &&
             <div className={classes.today} onClick={::this.onToday}>
