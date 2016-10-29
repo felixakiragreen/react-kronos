@@ -132,7 +132,9 @@ class Calendar extends Component {
 
   getCells(unit, datetime) {
     datetime = datetime || Moment()
-    switch (unit) {
+    const type = this.props.timeStep ? 'minutes' : unit;
+
+    switch (type) {
       case 'years': {
         const start = datetime.clone().subtract(4, 'years')
         const end = datetime.clone().add(7, 'years')
@@ -210,28 +212,53 @@ class Calendar extends Component {
         const format = get(this.props, 'options.format.hour') || 'h:mm a'
 
         Moment()
-          .range(start, end)
-          .by(Units.HOUR, hour => {
-            hours.push({
-              moment: hour,
-              label: hour.format(format),
-              selected: hour.isSame(datetime, 'minute'),
-              nearestBefore: hour.isBetween(closeBefore, datetime),
-              nearestAfter: hour.isBetween(datetime, closeAfter),
+            .range(start, end)
+            .by(Units.HOUR, hour => {
+              hours.push({
+                moment: hour,
+                label: hour.format(format),
+                selected: hour.isSame(datetime, 'minute'),
+                nearestBefore: hour.isBetween(closeBefore, datetime),
+                nearestAfter: hour.isBetween(datetime, closeAfter),
+              })
+              let halfHour = hour.clone().add(30, 'minutes')
+              hours.push({
+                moment: halfHour,
+                label: halfHour.format(format),
+                selected: halfHour.isSame(datetime, 'minute'),
+                nearestBefore: halfHour.isBetween(closeBefore, datetime),
+                nearestAfter: halfHour.isBetween(datetime, closeAfter),
+              })
             })
-            let halfHour = hour.clone().add(30, 'minutes')
-            hours.push({
-              moment: halfHour,
-              label: halfHour.format(format),
-              selected: halfHour.isSame(datetime, 'minute'),
-              nearestBefore: halfHour.isBetween(closeBefore, datetime),
-              nearestAfter: halfHour.isBetween(datetime, closeAfter),
-            })
-          })
-
         return hours
       }
+      case 'minutes': {
+        const start = datetime.clone().startOf('day')
+        const end = datetime.clone().endOf('day')
+        let minutes = []
+        const format = get(this.props, 'options.format.minute') || 'HH:mm'
 
+        Moment()
+          .range(start, end)
+          .by(Units.MINUTE, (minute) => {
+            const _minutes = minute.minutes()
+
+            if (_minutes === 0) {
+              minutes.push({
+                moment: minute,
+                label: minute.format(format),
+                selected: minute.isSame(datetime, 'minute')
+              });
+            } else if ((_minutes % this.props.timeStep) === 0) {
+              minutes.push({
+                moment: minute,
+                label: minute.format(format),
+                selected: minute.isSame(datetime, 'minute')
+              });
+            }
+          });
+        return minutes
+      }
     }
   }
 
