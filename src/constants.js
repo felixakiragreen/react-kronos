@@ -12,6 +12,7 @@ export const Units = {
   MONTH: 'months',
   DAY: 'days',
   HOUR: 'hours',
+  MINUTE: 'minutes',
 }
 
 export const Types = {
