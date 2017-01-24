@@ -39,6 +39,7 @@ class Kronos extends Component {
   static propTypes = {
     date: PropTypes.any,
     time: PropTypes.any,
+    timeStep: PropTypes.number,
     min: PropTypes.any,
     max: PropTypes.any,
     minTime: PropTypes.any,
@@ -416,6 +417,7 @@ class Kronos extends Component {
             options={this.props.options}
             inputRect={this._input.getClientRects()[0]}
             hideOutsideDateTimes={this.props.hideOutsideDateTimes}
+            timeStep={this.props.timeStep}
           />
         }
       </div>

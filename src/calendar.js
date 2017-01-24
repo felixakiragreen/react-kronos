@@ -132,7 +132,9 @@ class Calendar extends Component {
 
   getCells(unit, datetime) {
     datetime = datetime || Moment()
-    switch (unit) {
+    const type = this.props.timeStep ? 'minutes' : unit
+
+    switch (type) {
       case 'years': {
         const start = datetime.clone().subtract(4, 'years')
         const end = datetime.clone().add(7, 'years')
@@ -230,6 +232,36 @@ class Calendar extends Component {
           })
 
         return hours
+      }
+
+      case 'minutes': {
+        const start = datetime.clone().startOf('day')
+        const end = datetime.clone().endOf('day')
+        let minutes = []
+        const format = get(this.props, 'options.format.minute') || 'HH:mm'
+
+        Moment()
+          .range(start, end)
+          .by(Units.MINUTE, (minute) => {
+            const _minutes = minute.minutes()
+
+            if (_minutes === 0) {
+              minutes.push({
+                moment: minute,
+                label: minute.format(format),
+                selected: minute.isSame(datetime, 'minute')
+              })
+            }
+            else if ((_minutes % this.props.timeStep) === 0) {
+              minutes.push({
+                moment: minute,
+                label: minute.format(format),
+                selected: minute.isSame(datetime, 'minute')
+              })
+            }
+          })
+
+        return minutes
       }
 
     }

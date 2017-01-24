@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 1.5.0
+
+- [feature] added `hideOutsideDateTimes` to hide times that cannot be selected [#45](https://github.com/dubert/react-kronos/pull/45) (thanks [Commander-lol](https://github.com/Commander-lol))
+- [feature] added `timeStep` prop to configure the number of minutes in an interval [#48](https://github.com/dubert/react-kronos/issues/48) (thanks [ochervak](https://github.com/ochervak))
+
 ## 1.4.2
 
 - [bug] fixed issue with toggling visibility on controlled inputs [#41](https://github.com/dubert/react-kronos/issues/41)

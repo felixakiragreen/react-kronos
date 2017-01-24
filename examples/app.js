@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Moment from 'moment'
-import Kronos from  'kronos'
+import Kronos from 'kronos'
 
 
 export default class App extends Component {
@@ -103,6 +103,8 @@ export default class App extends Component {
           hour: 'H:mm',
         },
       },
+      hideOutsideDateTimes: true,
+      timeStep: 15,
       // shouldTriggerOnChangeForDateTimeOutsideRange: true,
       // closeOnBlur: false,
     }
