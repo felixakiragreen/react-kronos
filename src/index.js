@@ -58,6 +58,7 @@ class Kronos extends Component {
     placeholder: PropTypes.string,
     name: PropTypes.string,
     options: PropTypes.object,
+    hideOutsideDateTimes: PropTypes.bool,
     // Advanced controls
     controlVisibility: PropTypes.bool,
     visible: PropTypes.bool,
@@ -414,6 +415,7 @@ class Kronos extends Component {
             validate={::this.validate}
             options={this.props.options}
             inputRect={this._input.getClientRects()[0]}
+            hideOutsideDateTimes={this.props.hideOutsideDateTimes}
           />
         }
       </div>
