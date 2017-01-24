@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.5.1
+
+- [bug] fix showing minute cells when passing `timeStep` prop to a date component
+
 ## 1.5.0
 
 - [feature] added `hideOutsideDateTimes` to hide times that cannot be selected [#45](https://github.com/dubert/react-kronos/pull/45) (thanks [Commander-lol](https://github.com/Commander-lol))
