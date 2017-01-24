@@ -132,9 +132,12 @@ class Calendar extends Component {
 
   getCells(unit, datetime) {
     datetime = datetime || Moment()
-    const type = this.props.timeStep ? 'minutes' : unit
 
-    switch (type) {
+    const type = unit === 'hours' && this.props.timeStep
+      ? 'minutes'
+      : unit
+
+    switch (unit) {
       case 'years': {
         const start = datetime.clone().subtract(4, 'years')
         const end = datetime.clone().add(7, 'years')
