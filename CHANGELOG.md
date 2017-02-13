@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.5.2
+
+- [bug] fix prop `timeStep` so it reads the passed prop [#53](https://github.com/dubert/react-kronos/issues/53) (thanks [Slapbox](https://github.com/Slapbox))
+
 ## 1.5.1
 
 - [bug] fix showing minute cells when passing `timeStep` prop to a date component

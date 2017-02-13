@@ -137,7 +137,7 @@ class Calendar extends Component {
       ? 'minutes'
       : unit
 
-    switch (unit) {
+    switch (type) {
       case 'years': {
         const start = datetime.clone().subtract(4, 'years')
         const end = datetime.clone().add(7, 'years')
