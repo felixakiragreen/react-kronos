@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.5.3
+
+- update jss dependency to latest version (6.3.0)
+
 ## 1.5.2
 
 - [bug] fix prop `timeStep` so it reads the passed prop [#53](https://github.com/dubert/react-kronos/issues/53) (thanks [Slapbox](https://github.com/Slapbox))

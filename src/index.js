@@ -5,11 +5,8 @@ import Moment from 'moment'
 import cn from 'classnames'
 
 import jss from 'jss'
-import nested from 'jss-nested'
-import camelCase from 'jss-camel-case'
-import vendorPrefixer from 'jss-vendor-prefixer'
-import defaultUnit from 'jss-default-unit'
-jss.use(nested(), camelCase(), vendorPrefixer(), defaultUnit())
+import preset from 'jss-preset-default'
+jss.setup(preset())
 
 import { Keys, Levels, Units, Types } from './constants'
 import Calendar from './calendar'
