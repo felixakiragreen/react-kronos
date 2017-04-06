@@ -20,7 +20,7 @@ function initializeMoment(options) {
     else {
       Moment.updateLocale('en', {
         week: { dow: 1 },
-        weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        weekdaysMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
       })
     }
   }
