@@ -15,6 +15,7 @@ export default class App extends Component {
   }
 
   onChangeUncontrolled(datetime) {
+    console.log('hey:', datetime)
     this.setState({ uncontrolledDatetime: datetime })
   }
 
@@ -100,7 +101,7 @@ export default class App extends Component {
           year: 'YYYY',
           month: 'MMM',
           day: 'D',
-          hour: 'H:mm',
+          hour: 'H:mm a',
         },
       },
       hideOutsideDateTimes: true,
@@ -156,7 +157,7 @@ export default class App extends Component {
                 max={maxDate}
                 maxTime={maxTime}
                 placeholder={'Another one'}
-                {...props}
+                options={ { format: { hour: 'hh:mm' } } }
               />
             </div>
             <h2>Controlled</h2>

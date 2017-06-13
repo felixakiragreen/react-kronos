@@ -54,9 +54,6 @@ export default function getStyle(page, props, uuid) {
     case 'navigation':
       style = navigation(options)
       break
-    case 'cell':
-      style = cell(options)
-      break
   }
 
   return style
@@ -73,8 +70,6 @@ function index(options) {
       color: 'hsl(0, 0%, 50%)',
       '& *': {
         fontFamily: options.font,
-        margin: 0,
-        padding: 0,
         boxSizing: 'border-box',
         userSelect: 'none',
       }

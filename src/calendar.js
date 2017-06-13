@@ -212,7 +212,7 @@ class Calendar extends Component {
         let hours = []
         const closeBefore = datetime.clone().subtract(31, 'minutes')
         const closeAfter = datetime.clone().add(31, 'minutes')
-        const format = get(this.props, 'options.format.hour') || 'h:mm a'
+        const format = get(this.props, 'options.format.hour') || 'HH:mm'
 
         Moment()
           .range(start, end)
@@ -241,7 +241,7 @@ class Calendar extends Component {
         const start = datetime.clone().startOf('day')
         const end = datetime.clone().endOf('day')
         let minutes = []
-        const format = get(this.props, 'options.format.minute') || 'HH:mm'
+        const format = get(this.props, 'options.format.hour') || 'HH:mm'
 
         Moment()
           .range(start, end)

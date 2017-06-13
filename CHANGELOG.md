@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.5.4
+
+- removed margin and padding style that was clashing
+
 ## 1.5.3
 
 - update jss dependency to latest version (6.3.0)
