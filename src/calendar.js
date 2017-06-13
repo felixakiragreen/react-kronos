@@ -180,13 +180,16 @@ class Calendar extends Component {
       case 'days': {
         const start = datetime.clone().startOf('month').weekday(0)
         const end = datetime.clone().endOf('month').weekday(6)
+        const header_start = start.clone()
+        const header_end = header_start.clone().weekday(6)
         let days = []
         const format = get(this.props, 'options.format.day') || 'D'
 
-        Moment.weekdaysMin()
-          .forEach(day => {
+        Moment()
+          .range(header_start, header_end)
+          .by(Units.DAY, day => {
             days.push({
-              label: day,
+              label: day.format('dd'),
               header: true,
             })
           })
