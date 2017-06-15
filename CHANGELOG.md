@@ -5,6 +5,7 @@ Changelog
 
 - renamed `options.moment` prop to `options.locale`
 - refactored how the locale is set to fix several issues
+- add `disabled` prop
 
 ## 1.5.4
 

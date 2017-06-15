@@ -54,6 +54,7 @@ class Kronos extends Component {
     closeOnBlur: PropTypes.bool,
     placeholder: PropTypes.string,
     name: PropTypes.string,
+    disabled: PropTypes.bool,
     options: PropTypes.shape({
       color: PropTypes.string,
       corners: PropTypes.number,
@@ -88,6 +89,7 @@ class Kronos extends Component {
     shouldTriggerOnChangeForDateTimeOutsideRange: false,
     preventClickOnDateTimeOutsideRange: false,
     visible: false,
+    disabled: false,
   }
 
   static above = false
@@ -406,6 +408,7 @@ class Kronos extends Component {
           placeholder={this.props.placeholder}
           name={this.props.name}
           className={inputClasses}
+          disabled={this.props.disabled}
         />
         {visible &&
           <Calendar

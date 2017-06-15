@@ -46,6 +46,10 @@ export default function getStyle(page, props, uuid) {
   }
   let options = assign(defaultOptions, _options[uuid])
 
+  if (props.disabled) {
+    options.inputDisabled = true
+  }
+
   let style
   switch (page) {
     case 'index':
@@ -86,6 +90,9 @@ function index(options) {
       '&.outside-range': {
         color: 'white',
         background: '#d0021b',
+      },
+      '&:hover': {
+        cursor: options.inputDisabled ? 'not-allowed' : 'default',
       },
       '&:focus': {
         outline: 'none',

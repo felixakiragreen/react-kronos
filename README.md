@@ -56,6 +56,7 @@ A fast, intuitive, and elegant date and time picker for React.
 - `hideOutsideDateTimes` - *boolean*: optionally hide times that do not pass validation
 - `placeholder` - *string* : placeholder text when there is no value
 - `name` - *string* : name used for the input form
+- `disabled` - *boolean* : prevent interaction with input field
 - `options:`
   - `color` - *string* : the highlight color in the UI as a hex
   - `corners` - *number* : the pixel size of rounded corners (default: `4`)
