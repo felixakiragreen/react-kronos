@@ -30,21 +30,21 @@ function initializeMoment(options) {
   _moment = true
 }
 
-function initializeOptions(options, uuid) {
-  _options[uuid] = omit(options, 'moment')
+function initializeOptions(options, instance) {
+  _options[instance] = omit(options, 'moment')
 }
 
-export default function getStyle(page, props, uuid) {
+export default function getStyle(page, props, instance) {
   initializeMoment(props.options)
   if (props.options) {
-    initializeOptions(props.options, uuid)
+    initializeOptions(props.options, instance)
   }
   let defaultOptions = {
     color: '#1e7e9e',
     corners: 4,
     font: 'Source Sans Pro',
   }
-  let options = assign(defaultOptions, _options[uuid])
+  let options = assign(defaultOptions, _options[instance])
 
   if (props.disabled) {
     options.inputDisabled = true

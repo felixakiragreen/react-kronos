@@ -6,8 +6,9 @@ Changelog
 - renamed `options.moment` prop to `options.locale`
 - refactored how the locale is set to fix several issues
 - add `disabled` prop
-- add `inputStyle` and `inputClassName` props
+- add `inputStyle`, `inputClassName`, and `inputId` props
 - add `calendarStyle` and `calendarClassName` props
+- add `shouldClose` parameter to controlled `onSelect` callback
 
 ## 1.5.4
 

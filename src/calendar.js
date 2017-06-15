@@ -274,7 +274,7 @@ class Calendar extends Component {
       >
         {level != 'hours' &&
           <Navigation
-            id={this.props.id}
+            instance={this.props.instance}
             onPrev={::this.onNavigateLeft}
             onNext={::this.onNavigateRight}
             onTitle={::this.onNavigateUp}
@@ -334,6 +334,6 @@ class Calendar extends Component {
   }
 }
 
-export default createStyledComponent(Calendar, (props, id) =>
-  getStyle('calendar', props, id),
+export default createStyledComponent(Calendar, (props, instance) =>
+  getStyle('calendar', props, instance),
 )

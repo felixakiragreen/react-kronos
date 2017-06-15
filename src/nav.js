@@ -29,6 +29,6 @@ class Navigation extends Component {
   }
 }
 
-export default createStyledComponent(Navigation, (props, id) =>
-  getStyle('navigation', props, id),
+export default createStyledComponent(Navigation, (props, instance) =>
+  getStyle('navigation', props, instance),
 )

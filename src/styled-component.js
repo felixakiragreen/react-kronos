@@ -1,31 +1,24 @@
 import React from 'react'
 import jss from 'jss'
 
-
 export default function createStyledComponent(Component, rules, options) {
-
   function attach(rules, options) {
     return jss.createStyleSheet(rules, options).attach()
   }
 
   function makeUUID() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      let r = Math.random() * 16 | 0
-      let v = c === 'x' ? r : r & 0x3 | 0x8
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+      let r = (Math.random() * 16) | 0
+      let v = c === 'x' ? r : (r & 0x3) | 0x8
       return v.toString(16)
     })
   }
 
   class StyledComponent extends React.Component {
-
     componentWillMount() {
-      let uuid = this.props.id ? this.props.id : makeUUID()
-      let _rules
-        = typeof rules === 'function'
-        ? rules(this.props, uuid)
-        : rules
-      let _options
-        = typeof options === 'function'
+      let uuid = this.props.instance ? this.props.instance : makeUUID()
+      let _rules = typeof rules === 'function' ? rules(this.props, uuid) : rules
+      let _options = typeof options === 'function'
         ? options(this.props, uuid)
         : options
 
@@ -39,12 +32,11 @@ export default function createStyledComponent(Component, rules, options) {
     }
 
     classSet(classNames) {
-      return Object
-        .keys(classNames)
-        .filter(function (className) {
+      return Object.keys(classNames)
+        .filter(function(className) {
           return classNames[className]
         })
-        .map(function (className) {
+        .map(function(className) {
           return this.sheet.classes[className] || className
         })
         .join(' ')
@@ -53,7 +45,7 @@ export default function createStyledComponent(Component, rules, options) {
     render() {
       return (
         <Component
-          id={this.uuid}
+          instance={this.uuid}
           ref={'kronos'}
           classes={this.sheet.classes}
           classSet={this.classSet}
@@ -61,7 +53,6 @@ export default function createStyledComponent(Component, rules, options) {
         />
       )
     }
-
   }
 
   // Support React Hot Loader
@@ -69,12 +60,10 @@ export default function createStyledComponent(Component, rules, options) {
     class HotStyledComponent extends StyledComponent {
       componentWillReceiveProps(nextProps) {
         if (this.props !== nextProps) {
-          let _rules
-            = typeof rules === 'function'
+          let _rules = typeof rules === 'function'
             ? rules(nextProps, this.uuid)
             : rules
-          let _options
-            = typeof options === 'function'
+          let _options = typeof options === 'function'
             ? options(nextProps, this.uuid)
             : options
 

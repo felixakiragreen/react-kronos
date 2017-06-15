@@ -74,6 +74,7 @@ class Kronos extends Component {
     hideOutsideDateTimes: PropTypes.bool,
     inputStyle: PropTypes.object,
     inputClassName: PropTypes.string,
+    inputId: PropTypes.string,
     calendarStyle: PropTypes.object,
     calendarClassName: PropTypes.string,
     // Advanced controls
@@ -392,7 +393,7 @@ class Kronos extends Component {
   render() {
     const mainClasses = cn(
       'react-kronos',
-      this.props.id,
+      this.props.instance,
       this.props.classes.kronos,
     )
     const inputClasses = cn(
@@ -408,6 +409,7 @@ class Kronos extends Component {
       <div className={mainClasses}>
         <input
           type="text"
+          id={this.props.inputId}
           ref={input => (this._input = input)}
           value={this.state.input || ''}
           onClick={::this.onClickInput}
@@ -423,7 +425,7 @@ class Kronos extends Component {
         />
         {visible &&
           <Calendar
-            id={this.props.id}
+            instance={this.props.instance}
             datetime={this.state.datetime}
             onSelect={::this.onSelect}
             above={bool =>
@@ -443,6 +445,6 @@ class Kronos extends Component {
   }
 }
 
-export default createStyledComponent(Kronos, (props, id) =>
-  getStyle('index', props, id),
+export default createStyledComponent(Kronos, (props, instance) =>
+  getStyle('index', props, instance),
 )
