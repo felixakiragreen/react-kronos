@@ -1,4 +1,4 @@
-React Kronos 1.5
+React Kronos 1.6
 ================
 
 A fast, intuitive, and elegant date and time picker for React.
@@ -57,6 +57,11 @@ A fast, intuitive, and elegant date and time picker for React.
 - `placeholder` - *string* : placeholder text when there is no value
 - `name` - *string* : name used for the input form
 - `disabled` - *boolean* : prevent interaction with input field
+- `inputStyle` - *object* : inline styles for input field
+- `inputClassName` - *string* : `.class` for input field
+- `inputId` - *string* : `#id` for input field
+- `calendarStyle` - *object* : inline styles for calendar
+- `calendarClassName` - *string* : `.class` for calendar
 - `options:`
   - `color` - *string* : the highlight color in the UI as a hex
   - `corners` - *number* : the pixel size of rounded corners (default: `4`)

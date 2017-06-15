@@ -3,7 +3,10 @@ Changelog
 
 ## 1.6.0
 
+**Breaking**:
 - renamed `options.moment` prop to `options.locale`
+
+**Non-breaking**:
 - refactored how the locale is set to fix several issues
 - add `disabled` prop
 - add `inputStyle`, `inputClassName`, and `inputId` props

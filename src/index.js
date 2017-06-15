@@ -55,6 +55,11 @@ class Kronos extends Component {
     placeholder: PropTypes.string,
     name: PropTypes.string,
     disabled: PropTypes.bool,
+    inputStyle: PropTypes.object,
+    inputClassName: PropTypes.string,
+    inputId: PropTypes.string,
+    calendarStyle: PropTypes.object,
+    calendarClassName: PropTypes.string,
     options: PropTypes.shape({
       color: PropTypes.string,
       corners: PropTypes.number,
@@ -72,11 +77,6 @@ class Kronos extends Component {
       }),
     }),
     hideOutsideDateTimes: PropTypes.bool,
-    inputStyle: PropTypes.object,
-    inputClassName: PropTypes.string,
-    inputId: PropTypes.string,
-    calendarStyle: PropTypes.object,
-    calendarClassName: PropTypes.string,
     // Advanced controls
     controlVisibility: PropTypes.bool,
     visible: PropTypes.bool,
