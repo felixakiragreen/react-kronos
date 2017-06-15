@@ -13,11 +13,12 @@ export default class App extends Component {
   }
 
   onChangeUncontrolled(datetime) {
-    console.log('hey:', datetime)
+    console.log('onChangeUncontrolled:', datetime)
     this.setState({ uncontrolledDatetime: datetime })
   }
 
   onChangeControlled(datetime) {
+    console.log('onChangeControlled:', datetime)
     this.setState({ controlledDatetime: datetime })
   }
 
@@ -34,19 +35,27 @@ export default class App extends Component {
   }
 
   onClick = () => {
-    // if (!this.state.visible) this.setState({ visible: true })
+    if (!this.state.visible) {
+      this.setState({ visible: true })
+    }
   }
 
   onFocus = () => {
-    // if (!this.state.visible) this.setState({ visible: true })
+    if (!this.state.visible) {
+      this.setState({ visible: true })
+    }
   }
 
   onBlur = () => {
-    // if (this.state.visible) this.setState({ visible: false })
+    if (this.state.visible) {
+      this.setState({ visible: false })
+    }
   }
 
-  onSelect = (datetime, visible) => {
-    // if (this.state.visible && !visible) this.setState({ visible })
+  onSelect = (datetime, visible, shouldClose) => {
+    if (shouldClose) {
+      this.setState({ visible: false })
+    }
   }
 
   render() {
