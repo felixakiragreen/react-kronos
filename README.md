@@ -60,7 +60,7 @@ A fast, intuitive, and elegant date and time picker for React.
   - `color` - *string* : the highlight color in the UI as a hex
   - `corners` - *number* : the pixel size of rounded corners (default: `4`)
   - `font` - *string* : the font family (default: `Source Sans Pro`)
-  - `moment:` - *object* : Moment locale [customization](http://momentjs.com/docs/#/customization/)
+  - `locale` - *object* : Moment locale [customization](http://momentjs.com/docs/#/customization/)
     - `lang` - *string* : language (default: `en` for english)
     - `settings` - *object* : properties to override as an object (default: `{ week: { dow: 1 }, weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S'] }`)
   - `format`: - *object* : Moment formatting for cell titles

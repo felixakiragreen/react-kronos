@@ -54,7 +54,22 @@ class Kronos extends Component {
     closeOnBlur: PropTypes.bool,
     placeholder: PropTypes.string,
     name: PropTypes.string,
-    options: PropTypes.object,
+    options: PropTypes.shape({
+      color: PropTypes.string,
+      corners: PropTypes.number,
+      font: PropTypes.string,
+      locale: PropTypes.shape({
+        lang: PropTypes.string,
+        settings: PropTypes.object,
+      }),
+      format: PropTypes.shape({
+        today: PropTypes.string,
+        year: PropTypes.string,
+        month: PropTypes.string,
+        day: PropTypes.string,
+        hour: PropTypes.string,
+      }),
+    }),
     hideOutsideDateTimes: PropTypes.bool,
     // Advanced controls
     controlVisibility: PropTypes.bool,

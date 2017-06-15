@@ -8,20 +8,25 @@ let _moment = false
 let _options = {}
 
 function initializeMoment(options) {
-  if (!_moment) {
-    if (options && options.moment) {
-      if (options.moment.settings) {
-        Moment.locale(options.moment.lang, options.moment.settings)
-      } else {
-        Moment.locale(options.moment.lang)
-      }
-    } else {
-      Moment.updateLocale('en', {
-        week: { dow: 1 },
-        weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-      })
+  if (_moment) return
+
+  let lang = Moment.locale()
+
+  if (options && options.locale) {
+    if (options.locale.lang) {
+      lang = options.locale.lang
+      Moment.locale(lang)
     }
+    if (options.locale.settings) {
+      Moment.updateLocale(lang, options.locale.settings)
+    }
+  } else {
+    Moment.updateLocale(lang, {
+      week: { dow: 1 },
+      weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    })
   }
+
   _moment = true
 }
 

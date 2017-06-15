@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 1.6.0
+
+- renamed `options.moment` prop to `options.locale`
+- refactored how the locale is set to fix several issues
+
 ## 1.5.4
 
 - removed margin and padding style that was clashing
