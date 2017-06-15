@@ -267,9 +267,10 @@ class Calendar extends Component {
 
     return (
       <div
-        className={calendarClass}
+        className={cn(this.props.className, calendarClass)}
         onMouseDown={e => this.props.above(true)}
         onMouseUp={e => this.props.above(false)}
+        style={this.props.style}
       >
         {level != 'hours' &&
           <Navigation

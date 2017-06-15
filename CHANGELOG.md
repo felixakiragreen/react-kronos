@@ -6,6 +6,8 @@ Changelog
 - renamed `options.moment` prop to `options.locale`
 - refactored how the locale is set to fix several issues
 - add `disabled` prop
+- add `inputStyle` and `inputClassName` props
+- add `calendarStyle` and `calendarClassName` props
 
 ## 1.5.4
 

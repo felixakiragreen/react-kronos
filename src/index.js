@@ -72,6 +72,10 @@ class Kronos extends Component {
       }),
     }),
     hideOutsideDateTimes: PropTypes.bool,
+    inputStyle: PropTypes.object,
+    inputClassName: PropTypes.string,
+    calendarStyle: PropTypes.object,
+    calendarClassName: PropTypes.string,
     // Advanced controls
     controlVisibility: PropTypes.bool,
     visible: PropTypes.bool,
@@ -387,9 +391,11 @@ class Kronos extends Component {
       this.props.id,
       this.props.classes.kronos,
     )
-    const inputClasses = cn(this.props.classes.input, {
-      'outside-range': this.state.dateTimeExceedsValidRange,
-    })
+    const inputClasses = cn(
+      this.props.inputClassName,
+      this.props.classes.input,
+      { 'outside-range': this.state.dateTimeExceedsValidRange },
+    )
     const visible = this.props.controlVisibility
       ? this.props.visible
       : this.state.visible
@@ -409,6 +415,7 @@ class Kronos extends Component {
           name={this.props.name}
           className={inputClasses}
           disabled={this.props.disabled}
+          style={this.props.inputStyle}
         />
         {visible &&
           <Calendar
@@ -424,6 +431,8 @@ class Kronos extends Component {
             inputRect={this._input.getClientRects()[0]}
             hideOutsideDateTimes={this.props.hideOutsideDateTimes}
             timeStep={this.props.timeStep}
+            style={this.props.calendarStyle}
+            className={this.props.calendarClassName}
           />}
       </div>
     )
