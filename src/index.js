@@ -342,8 +342,10 @@ class Kronos extends Component {
     } else {
       if (!this.validate(datetime)) shouldClose = false
     }
-    if (close && shouldClose === false && preventClickOnDateTimeOutsideRange)
+
+    if (close && shouldClose === false && preventClickOnDateTimeOutsideRange) {
       return
+    }
 
     const willBeVisible = closeOnSelect && shouldClose ? !visible : visible
 
@@ -351,7 +353,9 @@ class Kronos extends Component {
 
     this.save(datetime)
 
-    if (this.props.onSelect) this.props.onSelect(datetime, willBeVisible)
+    if (this.props.onSelect) {
+      this.props.onSelect(datetime, willBeVisible, shouldClose)
+    }
   }
 
   onKeyDown(code) {
