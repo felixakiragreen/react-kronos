@@ -33,7 +33,7 @@ export const Levels = {
     key: {
       unit: 'year',
       span: 1,
-    }
+    },
   },
   months: {
     up: 'years',
@@ -45,7 +45,7 @@ export const Levels = {
     key: {
       unit: 'month',
       span: 1,
-    }
+    },
   },
   days: {
     up: 'months',
@@ -57,7 +57,7 @@ export const Levels = {
     key: {
       unit: 'day',
       span: 1,
-    }
+    },
   },
   hours: {
     up: null,
@@ -65,6 +65,6 @@ export const Levels = {
     key: {
       unit: 'minutes',
       span: 30,
-    }
-  }
+    },
+  },
 }

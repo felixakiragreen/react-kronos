@@ -1,5 +1,5 @@
-import omit from 'lodash/omit';
-import assign from 'lodash/assign';
+import omit from 'lodash/omit'
+import assign from 'lodash/assign'
 import color from 'color'
 import Moment from 'moment'
 import 'moment-range'
@@ -12,12 +12,10 @@ function initializeMoment(options) {
     if (options && options.moment) {
       if (options.moment.settings) {
         Moment.locale(options.moment.lang, options.moment.settings)
-      }
-      else {
+      } else {
         Moment.locale(options.moment.lang)
       }
-    }
-    else {
+    } else {
       Moment.updateLocale('en', {
         week: { dow: 1 },
         weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
@@ -59,7 +57,6 @@ export default function getStyle(page, props, uuid) {
   return style
 }
 
-
 // Styles for each page
 
 function index(options) {
@@ -72,7 +69,7 @@ function index(options) {
         fontFamily: options.font,
         boxSizing: 'border-box',
         userSelect: 'none',
-      }
+      },
     },
     input: {
       border: '1px solid transparent',
@@ -139,7 +136,7 @@ function calendar(options) {
         borderRadius: options.corners,
         background: options.color,
         boxShadow: 'inset 0 0 3px rgba(0, 0, 0, 0.3)',
-      }
+      },
     },
     today: {
       display: 'flex',
@@ -153,7 +150,7 @@ function calendar(options) {
       '&:hover': {
         borderColor: color(options.color).alpha(0.5).rgbString(),
         color: options.color,
-      }
+      },
     },
     cell: {
       display: 'inline-flex',
@@ -172,7 +169,7 @@ function calendar(options) {
           color: '#d0021b',
           backgroundColor: color('#d0021b').alpha(0.2).rgbString(),
           cursor: 'not-allowed',
-        }
+        },
       },
       '&.years': {
         width: 58,
@@ -212,7 +209,7 @@ function calendar(options) {
         color: 'white',
         '&.outside-range': {
           backgroundColor: '#d0021b',
-        }
+        },
       },
       '&:not(.selected).outside-range': {
         color: '#d0021b',

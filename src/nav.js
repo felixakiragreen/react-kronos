@@ -4,9 +4,7 @@ import PropTypes from 'prop-types'
 import createStyledComponent from './styled-component'
 import getStyle from './styles'
 
-
 class Navigation extends Component {
-
   static propTypes = {
     onPrev: PropTypes.func,
     onNext: PropTypes.func,
@@ -17,13 +15,13 @@ class Navigation extends Component {
   render() {
     return (
       <div className={this.props.classes.nav}>
-        <div className='arrow' onClick={this.props.onPrev}>
+        <div className="arrow" onClick={this.props.onPrev}>
           «
         </div>
-        <div className='title' onClick={this.props.onTitle}>
+        <div className="title" onClick={this.props.onTitle}>
           {this.props.title}
         </div>
-        <div className='arrow' onClick={this.props.onNext}>
+        <div className="arrow" onClick={this.props.onNext}>
           »
         </div>
       </div>
@@ -31,6 +29,6 @@ class Navigation extends Component {
   }
 }
 
-export default createStyledComponent(Navigation,
-  (props, id) => getStyle('navigation', props, id)
+export default createStyledComponent(Navigation, (props, id) =>
+  getStyle('navigation', props, id),
 )
