@@ -69,7 +69,7 @@ class Kronos extends Component {
         settings: PropTypes.object,
       }),
       format: PropTypes.shape({
-        today: PropTypes.string,
+        today: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
         year: PropTypes.string,
         month: PropTypes.string,
         day: PropTypes.string,
