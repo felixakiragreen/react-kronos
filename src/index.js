@@ -60,6 +60,11 @@ class Kronos extends Component {
     inputId: PropTypes.string,
     calendarStyle: PropTypes.object,
     calendarClassName: PropTypes.string,
+    mainBlockClassName: PropTypes.string,
+    calendarIcon: PropTypes.shape({
+      className: PropTypes.string,
+      onClick: PropTypes.func,
+    }),
     options: PropTypes.shape({
       color: PropTypes.string,
       corners: PropTypes.number,
@@ -396,11 +401,15 @@ class Kronos extends Component {
       'react-kronos',
       this.props.instance,
       this.props.classes.kronos,
+      this.props.mainBlockClassName,
+      this.props.calendarIcon ? this.props.classes.border : '',
+      this.props.calendarIcon && this.state.dateTimeExceedsValidRange ? 'outside-range' : '',
     )
     const inputClasses = cn(
       this.props.inputClassName,
       this.props.classes.input,
-      { 'outside-range': this.state.dateTimeExceedsValidRange },
+      !this.props.calendarIcon ? this.props.classes.border : '',
+      !this.props.calendarIcon && this.state.dateTimeExceedsValidRange ? 'outside-range' : '',
     )
     const visible = this.props.controlVisibility
       ? this.props.visible
@@ -424,6 +433,12 @@ class Kronos extends Component {
           disabled={this.props.disabled}
           style={this.props.inputStyle}
         />
+        {this.props.calendarIcon &&
+          <div
+            className={this.props.calendarIcon.className || this.props.classes.calendarIcon}
+            onClick={e => this.props.calendarIcon.onClick ? this.props.calendarIcon.onClick(e) : this.toggle()}
+          />
+        }
         {visible &&
           <Calendar
             instance={this.props.instance}
