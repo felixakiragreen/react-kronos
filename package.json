@@ -77,6 +77,6 @@
   "peerDependencies": {
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.5"
   }
 }
