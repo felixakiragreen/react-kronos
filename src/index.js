@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
-import moment from 'moment'
-import { extendMoment } from 'moment-range';
+import Moment from 'moment'
 
 import cn from 'classnames'
 
@@ -19,7 +18,6 @@ const ISOregex = /((\d{4}\-\d\d\-\d\d)[tT]([\d:\.]*)?)([zZ]|([+\-])(\d\d):?(\d\d
 const minutesOfDay = m => {
   return Moment(m).minutes() + Moment(m).hours() * 60
 }
-const Moment = extendMoment(moment);
 class Kronos extends Component {
   constructor(props) {
     super(props)

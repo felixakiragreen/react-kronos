@@ -1,13 +1,11 @@
 import omit from 'lodash/omit'
 import assign from 'lodash/assign'
 import color from 'color'
-import moment from 'moment'
-import { extendMoment } from 'moment-range';
+import Moment from 'moment'
+import 'moment-range';
 
 let _moment = false
 let _options = {}
-
-const Moment = extendMoment(moment);
 
 function initializeMoment(options) {
   if (_moment) return

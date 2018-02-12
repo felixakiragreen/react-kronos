@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom'
 
 import get from 'lodash/get'
 
-import moment from 'moment'
-import { extendMoment } from 'moment-range';
+import Moment from 'moment'
+import 'moment-range';
 import cn from 'classnames'
 
 import { Levels, Units } from './constants'
@@ -13,8 +13,6 @@ import Navigation from './nav'
 import Cell from './cell'
 import createStyledComponent from './styled-component'
 import getStyle from './styles'
-
-const Moment = extendMoment(moment)
 
 class Calendar extends Component {
   constructor(props) {
