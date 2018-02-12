@@ -3,11 +3,8 @@ var webpack = require('webpack')
 var nodeExternals = require('webpack-node-externals')
 
 module.exports = {
-  eval: 'eval-source-map',
   externals: [nodeExternals()],
-  entry: [
-    './src/index'
-  ],
+  entry: './src/index',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -20,18 +17,18 @@ module.exports = {
       }
     }),
     new webpack.NormalModuleReplacementPlugin(/^kronos$/, path.join(__dirname, 'src/index')),
-    new webpack.optimize.OccurenceOrderPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin()
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json-loader'
       },
     ]
   }

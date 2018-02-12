@@ -2,7 +2,7 @@ import omit from 'lodash/omit'
 import assign from 'lodash/assign'
 import color from 'color'
 import Moment from 'moment'
-import 'moment-range'
+import 'moment-range';
 
 let _moment = false
 let _options = {}

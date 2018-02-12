@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import get from 'lodash/get'
 
 import Moment from 'moment'
-import 'moment-range'
+import 'moment-range';
 import cn from 'classnames'
 
 import { Levels, Units } from './constants'

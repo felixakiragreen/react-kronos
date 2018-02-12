@@ -18,7 +18,6 @@ const ISOregex = /((\d{4}\-\d\d\-\d\d)[tT]([\d:\.]*)?)([zZ]|([+\-])(\d\d):?(\d\d
 const minutesOfDay = m => {
   return Moment(m).minutes() + Moment(m).hours() * 60
 }
-
 class Kronos extends Component {
   constructor(props) {
     super(props)
