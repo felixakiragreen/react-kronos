@@ -13,7 +13,7 @@ module.exports = {
   },
   plugins: [
     new webpack.NormalModuleReplacementPlugin(/^kronos$/, path.join(__dirname, '../src/index')),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
@@ -26,15 +26,15 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loaders: [ 'babel' ],
+        loaders: [ 'babel-loader' ],
         exclude: /node_modules/,
       },
       {
         test: /\.json$/,
-        loader: 'json',
+        loader: 'json-loader',
       },
     ]
   }
