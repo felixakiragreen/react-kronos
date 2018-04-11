@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 1.7.0
+
+- upgrade to React 16.3.1
+- upgrade to Babel 7.0.0-beta
+
 ## 1.6.0
 
 **Breaking**:
