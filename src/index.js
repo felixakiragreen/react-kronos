@@ -76,6 +76,7 @@ class Kronos extends Component {
       }),
     }),
     hideOutsideDateTimes: PropTypes.bool,
+    alwaysSelectMinutes: PropTypes.bool,
     // Advanced controls
     controlVisibility: PropTypes.bool,
     visible: PropTypes.bool,
@@ -94,6 +95,7 @@ class Kronos extends Component {
     preventClickOnDateTimeOutsideRange: false,
     visible: false,
     disabled: false,
+    alwaysSelectMinutes: false,
   }
 
   static above = false
@@ -436,6 +438,7 @@ class Kronos extends Component {
             inputRect={this._input.getClientRects()[0]}
             hideOutsideDateTimes={this.props.hideOutsideDateTimes}
             timeStep={this.props.timeStep}
+            alwaysSelectMinutes={this.props.alwaysSelectMinutes}
             style={this.props.calendarStyle}
             className={this.props.calendarClassName}
           />}
