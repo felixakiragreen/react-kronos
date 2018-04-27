@@ -54,6 +54,7 @@ A fast, intuitive, and elegant date and time picker for React.
 - `shouldTriggerOnChangeForDateTimeOutsideRange` - *boolean*: optionally allow dates outside min/max range to trigger onChanges (default: `false`)
 - `preventClickOnDateTimeOutsideRange` - *boolean*: optionally prevent users from clicking on dates outside min/max range (default: `false`)
 - `hideOutsideDateTimes` - *boolean*: optionally hide times that do not pass validation
+- `alwaysSelectMinutes` - *boolean*: optionally select the entered minutes in the dropdown even when it is outside of the `timeStep`
 - `placeholder` - *string* : placeholder text when there is no value
 - `name` - *string* : name used for the input form
 - `disabled` - *boolean* : prevent interaction with input field

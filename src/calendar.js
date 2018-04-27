@@ -30,6 +30,11 @@ class Calendar extends Component {
     setLevel: PropTypes.func.isRequired,
     onMouseDown: PropTypes.func,
     onMouseUp: PropTypes.func,
+    alwaysSelectMinutes: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    alwaysSelectMinutes: false,
   }
 
   static _isMounted = false
@@ -242,7 +247,13 @@ class Calendar extends Component {
               label: minute.format(format),
               selected: minute.isSame(datetime, 'minute'),
             })
-          }
+          } else if (this.props.alwaysSelectMinutes && minute.isSame(datetime, 'minute')) {
+            minutes.push({
+              moment: datetime,
+              label: datetime.format(format),
+              selected: true,
+            });
+           }
         })
 
         return minutes
