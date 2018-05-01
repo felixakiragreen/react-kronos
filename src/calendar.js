@@ -62,7 +62,7 @@ class Calendar extends Component {
   }
 
   scrollToHour() {
-    if (this.props.level == 'hours' && this.refs.selected) {
+    if (this.props.level === 'hours' && this.refs.selected) {
       const selected = ReactDOM.findDOMNode(this.refs.selected)
       selected.parentNode.scrollTop = selected.offsetTop - 6
     }
@@ -128,7 +128,9 @@ class Calendar extends Component {
   getCells(unit, datetime) {
     datetime = datetime || Moment()
 
-    const type = unit === 'hours' && this.props.timeStep ? 'minutes' : unit
+    const type = this.props.timeStep && unit === 'hours'
+      ? 'minutes'
+      : unit
 
     switch (type) {
       case 'years': {
@@ -196,9 +198,9 @@ class Calendar extends Component {
         const start = datetime.clone().startOf('day')
         const end = datetime.clone().endOf('day')
         let hours = []
+        const format = get(this.props, 'options.format.hour') || 'HH:mm'
         const closeBefore = datetime.clone().subtract(31, 'minutes')
         const closeAfter = datetime.clone().add(31, 'minutes')
-        const format = get(this.props, 'options.format.hour') || 'HH:mm'
 
         Moment().range(start, end).by(Units.HOUR, hour => {
           hours.push({
@@ -226,6 +228,8 @@ class Calendar extends Component {
         const end = datetime.clone().endOf('day')
         let minutes = []
         const format = get(this.props, 'options.format.hour') || 'HH:mm'
+        const closeBefore = datetime.clone().subtract(this.props.timeStep, 'minutes')
+        const closeAfter = datetime.clone().add(this.props.timeStep, 'minutes')
 
         Moment().range(start, end).by(Units.MINUTE, minute => {
           const _minutes = minute.minutes()
@@ -235,12 +239,16 @@ class Calendar extends Component {
               moment: minute,
               label: minute.format(format),
               selected: minute.isSame(datetime, 'minute'),
+              nearestBefore: minute.isBetween(closeBefore, datetime),
+              nearestAfter: minute.isBetween(datetime, closeAfter),
             })
           } else if (_minutes % this.props.timeStep === 0) {
             minutes.push({
               moment: minute,
               label: minute.format(format),
               selected: minute.isSame(datetime, 'minute'),
+              nearestBefore: minute.isBetween(closeBefore, datetime),
+              nearestAfter: minute.isBetween(datetime, closeAfter),
             })
           }
         })

@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 1.7.1
+
+- [bug] fixed issue where hour/minute dropdown would not scroll to user entered time when a `timeStep` was entered [#70](https://github.com/dubert/react-kronos/issues/70) (thanks [LAT-Rosie](https://github.com/LAT-Rosie))
+
 ## 1.7.0
 
 - upgrade to React 16.3.1

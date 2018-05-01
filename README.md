@@ -1,5 +1,5 @@
-React Kronos 1.7
-================
+React Kronos 1.7.1
+==================
 
 A fast, intuitive, and elegant date and time picker for React.
 
