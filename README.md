@@ -100,7 +100,14 @@ A fast, intuitive, and elegant date and time picker for React.
 - prop: `styles` - granular styling (overwrite any style, or provide entire theme)
 - add crazy awesome date/time interpretation/parsing similar to that in The Hit List
 - set up solid unit tests
+- prop to allow or disallow outside range selection?
 
+#### Kronos 2.0
+
+- remove moment dependency to decrease size
+- mobile support
+- single input with date & time, or double
+- simplify formatting
 
 #### Thanks
 
