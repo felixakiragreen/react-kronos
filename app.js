@@ -116,7 +116,7 @@ export default class App extends Component {
           year: 'YYYY',
           month: 'MMM',
           day: 'D',
-          hour: 'H:mm a',
+          hour: 'h:mm a',
         },
       },
       hideOutsideDateTimes: true,
@@ -176,14 +176,15 @@ export default class App extends Component {
               />
               <Kronos
                 time={this.state.uncontrolledDatetime}
-                format={'H:mm'}
+                format={'HH:mm'}
                 onChangeDateTime={::this.onChangeUncontrolled}
                 min={minDate}
                 minTime={minTime}
                 max={maxDate}
                 maxTime={maxTime}
                 placeholder={'Another one'}
-                options={{ format: { hour: 'hh:mm' } }}
+                options={{ format: { hour: 'HH:mm' } }}
+                hideOutsideDateTimes
               />
             </div>
             <h2>Controlled</h2>
