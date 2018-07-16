@@ -172,6 +172,7 @@ export default class App extends Component {
                 min={minDate}
                 max={maxDate}
                 placeholder={'This is the placeholder'}
+                calendarIcon={{}}
                 {...props}
               />
               <Kronos
@@ -200,6 +201,7 @@ export default class App extends Component {
                 date={this.state.controlledDatetime}
                 onChangeDateTime={::this.onChangeControlled}
                 min={minDate}
+                calendarIcon={{onClick: ::this.onClickButtonControlled}}
                 max={maxDate}
                 placeholder={'This is the placeholder'}
                 controlVisibility={true}

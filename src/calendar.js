@@ -332,7 +332,7 @@ class Calendar extends Component {
               )
             })
             .filter(cell => cell != null)}
-          {level != 'hours' &&
+          {level != 'hours' && !get(this.props, 'options.format.hideToday') &&
             <div className={classes.today} onClick={::this.onToday}>
               {get(this.props, 'options.format.today') || 'Today'}
             </div>}

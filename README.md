@@ -62,6 +62,9 @@ A fast, intuitive, and elegant date and time picker for React.
 - `inputId` - *string* : `#id` for input field
 - `calendarStyle` - *object* : inline styles for calendar
 - `calendarClassName` - *string* : `.class` for calendar
+- `calendarIcon:` - optionally button-icon to native toggle the calendar
+  - `className` - *string* : `.class` for icon
+  - `onClick` - *function* : native onClick method
 - `options:`
   - `color` - *string* : the highlight color in the UI as a hex
   - `corners` - *number* : the pixel size of rounded corners (default: `4`)
@@ -71,6 +74,7 @@ A fast, intuitive, and elegant date and time picker for React.
     - `settings` - *object* : properties to override as an object (default: `{ week: { dow: 1 }, weekdaysMin: ['M', 'T', 'W', 'T', 'F', 'S', 'S'] }`)
   - `format`: - *object* : Moment formatting for cell titles
     - `today`: - *string* : default: `Today`
+    - `hideToday`: - *boolean* : default: `false`
     - `year`: - *string* : default: `YYYY`
     - `month`: - *string* : default: `MMM`
     - `day`: - *string* : default: `D`

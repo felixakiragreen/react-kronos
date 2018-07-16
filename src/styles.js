@@ -79,18 +79,14 @@ function index(options) {
         boxSizing: 'border-box',
         userSelect: 'none',
       },
+      background: 'none',
+      border: 'none',
     },
     input: {
-      border: '1px solid transparent',
-      borderRadius: options.corners,
-      borderColor: color(options.color).alpha(0.2).rgbString(),
       fontSize: 16,
       padding: '3px 6px',
-      background: 'white',
-      '&.outside-range': {
-        color: 'white',
-        background: '#d0021b',
-      },
+      background: 'none',
+      border: 'none',
       '&:hover': {
         cursor: options.inputDisabled ? 'not-allowed' : 'default',
       },
@@ -99,6 +95,24 @@ function index(options) {
         borderColor: color(options.color).alpha(0.5).rgbString(),
       },
     },
+    border: {
+      background: 'white',
+      border: '1px solid transparent',
+      borderRadius: options.corners,
+      borderColor: color(options.color).alpha(0.2).rgbString(),
+      '&.outside-range': {
+        background: '#d0021b'
+      },
+      '&.outside-range input, input.outside-range&': {
+        color: 'white'
+      }
+    },
+    calendarIcon: {
+      margin: '2px 2px 0 0',
+      '&:before': {
+        content: "\"\\1F4C6\""
+      }
+    }
   }
 }
 
