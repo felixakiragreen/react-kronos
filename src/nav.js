@@ -15,13 +15,13 @@ class Navigation extends Component {
   render() {
     return (
       <div className={this.props.classes.nav}>
-        <div className="arrow" onClick={this.props.onPrev}>
+        <div className='arrow' onClick={this.props.onPrev}>
           «
         </div>
-        <div className="title" onClick={this.props.onTitle}>
+        <div className='title' onClick={this.props.onTitle}>
           {this.props.title}
         </div>
-        <div className="arrow" onClick={this.props.onNext}>
+        <div className='arrow' onClick={this.props.onNext}>
           »
         </div>
       </div>
@@ -30,5 +30,5 @@ class Navigation extends Component {
 }
 
 export default createStyledComponent(Navigation, (props, instance) =>
-  getStyle('navigation', props, instance),
+  getStyle('navigation', props, instance)
 )

@@ -18,9 +18,8 @@ export default function createStyledComponent(Component, rules, options) {
     componentWillMount() {
       let uuid = this.props.instance ? this.props.instance : makeUUID()
       let _rules = typeof rules === 'function' ? rules(this.props, uuid) : rules
-      let _options = typeof options === 'function'
-        ? options(this.props, uuid)
-        : options
+      let _options =
+        typeof options === 'function' ? options(this.props, uuid) : options
 
       this.sheet = attach(_rules, _options)
       this.uuid = uuid
@@ -60,12 +59,12 @@ export default function createStyledComponent(Component, rules, options) {
     class HotStyledComponent extends StyledComponent {
       componentWillReceiveProps(nextProps) {
         if (this.props !== nextProps) {
-          let _rules = typeof rules === 'function'
-            ? rules(nextProps, this.uuid)
-            : rules
-          let _options = typeof options === 'function'
-            ? options(nextProps, this.uuid)
-            : options
+          let _rules =
+            typeof rules === 'function' ? rules(nextProps, this.uuid) : rules
+          let _options =
+            typeof options === 'function'
+              ? options(nextProps, this.uuid)
+              : options
 
           this.sheet.detach()
           this.sheet = attach(_rules, _options)

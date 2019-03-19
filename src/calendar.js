@@ -2,10 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import get from 'lodash/get'
-
 import Moment from 'moment'
-import 'moment-range';
+import 'moment-range'
 import cn from 'classnames'
 
 import { Levels, Units } from './constants'
@@ -13,6 +11,7 @@ import Navigation from './nav'
 import Cell from './cell'
 import createStyledComponent from './styled-component'
 import getStyle from './styles'
+import { get } from './utils'
 
 class Calendar extends Component {
   constructor(props) {
@@ -106,12 +105,14 @@ class Calendar extends Component {
         const end = datetime.clone().add(7, 'years')
         let years = []
 
-        Moment().range(start, end).by(Units.YEAR, year => {
-          years.push({
-            label: year.format('YYYY'),
-            selected: year.isSame(datetime, 'year'),
+        Moment()
+          .range(start, end)
+          .by(Units.YEAR, year => {
+            years.push({
+              label: year.format('YYYY'),
+              selected: year.isSame(datetime, 'year'),
+            })
           })
-        })
         return [years[0].label, years[years.length - 1].label].join('-')
 
       case 'months':
@@ -128,9 +129,7 @@ class Calendar extends Component {
   getCells(unit, datetime) {
     datetime = datetime || Moment()
 
-    const type = this.props.timeStep && unit === 'hours'
-      ? 'minutes'
-      : unit
+    const type = this.props.timeStep && unit === 'hours' ? 'minutes' : unit
 
     switch (type) {
       case 'years': {
@@ -139,13 +138,15 @@ class Calendar extends Component {
         let years = []
         const format = get(this.props, 'options.format.year') || 'YYYY'
 
-        Moment().range(start, end).by(Units.YEAR, year => {
-          years.push({
-            moment: year,
-            label: year.format(format),
-            selected: year.isSame(datetime, 'year'),
+        Moment()
+          .range(start, end)
+          .by(Units.YEAR, year => {
+            years.push({
+              moment: year,
+              label: year.format(format),
+              selected: year.isSame(datetime, 'year'),
+            })
           })
-        })
 
         return years
       }
@@ -156,20 +157,28 @@ class Calendar extends Component {
         let months = []
         const format = get(this.props, 'options.format.month') || 'MMM'
 
-        Moment().range(start, end).by(Units.MONTH, month => {
-          months.push({
-            moment: month,
-            label: month.format(format),
-            selected: month.isSame(datetime, 'month'),
+        Moment()
+          .range(start, end)
+          .by(Units.MONTH, month => {
+            months.push({
+              moment: month,
+              label: month.format(format),
+              selected: month.isSame(datetime, 'month'),
+            })
           })
-        })
 
         return months
       }
 
       case 'days': {
-        const start = datetime.clone().startOf('month').weekday(0)
-        const end = datetime.clone().endOf('month').weekday(6)
+        const start = datetime
+          .clone()
+          .startOf('month')
+          .weekday(0)
+        const end = datetime
+          .clone()
+          .endOf('month')
+          .weekday(6)
         let days = []
         const format = get(this.props, 'options.format.day') || 'D'
 
@@ -180,16 +189,18 @@ class Calendar extends Component {
           })
         })
 
-        Moment().range(start, end).by(Units.DAY, day => {
-          days.push({
-            moment: day,
-            label: day.format(format),
-            past: day.isBefore(datetime, 'month'),
-            future: day.isAfter(datetime, 'month'),
-            selected: day.isSame(datetime, 'day'),
-            today: day.isSame(Moment(), 'day'),
+        Moment()
+          .range(start, end)
+          .by(Units.DAY, day => {
+            days.push({
+              moment: day,
+              label: day.format(format),
+              past: day.isBefore(datetime, 'month'),
+              future: day.isAfter(datetime, 'month'),
+              selected: day.isSame(datetime, 'day'),
+              today: day.isSame(Moment(), 'day'),
+            })
           })
-        })
 
         return days
       }
@@ -202,23 +213,25 @@ class Calendar extends Component {
         const closeBefore = datetime.clone().subtract(31, 'minutes')
         const closeAfter = datetime.clone().add(31, 'minutes')
 
-        Moment().range(start, end).by(Units.HOUR, hour => {
-          hours.push({
-            moment: hour,
-            label: hour.format(format),
-            selected: hour.isSame(datetime, 'minute'),
-            nearestBefore: hour.isBetween(closeBefore, datetime),
-            nearestAfter: hour.isBetween(datetime, closeAfter),
+        Moment()
+          .range(start, end)
+          .by(Units.HOUR, hour => {
+            hours.push({
+              moment: hour,
+              label: hour.format(format),
+              selected: hour.isSame(datetime, 'minute'),
+              nearestBefore: hour.isBetween(closeBefore, datetime),
+              nearestAfter: hour.isBetween(datetime, closeAfter),
+            })
+            let halfHour = hour.clone().add(30, 'minutes')
+            hours.push({
+              moment: halfHour,
+              label: halfHour.format(format),
+              selected: halfHour.isSame(datetime, 'minute'),
+              nearestBefore: halfHour.isBetween(closeBefore, datetime),
+              nearestAfter: halfHour.isBetween(datetime, closeAfter),
+            })
           })
-          let halfHour = hour.clone().add(30, 'minutes')
-          hours.push({
-            moment: halfHour,
-            label: halfHour.format(format),
-            selected: halfHour.isSame(datetime, 'minute'),
-            nearestBefore: halfHour.isBetween(closeBefore, datetime),
-            nearestAfter: halfHour.isBetween(datetime, closeAfter),
-          })
-        })
 
         return hours
       }
@@ -228,30 +241,34 @@ class Calendar extends Component {
         const end = datetime.clone().endOf('day')
         let minutes = []
         const format = get(this.props, 'options.format.hour') || 'HH:mm'
-        const closeBefore = datetime.clone().subtract(this.props.timeStep, 'minutes')
+        const closeBefore = datetime
+          .clone()
+          .subtract(this.props.timeStep, 'minutes')
         const closeAfter = datetime.clone().add(this.props.timeStep, 'minutes')
 
-        Moment().range(start, end).by(Units.MINUTE, minute => {
-          const _minutes = minute.minutes()
+        Moment()
+          .range(start, end)
+          .by(Units.MINUTE, minute => {
+            const _minutes = minute.minutes()
 
-          if (_minutes === 0) {
-            minutes.push({
-              moment: minute,
-              label: minute.format(format),
-              selected: minute.isSame(datetime, 'minute'),
-              nearestBefore: minute.isBetween(closeBefore, datetime),
-              nearestAfter: minute.isBetween(datetime, closeAfter),
-            })
-          } else if (_minutes % this.props.timeStep === 0) {
-            minutes.push({
-              moment: minute,
-              label: minute.format(format),
-              selected: minute.isSame(datetime, 'minute'),
-              nearestBefore: minute.isBetween(closeBefore, datetime),
-              nearestAfter: minute.isBetween(datetime, closeAfter),
-            })
-          }
-        })
+            if (_minutes === 0) {
+              minutes.push({
+                moment: minute,
+                label: minute.format(format),
+                selected: minute.isSame(datetime, 'minute'),
+                nearestBefore: minute.isBetween(closeBefore, datetime),
+                nearestAfter: minute.isBetween(datetime, closeAfter),
+              })
+            } else if (_minutes % this.props.timeStep === 0) {
+              minutes.push({
+                moment: minute,
+                label: minute.format(format),
+                selected: minute.isSame(datetime, 'minute'),
+                nearestBefore: minute.isBetween(closeBefore, datetime),
+                nearestAfter: minute.isBetween(datetime, closeAfter),
+              })
+            }
+          })
 
         return minutes
       }
@@ -280,14 +297,15 @@ class Calendar extends Component {
         onMouseUp={e => this.props.above(false)}
         style={this.props.style}
       >
-        {level != 'hours' &&
+        {level != 'hours' && (
           <Navigation
             instance={this.props.instance}
             onPrev={::this.onNavigateLeft}
             onNext={::this.onNavigateRight}
             onTitle={::this.onNavigateUp}
             title={this.getTitle(level, datetime)}
-          />}
+          />
+        )}
         <div className={cn(classes.grid, level)}>
           {this.getCells(level, datetime)
             .map((cell, i) => {
@@ -332,10 +350,11 @@ class Calendar extends Component {
               )
             })
             .filter(cell => cell != null)}
-          {level != 'hours' &&
+          {level != 'hours' && (
             <div className={classes.today} onClick={::this.onToday}>
               {get(this.props, 'options.format.today') || 'Today'}
-            </div>}
+            </div>
+          )}
         </div>
       </div>
     )
@@ -343,5 +362,5 @@ class Calendar extends Component {
 }
 
 export default createStyledComponent(Calendar, (props, instance) =>
-  getStyle('calendar', props, instance),
+  getStyle('calendar', props, instance)
 )

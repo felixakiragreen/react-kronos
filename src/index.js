@@ -19,7 +19,6 @@ const minutesOfDay = m => {
   return Moment(m).minutes() + Moment(m).hours() * 60
 }
 
-
 class Kronos extends Component {
   constructor(props) {
     super(props)
@@ -156,7 +155,7 @@ class Kronos extends Component {
       return Units.HOUR
     } else {
       console.warn(
-        'Please set a date or time prop. It can be null but not undefined.',
+        'Please set a date or time prop. It can be null but not undefined.'
       )
       return Units.DAY
     }
@@ -395,12 +394,12 @@ class Kronos extends Component {
     const mainClasses = cn(
       'react-kronos',
       this.props.instance,
-      this.props.classes.kronos,
+      this.props.classes.kronos
     )
     const inputClasses = cn(
       this.props.inputClassName,
       this.props.classes.input,
-      { 'outside-range': this.state.dateTimeExceedsValidRange },
+      { 'outside-range': this.state.dateTimeExceedsValidRange }
     )
     const visible = this.props.controlVisibility
       ? this.props.visible
@@ -409,7 +408,7 @@ class Kronos extends Component {
     return (
       <div className={mainClasses}>
         <input
-          type="text"
+          type='text'
           id={this.props.inputId}
           ref={input => (this._input = input)}
           value={this.state.input || ''}
@@ -424,13 +423,14 @@ class Kronos extends Component {
           disabled={this.props.disabled}
           style={this.props.inputStyle}
         />
-        {visible &&
+        {visible && (
           <Calendar
             instance={this.props.instance}
             datetime={this.state.datetime}
             onSelect={::this.onSelect}
             above={bool =>
-              typeof bool === 'undefined' ? this.above : (this.above = bool)}
+              typeof bool === 'undefined' ? this.above : (this.above = bool)
+            }
             level={this.state.level}
             setLevel={level => this.setState({ level })}
             validate={::this.validate}
@@ -440,12 +440,13 @@ class Kronos extends Component {
             timeStep={this.props.timeStep}
             style={this.props.calendarStyle}
             className={this.props.calendarClassName}
-          />}
+          />
+        )}
       </div>
     )
   }
 }
 
 export default createStyledComponent(Kronos, (props, instance) =>
-  getStyle('index', props, instance),
+  getStyle('index', props, instance)
 )

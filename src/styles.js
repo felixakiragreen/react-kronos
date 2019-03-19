@@ -1,8 +1,6 @@
-import omit from 'lodash/omit'
-import assign from 'lodash/assign'
 import color from 'color'
 import Moment from 'moment'
-import 'moment-range';
+import 'moment-range'
 
 let _moment = false
 let _options = {}
@@ -31,7 +29,8 @@ function initializeMoment(options) {
 }
 
 function initializeOptions(options, instance) {
-  _options[instance] = omit(options, 'moment')
+  const { moment, otherOptions } = options
+  _options[instance] = otherOptions
 }
 
 export default function getStyle(page, props, instance) {
@@ -44,7 +43,7 @@ export default function getStyle(page, props, instance) {
     corners: 4,
     font: 'Source Sans Pro',
   }
-  let options = assign(defaultOptions, _options[instance])
+  let options = Object.assign({}, defaultOptions, _options[instance])
 
   if (props.disabled) {
     options.inputDisabled = true
@@ -83,7 +82,9 @@ function index(options) {
     input: {
       border: '1px solid transparent',
       borderRadius: options.corners,
-      borderColor: color(options.color).alpha(0.2).rgbString(),
+      borderColor: color(options.color)
+        .alpha(0.2)
+        .rgbString(),
       fontSize: 16,
       padding: '3px 6px',
       background: 'white',
@@ -96,7 +97,9 @@ function index(options) {
       },
       '&:focus': {
         outline: 'none',
-        borderColor: color(options.color).alpha(0.5).rgbString(),
+        borderColor: color(options.color)
+          .alpha(0.5)
+          .rgbString(),
       },
     },
   }
@@ -140,7 +143,9 @@ function calendar(options) {
         width: options.corners <= 2 ? 4 : options.corners * 2,
       },
       '&::-webkit-scrollbar-track': {
-        background: color(options.color).alpha(0.05).rgbString(),
+        background: color(options.color)
+          .alpha(0.05)
+          .rgbString(),
         boxShadow: 'inset 0 0 3px rgba(0, 0, 0, 0.15)',
         borderRadius: options.corners,
       },
@@ -160,7 +165,9 @@ function calendar(options) {
       borderRadius: options.corners,
       marginTop: 3,
       '&:hover': {
-        borderColor: color(options.color).alpha(0.5).rgbString(),
+        borderColor: color(options.color)
+          .alpha(0.5)
+          .rgbString(),
         color: options.color,
       },
     },
@@ -173,13 +180,17 @@ function calendar(options) {
       fontSize: 15,
       cursor: 'pointer',
       '&:not(.selected):not(.header):hover': {
-        backgroundColor: color(options.color).alpha(0.2).rgbString(),
+        backgroundColor: color(options.color)
+          .alpha(0.2)
+          .rgbString(),
         '&:not(.today)': {
           color: 'hsl(0, 0%, 25%)',
         },
         '&.outside-range': {
           color: '#d0021b',
-          backgroundColor: color('#d0021b').alpha(0.2).rgbString(),
+          backgroundColor: color('#d0021b')
+            .alpha(0.2)
+            .rgbString(),
           cursor: 'not-allowed',
         },
       },
@@ -201,7 +212,9 @@ function calendar(options) {
       },
       '&.header': {
         cursor: 'default',
-        color: color(options.color).alpha(0.4).rgbString(),
+        color: color(options.color)
+          .alpha(0.4)
+          .rgbString(),
         fontWeight: 700,
       },
       '&.past': {
@@ -213,7 +226,9 @@ function calendar(options) {
       '&.today': {
         fontWeight: 700,
         border: '1px solid',
-        borderColor: color(options.color).alpha(0.75).rgbString(),
+        borderColor: color(options.color)
+          .alpha(0.75)
+          .rgbString(),
         color: options.color,
       },
       '&.selected': {
@@ -241,7 +256,9 @@ function navigation(options) {
         borderColor: 'transparent',
         borderRadius: options.corners,
         '&:hover': {
-          borderColor: color(options.color).alpha(0.5).rgbString(),
+          borderColor: color(options.color)
+            .alpha(0.5)
+            .rgbString(),
           color: options.color,
         },
         '&.arrow': {
