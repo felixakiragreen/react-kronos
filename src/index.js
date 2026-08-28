@@ -60,6 +60,7 @@ class Kronos extends Component {
     inputId: PropTypes.string,
     calendarStyle: PropTypes.object,
     calendarClassName: PropTypes.string,
+    usePortal: PropTypes.bool,
     options: PropTypes.shape({
       color: PropTypes.string,
       corners: PropTypes.number,
@@ -95,6 +96,7 @@ class Kronos extends Component {
     preventClickOnDateTimeOutsideRange: false,
     visible: false,
     disabled: false,
+    usePortal: false,
   }
 
   static above = false
@@ -405,6 +407,29 @@ class Kronos extends Component {
       ? this.props.visible
       : this.state.visible
 
+    const calendar = visible
+      ? (
+          <Calendar
+            instance={this.props.instance}
+            datetime={this.state.datetime}
+            onSelect={::this.onSelect}
+            above={bool =>
+              typeof bool === 'undefined' ? this.above : (this.above = bool)
+            }
+            level={this.state.level}
+            setLevel={level => this.setState({ level })}
+            validate={::this.validate}
+            options={this.props.options}
+            inputRect={this._input && this._input.getClientRects()[0]}
+            hideOutsideDateTimes={this.props.hideOutsideDateTimes}
+            timeStep={this.props.timeStep}
+            usePortal={this.props.usePortal}
+            style={this.props.calendarStyle}
+            className={this.props.calendarClassName}
+          />
+        )
+      : null
+
     return (
       <div className={mainClasses}>
         <input
@@ -423,25 +448,10 @@ class Kronos extends Component {
           disabled={this.props.disabled}
           style={this.props.inputStyle}
         />
-        {visible && (
-          <Calendar
-            instance={this.props.instance}
-            datetime={this.state.datetime}
-            onSelect={::this.onSelect}
-            above={bool =>
-              typeof bool === 'undefined' ? this.above : (this.above = bool)
-            }
-            level={this.state.level}
-            setLevel={level => this.setState({ level })}
-            validate={::this.validate}
-            options={this.props.options}
-            inputRect={this._input.getClientRects()[0]}
-            hideOutsideDateTimes={this.props.hideOutsideDateTimes}
-            timeStep={this.props.timeStep}
-            style={this.props.calendarStyle}
-            className={this.props.calendarClassName}
-          />
-        )}
+        {visible &&
+          (this.props.usePortal
+            ? ReactDOM.createPortal(calendar, document.body)
+            : calendar)}
       </div>
     )
   }
