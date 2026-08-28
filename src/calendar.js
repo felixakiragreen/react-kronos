@@ -29,6 +29,7 @@ class Calendar extends Component {
     setLevel: PropTypes.func.isRequired,
     onMouseDown: PropTypes.func,
     onMouseUp: PropTypes.func,
+    usePortal: PropTypes.bool,
   }
 
   static _isMounted = false
@@ -282,20 +283,34 @@ class Calendar extends Component {
       classes,
       inputRect,
       hideOutsideDateTimes,
+      usePortal,
     } = this.props
 
-    let calendarClass = classes.calendarBelow
-
-    if (inputRect.top + inputRect.height + 237 > this.state.windowHeight) {
-      calendarClass = classes.calendarAbove
-    }
+    const rect = inputRect || { top: 0, left: 0, bottom: 0, height: 0 }
+    const above = rect.top + rect.height + 237 > this.state.windowHeight
+    const calendarClass = usePortal
+      ? above
+        ? classes.calendarAbovePortal
+        : classes.calendarBelowPortal
+      : above
+        ? classes.calendarAbove
+        : classes.calendarBelow
+    const calendarStyle = usePortal
+      ? {
+          top:
+            (window.pageYOffset || window.scrollY || 0) +
+            (above ? rect.top : rect.bottom),
+          left:
+            (window.pageXOffset || window.scrollX || 0) + rect.left,
+        }
+      : {}
 
     return (
       <div
         className={cn(this.props.className, calendarClass)}
         onMouseDown={e => this.props.above(true)}
         onMouseUp={e => this.props.above(false)}
-        style={this.props.style}
+        style={Object.assign({}, calendarStyle, this.props.style)}
       >
         {level != 'hours' && (
           <Navigation
